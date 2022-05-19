@@ -1,7 +1,5 @@
 part of 'user_account_bloc.dart';
 
-import 'package:equatable/equatable.dart';
-
 abstract class UserAccountState extends Equatable {
   const UserAccountState();
   @override
@@ -10,12 +8,15 @@ abstract class UserAccountState extends Equatable {
 
 @immutable
 class UserLoggedInState extends UserAccountState {
-  final UserProfile = profile;
+  final UserProfile userProfile;
 
-  const UserLoggedInState(this.profile);
+  const UserLoggedInState(this.userProfile);
 
+
+  // po liscie propsow, bloc odroznia state od drugiego
+  // nie jest triggerowany, gdy 2 takie same ewventy
   @override
-  List<Object?> get props => [profile];
+  List<Object> get props => [userProfile];
 }
 
 @immutable

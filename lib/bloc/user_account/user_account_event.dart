@@ -1,7 +1,5 @@
 part of 'user_account_bloc.dart';
 
-import 'package:equatable/equatable.dart';
-
 // Equatable bloc moze probowac np. 10x wpisac, nie duplikowac eventow, wyrzuci z kolejki
 // abstrakcyjna klasa na eventy
 

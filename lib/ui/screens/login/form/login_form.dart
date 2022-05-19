@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginForm extends StatefulWidget {
-  final String? fallbackRoute;
-  final dynamic fallbackArgs;
 
   const LoginForm({Key? key}) : super(key: key);
 
@@ -21,9 +19,10 @@ class _LoginFormState extends State<LoginForm> {
   // TODO
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer(UserAccountBloc, UserAccountState) (
-      listener: navigateNext,
-
-    )
+    return SizedBox();
+    // return BlocConsumer(UserAccountBloc, UserAccountState) (
+    //   listener: navigateNext,
+    //
+    // )
   }
 }
