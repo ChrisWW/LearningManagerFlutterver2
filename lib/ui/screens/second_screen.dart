@@ -26,7 +26,7 @@ class SecondScreen extends StatelessWidget {
             const LinkCard(
                 title: 'website_card_title',
                 icon: Ionicons.person_circle_outline,
-                url: 'https://feichtinger.dev'),
+                url: 'https://app.com'),
             const SizedBox(height: 8),
             GridView.count(
               physics: const NeverScrollableScrollPhysics(),
@@ -66,57 +66,57 @@ class SecondScreen extends StatelessWidget {
                 GridItem(
                   title: 'flutter_bloc',
                   icon: Ionicons.apps_outline,
-                  url: 'https://pub.dev/packages/flutter_bloc',
+                  url: 'https://pub.com/packages/flutter_bloc',
                 ),
                 GridItem(
                   title: 'bloc',
                   icon: Ionicons.grid_outline,
-                  url: 'https://pub.dev/packages/bloc',
+                  url: 'https://pub.com/packages/bloc',
                 ),
                 GridItem(
                   title: 'hydrated_bloc',
                   icon: Ionicons.folder_open_outline,
-                  url: 'https://pub.dev/packages/hydrated_bloc',
+                  url: 'https://pub.com/packages/hydrated_bloc',
                 ),
                 GridItem(
                   title: 'equatable',
                   icon: Ionicons.git_compare_outline,
-                  url: 'https://pub.dev/packages/equatable',
+                  url: 'https://pub.com/packages/equatable',
                 ),
                 GridItem(
                   title: 'lints',
                   icon: Ionicons.options_outline,
-                  url: 'https://pub.dev/packages/flutter_lints',
+                  url: 'https://pub.com/packages/flutter_lints',
                 ),
                 GridItem(
                   title: 'path_provider',
                   icon: Ionicons.extension_puzzle_outline,
-                  url: 'https://pub.dev/packages/path_provider',
+                  url: 'https://pub.com/packages/path_provider',
                 ),
                 GridItem(
                   title: 'flutter_displaymode',
                   icon: Ionicons.speedometer_outline,
-                  url: 'https://pub.dev/packages/flutter_displaymode',
+                  url: 'https://pub.com/packages/flutter_displaymode',
                 ),
                 GridItem(
                   title: 'easy_localization',
                   icon: Ionicons.text_outline,
-                  url: 'https://pub.dev/packages/easy_localization',
+                  url: 'https://pub.com/packages/easy_localization',
                 ),
                 GridItem(
                   title: 'hive',
                   icon: Ionicons.folder_outline,
-                  url: 'https://pub.dev/packages/hive',
+                  url: 'https://pub.com/packages/hive',
                 ),
                 GridItem(
                   title: 'url_launcher',
                   icon: Ionicons.share_outline,
-                  url: 'https://pub.dev/packages/url_launcher',
+                  url: 'https://pub.com/packages/url_launcher',
                 ),
                 GridItem(
                   title: 'ionicons',
                   icon: Ionicons.logo_ionic,
-                  url: 'https://pub.dev/packages/ionicons',
+                  url: 'https://pub.com/packages/ionicons',
                 ),
               ],
             ),
