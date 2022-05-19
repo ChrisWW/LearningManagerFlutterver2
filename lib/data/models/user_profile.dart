@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'user_profile.freezed.dart';
+part 'user_profile.g.dart';
 
 // TODO
 // Ekran logowanie
@@ -10,8 +12,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 // wywolac funkcje na klikniecie z blocu
 
 // ** firebase implemenattion
-part 'user_profile.freezed.dart';
-part 'user_profile.g.dart';
 
 @freezed
 class UserProfile with _$UserProfile {
