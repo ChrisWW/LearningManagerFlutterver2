@@ -5,7 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter_production_boilerplate/cubit/theme_cubit.dart';
+import 'package:flutter_production_boilerplate/global_providers.dart';
+import 'package:flutter_production_boilerplate/ui/screens/home/home_screen.dart';
+import 'package:flutter_production_boilerplate/ui/screens/login/login_screen.dart';
 import 'package:flutter_production_boilerplate/ui/screens/skeleton_screen.dart';
+import 'package:flutter_production_boilerplate/ui/widgets/login/screen_with_appbar.dart';
 import 'package:hive/hive.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
@@ -35,7 +39,7 @@ void main() async {
         ],
         fallbackLocale: const Locale('en'),
         useFallbackTranslations: true,
-        child: const MyApp(),
+        child: const GlobalProviders(),
       ),
     ),
     storage: storage,
@@ -55,11 +59,15 @@ class MyApp extends StatelessWidget {
             /// Localization is not available for the title.
             title: 'Flutter Production Boilerplate',
             theme: state.themeData,
-            home: const SkeletonScreen(),
+            home: const LoginScreen(),
             debugShowCheckedModeBanner: false,
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,
+            routes: {
+              '/login': (_) => const LoginScreen(),
+              '/home': (_) => const HomeScreen(),
+            },
           );
         },
       ),

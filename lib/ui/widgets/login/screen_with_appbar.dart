@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ScreenWithAppBar extends StatelessWidget {
-  const ScreenWithAppBar({Key? key}) : super(key: key);
+  final Widget body;
+
+  const ScreenWithAppBar({Key? key, required this.body}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +42,7 @@ class ScreenWithAppBar extends StatelessWidget {
           ),
         ],
       ),
-      body: const Center(
-        child: Text(
-          'This is the home page',
-          style: TextStyle(fontSize: 24),
-        ),
-      ),
+      body: body,
     );
   }
 }

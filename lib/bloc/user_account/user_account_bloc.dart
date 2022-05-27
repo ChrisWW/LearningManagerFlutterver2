@@ -1,7 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:logger/logger.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../data/models/user_profile.dart';
@@ -50,7 +48,7 @@ class UserAccountBloc extends HydratedBloc<UserAccountEvent, UserAccountState> {
 
 
   @override
-  fromJson(Map<String, dynamic> json) {
+  UserAccountState? fromJson(Map<String, dynamic> json) {
     // TODO: implement fromJson
     throw UnimplementedError();
   }

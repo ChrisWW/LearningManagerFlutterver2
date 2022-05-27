@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_production_boilerplate/cubit/theme_cubit.dart';
+import 'package:flutter_production_boilerplate/main.dart';
 import 'package:flutter_production_boilerplate/repositories/user_account_repository.dart';
 import 'package:flutter_production_boilerplate/ui/screens/login/login_screen.dart';
 
@@ -16,7 +17,7 @@ class GlobalProviders extends StatelessWidget {
       child: Builder(
         builder: (BuildContext context) => MultiBlocProvider(
           providers: _buildBlocProviders(context),
-          child: const LoginScreen(),
+          child: const MyApp(),
         ),
       ),
     );

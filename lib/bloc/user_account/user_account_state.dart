@@ -12,7 +12,6 @@ class UserLoggedInState extends UserAccountState {
 
   const UserLoggedInState(this.userProfile);
 
-
   // po liscie propsow, bloc odroznia state od drugiego
   // nie jest triggerowany, gdy 2 takie same ewventy
   @override
