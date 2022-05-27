@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:flutter_production_boilerplate/data/models/user_profile.dart';
+import 'package:flutter_production_boilerplate/repositories/user_account_repository.dart';
 import 'package:equatable/equatable.dart';
-
-import '../../data/models/user_profile.dart';
-import '../../repositories/user_account_repository.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 part 'user_account_event.dart';
 
@@ -46,21 +45,7 @@ class UserAccountBloc extends HydratedBloc<UserAccountEvent, UserAccountState> {
     }
   }
 
-
-  @override
-  UserAccountState? fromJson(Map<String, dynamic> json) {
-    // TODO: implement fromJson
-    throw UnimplementedError();
-  }
-
-  @override
-  Map<String, dynamic>? toJson(state) {
-    // TODO: implement toJson
-    throw UnimplementedError();
-  }
-
-
-// Na ekranie logowanie wywolywany jest _mapTryToLogin
+  // Na ekranie logowanie wywolywany jest _mapTryToLogin
   Stream<UserAccountState> _mapTryToLogIn(TryToLogIn event) async* {
     try {
       // zaczynamy logowanie
@@ -104,13 +89,20 @@ class UserAccountBloc extends HydratedBloc<UserAccountEvent, UserAccountState> {
     }
   }
 
+  @override
+  UserAccountState? fromJson(Map<String, dynamic> json) {
+    return UserLoggedOutState();
+  }
 
+  @override
+  Map<String, dynamic>? toJson(UserAccountState state) {
+    return <String, dynamic>{};
+  }
 
   // \/ funkcja sluzyla do rejestracji, wstrzykiwanie stanu do rejestracji
   // Stream<UserAccountState> _mapInjectLogIn(InjectLogIn event) async* {
   //   yield UserLoggedInState(event.profile);
   // }
-
 }
 // TODO
 // jeden na bloc, drugi na zdefiniowane eventy, trzeci na zdefiniowane stany
