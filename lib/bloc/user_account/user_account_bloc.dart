@@ -89,21 +89,36 @@ class UserAccountBloc extends HydratedBloc<UserAccountEvent, UserAccountState> {
     }
   }
 
+  // from json deserializowac
   @override
   UserAccountState? fromJson(Map<String, dynamic> json) {
-    return UserLoggedOutState();
+    if (json.containsKey(profileKey)) {
+      return UserLoggedInState(UserProfile.fromJson(json[profileKey] as Map<String, dynamic));
+    } else {
+      return UserLoggedOutState();
+    }
   }
 
+  // serializacja obiektu mojego stanu, a from
+  // przy zamykaniu apki
+  // lokalny stan-> za kazdym raezm przepada po zniszczeniu
+  // tuz przed smiercia apki zapisac testament (stan) i odtwarzamy stan
+  // TO json a odpalamy apke znowu fromJson
   @override
   Map<String, dynamic>? toJson(UserAccountState state) {
-    return <String, dynamic>{};
+    if (state is UserLoggedInState) {
+      return <String, dynamic>{
+        profileKey: state.userProfile.toJson()};
+    } else {
+      return <String, dynamic>{};
+    }
   }
-
-  // \/ funkcja sluzyla do rejestracji, wstrzykiwanie stanu do rejestracji
-  // Stream<UserAccountState> _mapInjectLogIn(InjectLogIn event) async* {
-  //   yield UserLoggedInState(event.profile);
-  // }
 }
+
+// \/ funkcja sluzyla do rejestracji, wstrzykiwanie stanu do rejestracji
+// Stream<UserAccountState> _mapInjectLogIn(InjectLogIn event) async* {
+//   yield UserLoggedInState(event.profile);
+// }
 // TODO
 // jeden na bloc, drugi na zdefiniowane eventy, trzeci na zdefiniowane stany
 // najpierw event.

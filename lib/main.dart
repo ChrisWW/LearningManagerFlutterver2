@@ -9,8 +9,6 @@ import 'package:flutter_production_boilerplate/cubit/theme_cubit.dart';
 import 'package:flutter_production_boilerplate/global_providers.dart';
 import 'package:flutter_production_boilerplate/ui/screens/home/home_screen.dart';
 import 'package:flutter_production_boilerplate/ui/screens/login/login_screen.dart';
-import 'package:flutter_production_boilerplate/ui/screens/skeleton_screen.dart';
-import 'package:flutter_production_boilerplate/ui/widgets/login/screen_with_appbar.dart';
 import 'package:hive/hive.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
@@ -64,7 +62,7 @@ class MyApp extends StatelessWidget {
             routes: {
               '/login': (_) => const LoginScreen(),
               '/home': (_) => const HomeScreen(),
-            }, ,
+            },
           );
         },
       ),

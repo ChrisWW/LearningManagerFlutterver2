@@ -20,7 +20,7 @@ class UserProfile with _$UserProfile {
     @Default('') String login,
     @Default('') String imageUrl,
   }) = _UserProfile;
-
+// nie ma tutaj toJson ale paczka freezed generuje to za nas
   factory UserProfile.fromJson(Map<String, dynamic> json) =>
       _$UserProfileFromJson(json);
 }

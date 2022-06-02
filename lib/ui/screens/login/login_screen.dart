@@ -8,7 +8,6 @@ import 'package:flutter_production_boilerplate/ui/widgets/login/login_screen_tes
 import 'package:flutter_production_boilerplate/ui/widgets/login/screen_with_appbar.dart';
 
 import '../../widgets/login/login_screen_widget.dart';
-import 'form/login_form.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String route = '/login';

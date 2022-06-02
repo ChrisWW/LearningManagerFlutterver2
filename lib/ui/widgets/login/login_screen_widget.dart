@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_production_boilerplate/bloc/user_account/user_account_bloc.dart';
 
 class LoginScreenWidget extends StatefulWidget {
@@ -19,14 +20,20 @@ class _LoginScreenWidget extends State<LoginScreenWidget> {
     return BlocConsumer<UserAccountBloc, UserAccountState>(
       listener: (context, state) {
         // do stuff here based on BlocA's state
+        // do zmiany stanow, nawigacji listener, setState
         if (state is UserLoggedInState) {
+          EasyLoading.dismiss();
           Navigator.of(context).pushReplacementNamed("/home");
+        } else if (state is UserLoggingInProgressState) {
+          EasyLoading.showProgress(0.3, status: 'logging...');
+        } else if (state is UserLogInErrorState) {
+          EasyLoading.dismiss();
         }
       },
       builder: (context, state) {
         return Center(
           child: Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: ListView(
               children: <Widget>[
                 Container(
@@ -46,6 +53,8 @@ class _LoginScreenWidget extends State<LoginScreenWidget> {
                       'Sign in',
                       style: TextStyle(fontSize: 20),
                     )),
+                // tylko wtedy jesli bedziemy mieli errorstate
+                if (state is UserLogInErrorState) const Text("Error Message"),
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: TextField(
@@ -82,7 +91,9 @@ class _LoginScreenWidget extends State<LoginScreenWidget> {
                       child: const Text('Login'),
                       onPressed: () {
                         // logging, using blocprovider and event from useraccountbloc->event
-                        BlocProvider.of<UserAccountBloc>(context).add(TryToLogIn(nameController.text, passwordController.text));
+                        BlocProvider.of<UserAccountBloc>(context).add(
+                            TryToLogIn(
+                                nameController.text, passwordController.text));
                       },
                     )),
                 Row(
