@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_production_boilerplate/cubit/theme_cubit.dart';
 import 'package:flutter_production_boilerplate/global_providers.dart';
 import 'package:flutter_production_boilerplate/ui/screens/home/home_screen.dart';
@@ -25,24 +26,20 @@ void main() async {
   }
   final tmpDir = await getTemporaryDirectory();
   Hive.init(tmpDir.toString());
-  final storage = await HydratedStorage.build(
+  HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: tmpDir,
   );
 
-  HydratedBlocOverrides.runZoned(
-    () => runApp(
-      EasyLocalization(
-        path: 'assets/translations',
-        supportedLocales: const [
-          Locale('en'),
-          Locale('de'),
-        ],
-        fallbackLocale: const Locale('en'),
-        useFallbackTranslations: true,
-        child: const GlobalProviders(),
-      ),
+  runApp(
+    EasyLocalization(
+      path: 'assets/translations',
+      supportedLocales: const <Locale>[
+        Locale('en'),
+      ],
+      fallbackLocale: const Locale('en'),
+      useFallbackTranslations: true,
+      child: const GlobalProviders(),
     ),
-    storage: storage,
   );
 }
 
@@ -56,7 +53,6 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {
           return MaterialApp(
-            /// Localization is not available for the title.
             title: 'Flutter Production Boilerplate',
             theme: state.themeData,
             home: const LoginScreen(),
@@ -64,10 +60,11 @@ class MyApp extends StatelessWidget {
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,
+            builder: EasyLoading.init(),
             routes: {
               '/login': (_) => const LoginScreen(),
               '/home': (_) => const HomeScreen(),
-            },
+            }, ,
           );
         },
       ),

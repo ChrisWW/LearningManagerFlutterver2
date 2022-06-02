@@ -81,6 +81,7 @@ class _LoginScreenWidget extends State<LoginScreenWidget> {
                     child: ElevatedButton(
                       child: const Text('Login'),
                       onPressed: () {
+                        // logging, using blocprovider and event from useraccountbloc->event
                         BlocProvider.of<UserAccountBloc>(context).add(TryToLogIn(nameController.text, passwordController.text));
                       },
                     )),
