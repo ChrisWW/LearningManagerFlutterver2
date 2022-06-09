@@ -25,7 +25,64 @@ class _LoginScreenWidget extends State<LoginScreenWidget> {
           EasyLoading.dismiss();
           Navigator.of(context).pushReplacementNamed("/home");
         } else if (state is UserLoggingInProgressState) {
+
+          OverlayEntry myOverlay = OverlayEntry(builder: (context) {
+            final size = MediaQuery.of(context).size;
+            print(size.width);
+            return Material(
+              type: MaterialType.transparency,
+              child: Center(
+                // Aligns the container to center
+                child: Container(
+                  // A simplified version of dialog.
+                  width: 500.0,
+                  height: 900.0,
+                  color: Colors.black,
+                ),
+              ),
+            );
+          });
+          // showDialog(
+          //   context: context,
+          //   builder: (_) => Material(
+          //     type: MaterialType.transparency,
+          //     child: Center(
+          //       // Aligns the container to center
+          //       child: Container(
+          //         // A simplified version of dialog.
+          //         width: 100.0,
+          //         height: 56.0,
+          //         color: Colors.green,
+          //         child: Text('jojo'),
+          //       ),
+          //     ),
+          //   ),
+          // );
+
+          Overlay.of(context)!.insert(myOverlay);
+
+          // Overlay.of(context)!.insert(
+          //     OverlayEntry(builder: (context) {
+          //       final size = MediaQuery.of(context).size;
+          //       print(size.width);
+          //       return Positioned(
+          //         width: 56,
+          //         height: 56,
+          //         top: size.height - 72,
+          //         left: size.width - 72,
+          //         child: Material(
+          //           color: Colors.transparent,
+          //           child: GestureDetector(
+          //             onTap: () => print('ON TAP OVERLAY!'),
+          //             child: Container(
+          //               decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.redAccent),
+          //             ),
+          //           ),
+          //         ),
+          //       );
+          //     }));
           EasyLoading.showProgress(0.3, status: 'logging...');
+          myOverlay.remove();
         } else if (state is UserLogInErrorState) {
           EasyLoading.dismiss();
         }
