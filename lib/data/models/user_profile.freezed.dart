@@ -1,6 +1,5 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'user_profile.dart';
@@ -12,11 +11,31 @@ part of 'user_profile.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
   return _UserProfile.fromJson(json);
 }
+
+/// @nodoc
+class _$UserProfileTearOff {
+  const _$UserProfileTearOff();
+
+  _UserProfile call({String id = '', String login = '', String imageUrl = ''}) {
+    return _UserProfile(
+      id: id,
+      login: login,
+      imageUrl: imageUrl,
+    );
+  }
+
+  UserProfile fromJson(Map<String, Object?> json) {
+    return UserProfile.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $UserProfile = _$UserProfileTearOff();
 
 /// @nodoc
 mixin _$UserProfile {
@@ -70,24 +89,24 @@ class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_UserProfileCopyWith<$Res>
+abstract class _$UserProfileCopyWith<$Res>
     implements $UserProfileCopyWith<$Res> {
-  factory _$$_UserProfileCopyWith(
-          _$_UserProfile value, $Res Function(_$_UserProfile) then) =
-      __$$_UserProfileCopyWithImpl<$Res>;
+  factory _$UserProfileCopyWith(
+          _UserProfile value, $Res Function(_UserProfile) then) =
+      __$UserProfileCopyWithImpl<$Res>;
   @override
   $Res call({String id, String login, String imageUrl});
 }
 
 /// @nodoc
-class __$$_UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
-    implements _$$_UserProfileCopyWith<$Res> {
-  __$$_UserProfileCopyWithImpl(
-      _$_UserProfile _value, $Res Function(_$_UserProfile) _then)
-      : super(_value, (v) => _then(v as _$_UserProfile));
+class __$UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
+    implements _$UserProfileCopyWith<$Res> {
+  __$UserProfileCopyWithImpl(
+      _UserProfile _value, $Res Function(_UserProfile) _then)
+      : super(_value, (v) => _then(v as _UserProfile));
 
   @override
-  _$_UserProfile get _value => super._value as _$_UserProfile;
+  _UserProfile get _value => super._value as _UserProfile;
 
   @override
   $Res call({
@@ -95,7 +114,7 @@ class __$$_UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
     Object? login = freezed,
     Object? imageUrl = freezed,
   }) {
-    return _then(_$_UserProfile(
+    return _then(_UserProfile(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -120,14 +139,14 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
   factory _$_UserProfile.fromJson(Map<String, dynamic> json) =>
       _$$_UserProfileFromJson(json);
 
+  @JsonKey(defaultValue: '')
   @override
-  @JsonKey()
   final String id;
+  @JsonKey(defaultValue: '')
   @override
-  @JsonKey()
   final String login;
+  @JsonKey(defaultValue: '')
   @override
-  @JsonKey()
   final String imageUrl;
 
   @override
@@ -149,24 +168,20 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserProfile &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.login, login) &&
-            const DeepCollectionEquality().equals(other.imageUrl, imageUrl));
+            other is _UserProfile &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.login, login) || other.login == login) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl));
   }
 
-  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(login),
-      const DeepCollectionEquality().hash(imageUrl));
+  int get hashCode => Object.hash(runtimeType, id, login, imageUrl);
 
   @JsonKey(ignore: true)
   @override
-  _$$_UserProfileCopyWith<_$_UserProfile> get copyWith =>
-      __$$_UserProfileCopyWithImpl<_$_UserProfile>(this, _$identity);
+  _$UserProfileCopyWith<_UserProfile> get copyWith =>
+      __$UserProfileCopyWithImpl<_UserProfile>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -175,22 +190,20 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
 }
 
 abstract class _UserProfile implements UserProfile {
-  factory _UserProfile(
-      {final String id,
-      final String login,
-      final String imageUrl}) = _$_UserProfile;
+  factory _UserProfile({String id, String login, String imageUrl}) =
+      _$_UserProfile;
 
   factory _UserProfile.fromJson(Map<String, dynamic> json) =
       _$_UserProfile.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  String get login => throw _privateConstructorUsedError;
+  String get login;
   @override
-  String get imageUrl => throw _privateConstructorUsedError;
+  String get imageUrl;
   @override
   @JsonKey(ignore: true)
-  _$$_UserProfileCopyWith<_$_UserProfile> get copyWith =>
+  _$UserProfileCopyWith<_UserProfile> get copyWith =>
       throw _privateConstructorUsedError;
 }

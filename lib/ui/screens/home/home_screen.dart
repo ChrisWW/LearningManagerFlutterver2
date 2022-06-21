@@ -6,19 +6,6 @@ import 'package:flutter_production_boilerplate/ui/screens/inspiration/inspiratio
 import 'package:flutter_production_boilerplate/ui/screens/notes/notes_screen.dart';
 import 'package:flutter_production_boilerplate/ui/widgets/login/screen_with_appbar.dart';
 
-// class HomeScreen extends StatelessWidget {
-//   static const String route = '/home';
-//   const HomeScreen({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return const ScreenWithAppBar(body: SizedBox());
-//   }
-// }
-
-import 'package:flutter/services.dart';
-
-
 class HomeScreen extends StatefulWidget {
   static const String route = '/home';
   const HomeScreen({Key? key}) : super(key: key);
@@ -27,6 +14,8 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
+// TODO
+// oddzielny widget, screenwithappbar etc. tak jak logowanie
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) => DefaultTabController(

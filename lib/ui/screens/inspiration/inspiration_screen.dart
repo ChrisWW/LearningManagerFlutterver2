@@ -51,6 +51,8 @@ class _InspirationScreenState extends State<InspirationScreen> {
     getQuote();
   }
 
+  // TODO
+  // teg otypu metody nie powinny byc osadone w UI tlyko w jakim blocu
   // get a random Quote from the API
   dynamic getQuote() async {
     try {

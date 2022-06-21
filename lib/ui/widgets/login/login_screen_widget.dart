@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_production_boilerplate/bloc/user_account/user_account_bloc.dart';
 
 class LoginScreenWidget extends StatefulWidget {
@@ -59,7 +60,7 @@ class _LoginScreenWidget extends State<LoginScreenWidget> {
           //   ),
           // );
 
-          Overlay.of(context)!.insert(myOverlay);
+          // Overlay.of(context)!.insert(myOverlay);
 
           // Overlay.of(context)!.insert(
           //     OverlayEntry(builder: (context) {
@@ -81,8 +82,12 @@ class _LoginScreenWidget extends State<LoginScreenWidget> {
           //         ),
           //       );
           //     }));
+          EasyLoading.instance
+            ..fontSize = 20
+            ..maskType = EasyLoadingMaskType.black
+            ..progressColor = Colors.yellow;
           EasyLoading.showProgress(0.3, status: 'logging...');
-          myOverlay.remove();
+          // myOverlay.remove();
         } else if (state is UserLogInErrorState) {
           EasyLoading.dismiss();
         }
