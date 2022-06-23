@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'inspiration.dart';
+part of 'inspiration_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

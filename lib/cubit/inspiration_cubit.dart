@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
-import 'package:flutter_production_boilerplate/data/models/inspiration.dart';
+import 'package:flutter_production_boilerplate/data/models/inspiration_response.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:http/http.dart' as http;
 part 'inspiration_state.dart';
@@ -32,9 +32,9 @@ class InspirationCubit extends HydratedCubit<InspirationState> {
       owner = res["quoteAuthor"].toString().trim();
       quote = res["quoteText"].toString().replaceAll("â", " ");
       getImg(owner);
-      final inspiration = Inspiration(quoteAuthor: "pozniej_autor", quoteText: "pozniej_text");
+      final inspirationResponse = InspirationResponse(quoteAuthor: "pozniej_autor", quoteText: "pozniej_text");
 
-      emit(ShowInspirationState(inspiration));
+      emit(ShowInspirationState(inspirationResponse));
 
       //get img rowniez
     } catch (e) {

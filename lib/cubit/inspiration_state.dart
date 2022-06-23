@@ -16,7 +16,7 @@ class InitialInspirationState extends InspirationState {}
 // przekazywanie jednego natenczas inspiracje
 @immutable
 class ShowInspirationState extends InspirationState {
-  final Inspiration inspiration;
+  final InspirationResponse inspiration;
 
   const ShowInspirationState(this.inspiration);
 

@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'inspiration.dart';
+part of 'inspiration_response.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,7 +13,7 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Inspiration _$InspirationFromJson(Map<String, dynamic> json) {
+InspirationResponse _$InspirationFromJson(Map<String, dynamic> json) {
   return _Inspiration.fromJson(json);
 }
 
@@ -28,8 +28,8 @@ class _$InspirationTearOff {
     );
   }
 
-  Inspiration fromJson(Map<String, Object?> json) {
-    return Inspiration.fromJson(json);
+  InspirationResponse fromJson(Map<String, Object?> json) {
+    return InspirationResponse.fromJson(json);
   }
 }
 
@@ -43,14 +43,14 @@ mixin _$Inspiration {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $InspirationCopyWith<Inspiration> get copyWith =>
+  $InspirationCopyWith<InspirationResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $InspirationCopyWith<$Res> {
   factory $InspirationCopyWith(
-          Inspiration value, $Res Function(Inspiration) then) =
+          InspirationResponse value, $Res Function(InspirationResponse) then) =
       _$InspirationCopyWithImpl<$Res>;
   $Res call({String quoteAuthor, String quoteText});
 }
@@ -59,9 +59,9 @@ abstract class $InspirationCopyWith<$Res> {
 class _$InspirationCopyWithImpl<$Res> implements $InspirationCopyWith<$Res> {
   _$InspirationCopyWithImpl(this._value, this._then);
 
-  final Inspiration _value;
+  final InspirationResponse _value;
   // ignore: unused_field
-  final $Res Function(Inspiration) _then;
+  final $Res Function(InspirationResponse) _then;
 
   @override
   $Res call({
@@ -173,7 +173,7 @@ class _$_Inspiration with DiagnosticableTreeMixin implements _Inspiration {
   }
 }
 
-abstract class _Inspiration implements Inspiration {
+abstract class _Inspiration implements InspirationResponse {
   factory _Inspiration({String quoteAuthor, String quoteText}) = _$_Inspiration;
 
   factory _Inspiration.fromJson(Map<String, dynamic> json) =

@@ -5,11 +5,11 @@ part 'inspiration.freezed.dart';
 part 'inspiration.g.dart';
 
 @freezed
-class Inspiration with _$Inspiration {
-  factory Inspiration({
+class InspirationResponse with _$Inspiration {
+  factory InspirationResponse({
     @Default('') String quoteAuthor,
     @Default('') String quoteText
   }) = _Inspiration;
-  factory Inspiration.fromJson(Map<String, dynamic> json) =>
+  factory InspirationResponse.fromJson(Map<String, dynamic> json) =>
       _$InspirationFromJson(json);
 }
