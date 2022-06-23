@@ -1,11 +1,12 @@
-import 'package:flutter_production_boilerplate/data/models/inspiration_quote_request_body.dart';
-import 'package:flutter_production_boilerplate/data/models/inspiration_response.dart';
-import 'package:flutter_production_boilerplate/data/models/wikipedia_page_response.dart';
+import 'package:flutter_production_boilerplate/data/remote/inspiration_quote_request_body.dart';
+import 'package:flutter_production_boilerplate/data/remote/wikipedia_page_response.dart';
+import 'package:flutter_production_boilerplate/data/remote/inspiration_response.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
+
 part 'api_service.g.dart';
 
-@RestApi(baseUrl: '')
+@RestApi()
 abstract class ApiService {
   factory ApiService(Dio dio) => _ApiService(dio);
 

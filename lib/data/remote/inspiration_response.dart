@@ -1,15 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'inspiration.freezed.dart';
-part 'inspiration.g.dart';
+part 'inspiration_response.freezed.dart';
+part 'inspiration_response.g.dart';
 
 @freezed
-class InspirationResponse with _$Inspiration {
+class InspirationResponse with _$InspirationResponse {
   factory InspirationResponse({
     @Default('') String quoteAuthor,
     @Default('') String quoteText
-  }) = _Inspiration;
+  }) = _InspirationResponse;
+
   factory InspirationResponse.fromJson(Map<String, dynamic> json) =>
-      _$InspirationFromJson(json);
+      _$InspirationResponseFromJson(json);
 }

@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'inspiration_quote_request_body.freezed.dart';
+part 'inspiration_quote_request_body.g.dart';
 
 @freezed
 class InspirationQuoteRequestBody with _$InspirationQuoteRequestBody {
