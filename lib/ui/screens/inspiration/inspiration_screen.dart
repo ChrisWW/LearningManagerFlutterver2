@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:flutter_production_boilerplate/cubit/inspiration_cubit.dart';
 import 'package:http/http.dart' as http;
 import 'package:screenshot/screenshot.dart';
 import 'package:path_provider/path_provider.dart';
@@ -29,17 +30,24 @@ import 'package:flutter/services.dart';
 // }
 
 class InspirationScreen extends StatefulWidget {
-  const InspirationScreen({Key? key}) : super(key: key);
+  const InspirationScreen({Key? key, required this.inspirationCubit}) : super(key: key);
+  final InspirationCubit inspirationCubit;
 
   @override
   _InspirationScreenState createState() => _InspirationScreenState();
 }
 
 class _InspirationScreenState extends State<InspirationScreen> {
+  // TODO
+  // final InspirationCubit inspirationCubit;
+  // final cubit = InspirationCubit();
+  InspirationCubit get _inspirationCubit => widget.inspirationCubit;
   late String quote, owner, imglink;
   bool working = false;
   final grey = Colors.blueGrey[800];
   late ScreenshotController screenshotController;
+
+  // _InspirationScreenState();
 
   @override
   void initState() {
@@ -60,24 +68,27 @@ class _InspirationScreenState extends State<InspirationScreen> {
         working = true;
         quote = imglink = owner = "";
       });
-
+      _inspirationCubit.postQuote();
       // https://forismatic.com/en/api/
 
-      var response = await http.post(
-          Uri.parse(Uri.encodeFull('http://api.forismatic.com/api/1.0/')),
-          body: {"method": "getQuote", "format": "json", "lang": "en"});
-      setState(() {
-        try {
-          dynamic res = jsonDecode(response.body);
-          owner = res["quoteAuthor"].toString().trim();
-          quote = res["quoteText"].toString().replaceAll("â", " ");
-          getImg(owner);
-        } catch (e) {
-          getQuote();
-        }
-      });
+      //   var response = await http.post(
+      //       Uri.parse(Uri.encodeFull('http://api.forismatic.com/api/1.0/')),
+      //       body: {"method": "getQuote", "format": "json", "lang": "en"});
+      //   setState(() {
+      //     try {
+      //       dynamic res = jsonDecode(response.body);
+      //       owner = res["quoteAuthor"].toString().trim();
+      //       quote = res["quoteText"].toString().replaceAll("â", " ");
+      //       getImg(owner);
+      //     } catch (e) {
+      //       getQuote();
+      //     }
+      //   });
+      // } catch (e) {
+      //   offline();
+      // }
     } catch (e) {
-      offline();
+        offline();
     }
   }
 
@@ -124,23 +135,37 @@ class _InspirationScreenState extends State<InspirationScreen> {
   }
 
   // get image of the quote author, using Wikipedia Api
+
   dynamic getImg(String name) async {
-    var image = await http.get(Uri.parse(
-        "https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrlimit=1&prop=pageimages%7Cextracts&pithumbsize=400&gsrsearch=" +
-            name +
-            "&format=json"));
+    _inspirationCubit.getImage(name);
 
     setState(() {
       try {
-        dynamic res = json.decode(image.body)["query"]["pages"];
-        res = res[res.keys.first];
-        imglink = res["thumbnail"]["source"].toString();
+        // imglink = res["thumbnail"]["source"].toString();
       } catch (e) {
         imglink = "";
       }
       working = false;
     });
   }
+
+  // dynamic getImg(String name) async {
+  //   var image = await http.get(Uri.parse(
+  //       "https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrlimit=1&prop=pageimages%7Cextracts&pithumbsize=400&gsrsearch=" +
+  //           name +
+  //           "&format=json"));
+  //
+  //   setState(() {
+  //     try {
+  //       dynamic res = json.decode(image.body)["query"]["pages"];
+  //       res = res[res.keys.first];
+  //       imglink = res["thumbnail"]["source"].toString();
+  //     } catch (e) {
+  //       imglink = "";
+  //     }
+  //     working = false;
+  //   });
+  // }
 
   // Choose to show the loaded image from the Api or the offline one
   Widget drawImg() {

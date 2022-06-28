@@ -10,6 +10,13 @@ part 'api_service.g.dart';
 abstract class ApiService {
   factory ApiService(Dio dio) => _ApiService(dio);
 
+  @POST('http://api.forismatic.com/api/1.0/')
+  Future<InspirationResponse> postQuote(@Body() InspirationQuoteRequestBody body);
+
+  @GET('https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrlimit=1&prop=pageimages%7Cextracts&pithumbsize=400&gsrsearch={name}&format=json')
+  Future<WikipediaPageResponse> getImage(@Path("name") String name);
+
+
   // TODO retro
   // body: {"method": "getQuote", "format": "json", "lang": "en"});
   // @POST('')
@@ -19,14 +26,6 @@ abstract class ApiService {
   // @POST("")
   // Future<PostResponse> postDemo(@Body() PostRequest dataPost);
 // ustawianie zwrotu Future<obiekt> <---
-
-  @POST('http://api.forismatic.com/api/1.0/')
-  Future<InspirationResponse> postQuote(@Body() InspirationQuoteRequestBody body);
-
-  // TODO
-
-  @GET('https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrlimit=1&prop=pageimages%7Cextracts&pithumbsize=400&gsrsearch={name}&format=json')
-  Future<WikipediaPageResponse> getTask(@Path("name") String name);
 
   // @GET('https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrlimit=1&prop=pageimages%7Cextracts&pithumbsize=400&gsrsearch='+ name + '&format=json')
   // Future<void> getImage(String name);
