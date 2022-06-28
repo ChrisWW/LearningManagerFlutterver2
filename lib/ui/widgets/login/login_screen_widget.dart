@@ -46,7 +46,7 @@ class _LoginScreenWidget extends State<LoginScreenWidget> {
                     alignment: Alignment.center,
                     padding: const EdgeInsets.all(10),
                     child: const Text(
-                      'TutorialKart',
+                      'Learning Manager',
                       style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.w500,

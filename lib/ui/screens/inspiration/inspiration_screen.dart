@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_production_boilerplate/cubit/inspiration_cubit.dart';
 import 'package:http/http.dart' as http;
 import 'package:screenshot/screenshot.dart';
@@ -41,7 +42,8 @@ class _InspirationScreenState extends State<InspirationScreen> {
   // TODO
   // final InspirationCubit inspirationCubit;
   // final cubit = InspirationCubit();
-  InspirationCubit get _inspirationCubit => widget.inspirationCubit;
+  InspirationCubit get _inspirationCubit => BlocProvider.of<InspirationCubit>(context);
+      // widget.inspirationCubit;
   late String quote, owner, imglink;
   bool working = false;
   final grey = Colors.blueGrey[800];
