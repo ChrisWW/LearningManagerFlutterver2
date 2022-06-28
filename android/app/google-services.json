@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "117540174395",
+    "project_id": "learningmanagerflutter",
+    "storage_bucket": "learningmanagerflutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117540174395:android:31253af338692ff7377a1e",
+        "android_client_info": {
+          "package_name": "com.app.learningmanagerflutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "117540174395-2ao6tfc2j193ap7buk7k3heb1uadjrkh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.learningmanagerflutter",
+            "certificate_hash": "a454e5b8aec79e8dd8e34ef877bf14fb347c2250"
+          }
+        },
+        {
+          "client_id": "117540174395-vbu122tbk44utcm1dh3q0k7il78gut9g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAiQu3NeEtenNGs-g9OciOce1cr8Iu5aU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "117540174395-vbu122tbk44utcm1dh3q0k7il78gut9g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
