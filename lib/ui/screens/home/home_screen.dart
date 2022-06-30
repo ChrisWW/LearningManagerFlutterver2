@@ -86,7 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 automaticallyImplyLeading: false),
             body: TabBarView(
               children: [
-                InspirationScreen(inspirationCubit: BlocProvider.of<InspirationCubit>(context)),
+                // InspirationScreen(inspirationCubit: BlocProvider.of<InspirationCubit>(context)),
+                InspirationScreen(),
                 NotesScreen(),
                 GoalsScreen(),
               ],

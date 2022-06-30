@@ -25,85 +25,85 @@ import 'package:path_provider/path_provider.dart';
 /// Try using const constructors as much as possible!
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  Bloc.observer = AppBlocObserver();
-  runApp(MyApp());
-
-  // /// Initialize packages
   // WidgetsFlutterBinding.ensureInitialized();
-  // await EasyLocalization.ensureInitialized();
-  // if (Platform.isAndroid) {
-  //   await FlutterDisplayMode.setHighRefreshRate();
-  // }
-  // final tmpDir = await getTemporaryDirectory();
-  // Hive.init(tmpDir.toString());
-  // HydratedBloc.storage = await HydratedStorage.build(
-  //   storageDirectory: tmpDir,
-  // );
-  //
-  // runApp(
-  //   EasyLocalization(
-  //     path: 'assets/translations',
-  //     supportedLocales: const <Locale>[
-  //       Locale('en'),
-  //     ],
-  //     fallbackLocale: const Locale('en'),
-  //     useFallbackTranslations: true,
-  //     child: const GlobalProviders(),
-  //   ),
-  // );
+  // await Firebase.initializeApp();
+  // Bloc.observer = AppBlocObserver();
+  // runApp(MyApp());
+
+  /// Initialize packages
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  if (Platform.isAndroid) {
+    await FlutterDisplayMode.setHighRefreshRate();
+  }
+  final tmpDir = await getTemporaryDirectory();
+  Hive.init(tmpDir.toString());
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: tmpDir,
+  );
+
+  runApp(
+    EasyLocalization(
+      path: 'assets/translations',
+      supportedLocales: const <Locale>[
+        Locale('en'),
+      ],
+      fallbackLocale: const Locale('en'),
+      useFallbackTranslations: true,
+      child: const GlobalProviders(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthenticationBloc(
-        authenticationRepository: AuthenticationRepository(
-          authenticationFirebaseProvider: AuthenticationFirebaseProvider(
-            firebaseAuth: FirebaseAuth.instance,
-          ),
-          googleSignInProvider: GoogleSignInProvider(
-            googleSignIn: GoogleSignIn(),
-          ),
-        ),
-      ),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: HomeMainView(),
-      ),
-    );
-  }
-
   // @override
   // Widget build(BuildContext context) {
-  //   return BlocProvider<ThemeCubit>(
-  //     create: (context) => ThemeCubit(),
-  //     child: BlocBuilder<ThemeCubit, ThemeState>(
-  //       builder: (context, state) {
-  //         return MaterialApp(
-  //           title: 'Flutter Production Boilerplate',
-  //           theme: state.themeData,
-  //           home: const LoginScreen(),
-  //           debugShowCheckedModeBanner: false,
-  //           localizationsDelegates: context.localizationDelegates,
-  //           supportedLocales: context.supportedLocales,
-  //           locale: context.locale,
-  //           builder: EasyLoading.init(),
-  //           routes: {
-  //             '/login': (_) => const LoginScreen(),
-  //             '/home': (_) => const HomeScreen(),
-  //           },
-  //         );
-  //       },
+  //   return BlocProvider(
+  //     create: (context) => AuthenticationBloc(
+  //       authenticationRepository: AuthenticationRepository(
+  //         authenticationFirebaseProvider: AuthenticationFirebaseProvider(
+  //           firebaseAuth: FirebaseAuth.instance,
+  //         ),
+  //         googleSignInProvider: GoogleSignInProvider(
+  //           googleSignIn: GoogleSignIn(),
+  //         ),
+  //       ),
+  //     ),
+  //     child: MaterialApp(
+  //       title: 'Flutter Demo',
+  //       theme: ThemeData(
+  //         primarySwatch: Colors.blue,
+  //         visualDensity: VisualDensity.adaptivePlatformDensity,
+  //       ),
+  //       home: HomeMainView(),
   //     ),
   //   );
   // }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<ThemeCubit>(
+      create: (context) => ThemeCubit(),
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, state) {
+          return MaterialApp(
+            title: 'Flutter Production Boilerplate',
+            theme: state.themeData,
+            home: const LoginScreen(),
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            builder: EasyLoading.init(),
+            routes: {
+              '/login': (_) => const LoginScreen(),
+              '/home': (_) => const HomeScreen(),
+            },
+          );
+        },
+      ),
+    );
+  }
 }

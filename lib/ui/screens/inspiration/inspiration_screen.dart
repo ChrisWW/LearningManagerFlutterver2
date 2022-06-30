@@ -31,8 +31,7 @@ import 'package:flutter/services.dart';
 // }
 
 class InspirationScreen extends StatefulWidget {
-  const InspirationScreen({Key? key, required this.inspirationCubit}) : super(key: key);
-  final InspirationCubit inspirationCubit;
+  const InspirationScreen({Key? key}) : super(key: key);
 
   @override
   _InspirationScreenState createState() => _InspirationScreenState();
@@ -42,7 +41,6 @@ class _InspirationScreenState extends State<InspirationScreen> {
   // TODO
   // final InspirationCubit inspirationCubit;
   // final cubit = InspirationCubit();
-  InspirationCubit get _inspirationCubit => BlocProvider.of<InspirationCubit>(context);
       // widget.inspirationCubit;
   late String quote, owner, imglink;
   bool working = false;
@@ -70,7 +68,7 @@ class _InspirationScreenState extends State<InspirationScreen> {
         working = true;
         quote = imglink = owner = "";
       });
-      _inspirationCubit.postQuote();
+      // _inspirationCubit.postQuote();
       // https://forismatic.com/en/api/
 
       //   var response = await http.post(
@@ -139,7 +137,7 @@ class _InspirationScreenState extends State<InspirationScreen> {
   // get image of the quote author, using Wikipedia Api
 
   dynamic getImg(String name) async {
-    _inspirationCubit.getImage(name);
+    // _inspirationCubit.getImage(name);
 
     setState(() {
       try {
