@@ -50,7 +50,7 @@ void main() async {
       ],
       fallbackLocale: const Locale('en'),
       useFallbackTranslations: true,
-      child: const GlobalProviders(),
+      child: GlobalProviders(),
     ),
   );
 }

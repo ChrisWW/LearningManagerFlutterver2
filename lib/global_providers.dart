@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_production_boilerplate/api/api_service.dart';
 import 'package:flutter_production_boilerplate/cubit/inspiration_cubit.dart';
 import 'package:flutter_production_boilerplate/cubit/theme_cubit.dart';
 import 'package:flutter_production_boilerplate/main.dart';
@@ -10,7 +12,13 @@ import 'package:flutter_production_boilerplate/ui/screens/login/login_screen.dar
 import 'bloc/user_account/user_account_bloc.dart';
 
 class GlobalProviders extends StatelessWidget {
-  const GlobalProviders({Key? key}) : super(key: key);
+  late final Dio _dio;
+  late final ApiService _apiService;
+
+  GlobalProviders({Key? key}) : super(key: key) {
+    _dio = Dio();
+    _apiService = ApiService(_dio);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +38,9 @@ class GlobalProviders extends StatelessWidget {
         RepositoryProvider<UserAccountRepository>(
           create: (BuildContext context) => UserAccountRepository(),
         ),
+        RepositoryProvider<InspirationRepository>(
+          create: (BuildContext context) => InspirationRepository(_apiService),
+        )
       ];
 
   List<BlocProvider<dynamic>> _buildBlocProviders(BuildContext context) =>

@@ -43,14 +43,12 @@ class InspirationCubit extends HydratedCubit<InspirationState> {
 
   @override
   InspirationState? fromJson(Map<String, dynamic> json) {
-    // TODO: implement fromJson
-    throw UnimplementedError();
+    return InitialInspirationState();
   }
 
   @override
   Map<String, dynamic>? toJson(InspirationState state) {
-    // TODO: implement toJson
-    throw UnimplementedError();
+    return <String, dynamic>{};
   }
 }
 // Future<void> fetchEntities() async {
