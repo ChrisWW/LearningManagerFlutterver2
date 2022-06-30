@@ -1,7 +1,8 @@
-import 'package:authentication_with_bloc/authenticaiton/bloc/authentication_bloc.dart';
-import 'package:authentication_with_bloc/login/views/login_main_view.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_production_boilerplate/authentication/bloc/authentication_bloc.dart';
+import 'package:flutter_production_boilerplate/authentication/login/views/login_main_view.dart';
 
 class HomeMainView extends StatelessWidget {
   @override
@@ -26,7 +27,7 @@ class HomeMainView extends StatelessWidget {
             listener: (context, state) {
               if (state is AuthenticationFailiure) {
                 Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (_) => LoginMainView()));
+                    MaterialPageRoute<void>(builder: (_) => LoginMainView()));
               }
             },
             builder: (context, state) {

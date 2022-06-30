@@ -31,30 +31,33 @@ class AuthenticationDetail {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'isValid': isValid,
-      'uid': uid,
-      'photoUrl': photoUrl,
-      'email': email,
-      'name': name,
-    };
-  }
+  // Map<String, dynamic> toMap() {
+  //   return {
+  //     'isValid': isValid,
+  //     'uid': uid,
+  //     'photoUrl': photoUrl,
+  //     'email': email,
+  //     'name': name,
+  //   };
+  // }
 
-  factory AuthenticationDetail.fromMap(Map<String, dynamic>? map) {
-    return AuthenticationDetail(
-      isValid: map?['isValid'],
-      uid: map?['uid'],
-      photoUrl: map?['photoUrl'],
-      email: map?['email'],
-      name: map?['name'],
-    );
-  }
+  // factory InspirationResponse.fromJson(Map<String, dynamic> json) =>
+  //     _$InspirationResponseFromJson(json);
 
-  String toJson() => json.encode(toMap());
+  // factory AuthenticationDetail.fromMap(Map<String, dynamic>? map) {
+  //   return AuthenticationDetail(
+  //     isValid: map?['isValid'],
+  //     uid: map?['uid'],
+  //     photoUrl: map?['photoUrl'],
+  //     email: map?['email'],
+  //     name: map?['name'],
+  //   );
+  // }
 
-  factory AuthenticationDetail.fromJson(String source) =>
-      AuthenticationDetail.fromMap(json.decode(source));
+  // String toJson() => json.encode(toMap());
+
+  // factory AuthenticationDetail.fromJson(String source) =>
+  //     AuthenticationDetail.fromMap(json.decode(source));
 
   @override
   String toString() {

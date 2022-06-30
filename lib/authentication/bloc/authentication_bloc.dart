@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:authentication_with_bloc/authenticaiton/data/repositories/authenticaiton_repository.dart';
-import 'package:authentication_with_bloc/authenticaiton/models/authentication_detail.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_production_boilerplate/authentication/data/repositories/authenticaiton_repository.dart';
+import 'package:flutter_production_boilerplate/authentication/models/authentication_detail.dart';
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
@@ -35,7 +35,7 @@ class AuthenticationBloc
             .getAuthDetailStream()
             .listen((authDetail) {
           add(AuthenticationStateChanged(authenticationDetail: authDetail));
-        });
+        }) as StreamSubscription<AuthenticationDetail>?;
       } catch (error) {
         print(
             'Error occured while fetching authentication detail : ${error.toString()}');

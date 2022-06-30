@@ -1,7 +1,8 @@
-import 'package:authentication_with_bloc/authenticaiton/data/providers/authentication_firebase_provider.dart';
-import 'package:authentication_with_bloc/authenticaiton/data/providers/google_sign_in_provider.dart';
-import 'package:authentication_with_bloc/authenticaiton/models/authentication_detail.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_production_boilerplate/authentication/data/providers/authentication_firebase_provider.dart';
+import 'package:flutter_production_boilerplate/authentication/data/providers/google_sign_in_provider.dart';
+import 'package:flutter_production_boilerplate/authentication/models/authentication_detail.dart';
 
 class AuthenticationRepository {
   final AuthenticationFirebaseProvider _authenticationFirebaseProvider;
