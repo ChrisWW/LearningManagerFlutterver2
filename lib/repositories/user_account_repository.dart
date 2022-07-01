@@ -36,18 +36,16 @@ class UserAccountRepository extends BaseRepository {
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-    final UserCredential cr = await FirebaseAuth.instance.signInWithCredential(credential);
 
+    // Once signed in, return the UserCredential
+    final UserCredential cr = await FirebaseAuth.instance.signInWithCredential(credential);
     final UserProfile userProfile = UserProfile(login: cr.user?.email.toString(), displayName: cr.user?.displayName.toString(), imageUrl: cr.user?.photoURL);
     return userProfile;
 
-    // // Once signed in, return the UserCredential
   }
 
   // TODO
   Future<void> logOutUser() async {
-    // google polaczenie z api
-    // logout
-    return Future.value();
+    return FirebaseAuth.instance.signOut();
   }
 }

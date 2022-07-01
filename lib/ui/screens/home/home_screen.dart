@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_production_boilerplate/cubit/inspiration_cubit.dart';
+import 'package:flutter_production_boilerplate/ui/screens/drawerlayout/drawer_page.dart';
 import 'package:flutter_production_boilerplate/ui/screens/goals/goals_screen.dart';
 import 'package:flutter_production_boilerplate/ui/screens/inspiration/inspiration_screen.dart';
 import 'package:flutter_production_boilerplate/ui/screens/notes/notes_screen.dart';
@@ -31,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return DefaultTabController(
           length: 3,
           child: Scaffold(
+            drawer: const DrawerPage(),
             appBar: AppBar(
                 foregroundColor: Colors.black,
                 title: Text("Learning Manager"),
