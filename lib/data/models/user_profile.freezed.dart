@@ -21,10 +21,15 @@ UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
 class _$UserProfileTearOff {
   const _$UserProfileTearOff();
 
-  _UserProfile call({String id = '', String login = '', String imageUrl = ''}) {
+  _UserProfile call(
+      {String id = '',
+      String? login = '',
+      String? displayName = '',
+      String? imageUrl = ''}) {
     return _UserProfile(
       id: id,
       login: login,
+      displayName: displayName,
       imageUrl: imageUrl,
     );
   }
@@ -40,8 +45,9 @@ const $UserProfile = _$UserProfileTearOff();
 /// @nodoc
 mixin _$UserProfile {
   String get id => throw _privateConstructorUsedError;
-  String get login => throw _privateConstructorUsedError;
-  String get imageUrl => throw _privateConstructorUsedError;
+  String? get login => throw _privateConstructorUsedError;
+  String? get displayName => throw _privateConstructorUsedError;
+  String? get imageUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,7 +60,7 @@ abstract class $UserProfileCopyWith<$Res> {
   factory $UserProfileCopyWith(
           UserProfile value, $Res Function(UserProfile) then) =
       _$UserProfileCopyWithImpl<$Res>;
-  $Res call({String id, String login, String imageUrl});
+  $Res call({String id, String? login, String? displayName, String? imageUrl});
 }
 
 /// @nodoc
@@ -69,6 +75,7 @@ class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? login = freezed,
+    Object? displayName = freezed,
     Object? imageUrl = freezed,
   }) {
     return _then(_value.copyWith(
@@ -79,11 +86,15 @@ class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
       login: login == freezed
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      displayName: displayName == freezed
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
+              as String?,
       imageUrl: imageUrl == freezed
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -95,7 +106,7 @@ abstract class _$UserProfileCopyWith<$Res>
           _UserProfile value, $Res Function(_UserProfile) then) =
       __$UserProfileCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String login, String imageUrl});
+  $Res call({String id, String? login, String? displayName, String? imageUrl});
 }
 
 /// @nodoc
@@ -112,6 +123,7 @@ class __$UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? login = freezed,
+    Object? displayName = freezed,
     Object? imageUrl = freezed,
   }) {
     return _then(_UserProfile(
@@ -122,11 +134,15 @@ class __$UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
       login: login == freezed
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      displayName: displayName == freezed
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
+              as String?,
       imageUrl: imageUrl == freezed
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -134,7 +150,11 @@ class __$UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
-  _$_UserProfile({this.id = '', this.login = '', this.imageUrl = ''});
+  _$_UserProfile(
+      {this.id = '',
+      this.login = '',
+      this.displayName = '',
+      this.imageUrl = ''});
 
   factory _$_UserProfile.fromJson(Map<String, dynamic> json) =>
       _$$_UserProfileFromJson(json);
@@ -144,14 +164,17 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
   final String id;
   @JsonKey(defaultValue: '')
   @override
-  final String login;
+  final String? login;
   @JsonKey(defaultValue: '')
   @override
-  final String imageUrl;
+  final String? displayName;
+  @JsonKey(defaultValue: '')
+  @override
+  final String? imageUrl;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserProfile(id: $id, login: $login, imageUrl: $imageUrl)';
+    return 'UserProfile(id: $id, login: $login, displayName: $displayName, imageUrl: $imageUrl)';
   }
 
   @override
@@ -161,6 +184,7 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
       ..add(DiagnosticsProperty('type', 'UserProfile'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('login', login))
+      ..add(DiagnosticsProperty('displayName', displayName))
       ..add(DiagnosticsProperty('imageUrl', imageUrl));
   }
 
@@ -171,12 +195,15 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
             other is _UserProfile &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.login, login) || other.login == login) &&
+            (identical(other.displayName, displayName) ||
+                other.displayName == displayName) &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, login, imageUrl);
+  int get hashCode =>
+      Object.hash(runtimeType, id, login, displayName, imageUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -190,8 +217,11 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
 }
 
 abstract class _UserProfile implements UserProfile {
-  factory _UserProfile({String id, String login, String imageUrl}) =
-      _$_UserProfile;
+  factory _UserProfile(
+      {String id,
+      String? login,
+      String? displayName,
+      String? imageUrl}) = _$_UserProfile;
 
   factory _UserProfile.fromJson(Map<String, dynamic> json) =
       _$_UserProfile.fromJson;
@@ -199,9 +229,11 @@ abstract class _UserProfile implements UserProfile {
   @override
   String get id;
   @override
-  String get login;
+  String? get login;
   @override
-  String get imageUrl;
+  String? get displayName;
+  @override
+  String? get imageUrl;
   @override
   @JsonKey(ignore: true)
   _$UserProfileCopyWith<_UserProfile> get copyWith =>

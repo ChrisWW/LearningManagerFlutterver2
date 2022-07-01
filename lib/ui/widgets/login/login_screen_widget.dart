@@ -94,12 +94,11 @@ class _LoginScreenWidget extends State<LoginScreenWidget> {
                     height: 50,
                     padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                     child: ElevatedButton(
-                      child: const Text('Login'),
+                      child: const Text('Login with Google'),
                       onPressed: () {
                         // logging, using blocprovider and event from useraccountbloc->event
                         BlocProvider.of<UserAccountBloc>(context).add(
-                            TryToLogIn(
-                                nameController.text, passwordController.text));
+                            TryToLogIn());
                       },
                     )),
                 Row(

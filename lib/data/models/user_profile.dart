@@ -17,8 +17,9 @@ part 'user_profile.g.dart';
 class UserProfile with _$UserProfile {
   factory UserProfile({
     @Default('') String id,
-    @Default('') String login,
-    @Default('') String imageUrl,
+    @Default('') String? login,
+    @Default('') String? displayName,
+    @Default('') String? imageUrl,
   }) = _UserProfile;
 // nie ma tutaj toJson ale paczka freezed generuje to za nas
   factory UserProfile.fromJson(Map<String, dynamic> json) =>

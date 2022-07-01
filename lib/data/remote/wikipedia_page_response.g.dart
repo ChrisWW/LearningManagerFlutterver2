@@ -25,7 +25,7 @@ _$_WikipediaPageQuery _$$_WikipediaPageQueryFromJson(
     _$_WikipediaPageQuery(
       pages: (json['pages'] as Map<String, WikipediaPage>?)?.map(
             (k, e) =>
-                MapEntry(k, WikipediaPage.fromJson(e as Map<String, dynamic>)),
+                MapEntry(k, WikipediaPage.fromJson(dynamic as Map<String, dynamic>)),
           ) ??
           {},
     );

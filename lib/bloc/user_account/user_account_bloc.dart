@@ -53,20 +53,13 @@ class UserAccountBloc extends HydratedBloc<UserAccountEvent, UserAccountState> {
       /// TODO:
       /// // zmusamy repo, zeby zalogowalo usera
       /// // zapytanie do API
-      final UserProfile profile = await _userAccountRepository.logInUser(
-          event.login,
-          event.password
-      );
+      final UserProfile profile = await _userAccountRepository.logInUserWithGoogle();
 
       // natenczas zmockowana logika
       // if accept
       // yield przechodzimy w inny stan(State)
       // mock hardcoded
-      if (event.login == 'test') {
         yield UserLoggedInState(profile);
-      } else {
-        throw Exception('random error');
-      }
     } catch (e) {
       print('$prefix:_mapTryToLogIn: error ${e.toString()}');
       yield UserLogInErrorState();
