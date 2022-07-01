@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:logger/logger.dart';
+import 'firebase_options.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -41,6 +44,16 @@ void main() async {
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: tmpDir,
   );
+
+  // Firebase
+  if (Firebase.apps.isEmpty) {
+    await Firebase.initializeApp(
+      // name:,
+      options: DefaultFirebaseOptions.currentPlatform
+    ).whenComplete(() async {
+      // Logger.d('Firebase initialized');
+    });
+  }
 
   runApp(
     EasyLocalization(
