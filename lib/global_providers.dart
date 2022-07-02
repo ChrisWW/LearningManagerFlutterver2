@@ -61,5 +61,3 @@ class GlobalProviders extends StatelessWidget {
         )
       ];
 }
-
-// Here I can add man

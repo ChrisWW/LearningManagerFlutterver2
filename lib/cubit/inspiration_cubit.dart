@@ -1,13 +1,8 @@
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter_production_boilerplate/data/remote/inspiration_response.dart';
 import 'package:flutter_production_boilerplate/repositories/inspiration_repository.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:http/http.dart' as http;
-import 'package:logger/logger.dart';
 
 part 'inspiration_state.dart';
 

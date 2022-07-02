@@ -10,17 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_production_boilerplate/authentication/bloc/authentication_bloc.dart';
-import 'package:flutter_production_boilerplate/authentication/data/providers/authentication_firebase_provider.dart';
-import 'package:flutter_production_boilerplate/authentication/data/providers/google_sign_in_provider.dart';
-import 'package:flutter_production_boilerplate/authentication/data/repositories/authenticaiton_repository.dart';
-import 'package:flutter_production_boilerplate/authentication/home/views/home_main_view.dart';
-import 'package:flutter_production_boilerplate/authentication/observers/app_bloc_observer.dart';
 import 'package:flutter_production_boilerplate/cubit/theme_cubit.dart';
 import 'package:flutter_production_boilerplate/global_providers.dart';
 import 'package:flutter_production_boilerplate/ui/screens/home/home_screen.dart';
 import 'package:flutter_production_boilerplate/ui/screens/login/login_screen.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive/hive.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
@@ -28,10 +21,6 @@ import 'package:path_provider/path_provider.dart';
 /// Try using const constructors as much as possible!
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
-  // Bloc.observer = AppBlocObserver();
-  // runApp(MyApp());
 
   /// Initialize packages
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,7 +34,7 @@ void main() async {
     storageDirectory: tmpDir,
   );
 
-  // Firebase
+  /// Firebase
   if (Firebase.apps.isEmpty) {
     await Firebase.initializeApp(
       // name:,
