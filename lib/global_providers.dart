@@ -19,7 +19,6 @@ class GlobalProviders extends StatelessWidget {
 
   GlobalProviders({Key? key}) : super(key: key) {
     _dio = Dio(BaseOptions(contentType: "application/json"));
-    _dio.interceptors.add(JsonResponseConverter());
     _apiService = ApiService(_dio);
   }
 
@@ -63,12 +62,4 @@ class GlobalProviders extends StatelessWidget {
           ),
         )
       ];
-}
-
-class JsonResponseConverter extends Interceptor {
-  @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    response.data = json.decode(response.data as String);
-    super.onResponse(response, handler);
-  }
 }

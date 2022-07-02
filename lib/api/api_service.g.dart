@@ -14,12 +14,17 @@ class _ApiService implements ApiService {
   String? baseUrl;
 
   @override
-  Future<InspirationResponse> postQuote(body) async {
+  Future<InspirationResponse> postQuote(
+      {method = 'getQuote', format = 'json', lang = 'en'}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'method': method,
+      r'format': format,
+      r'lang': lang
+    };
+    queryParameters.removeWhere((k, dynamic v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<InspirationResponse>(
             Options(method: 'POST', headers: _headers, extra: _extra)

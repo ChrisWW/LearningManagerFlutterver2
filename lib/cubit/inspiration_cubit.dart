@@ -19,15 +19,18 @@ class InspirationCubit extends HydratedCubit<InspirationState> {
   Future<void> getInspiration() async {
     try {
       emit(const InProgressInspirationState());
-      final InspirationResponse inspirationResponse = await _inspirationRepository.postQuote();
-      final WikipediaPageResponse wikipediaPageResponse = await _inspirationRepository.getImage(inspirationResponse.quoteAuthor);
-      final String imageUrl = wikipediaPageResponse.query!.pages.entries.first.value.thumbnail!.source;
+      final InspirationResponse inspirationResponse =
+          await _inspirationRepository.postQuote();
+      final WikipediaPageResponse wikipediaPageResponse =
+          await _inspirationRepository
+              .getImage(inspirationResponse.quoteAuthor);
+      final String imageUrl = wikipediaPageResponse
+          .query!.pages.entries.first.value.thumbnail!.source;
       emit(ShowInspirationState(inspirationResponse, imageUrl));
-    }
-    catch (e) {
+    } catch (e) {
       emit(const ErrorInspirationState());
-      print(e.toString());
       print("Error in PostQuote InspirationCubit");
+      print(e.toString());
     }
   }
 
@@ -53,4 +56,3 @@ class InspirationCubit extends HydratedCubit<InspirationState> {
 
 // obsluga ulubionych, cubit globalny
 //cachowanie kolejka 10 wczesniej pobranych ostatni outuje i laduje na pierwszy, przesuwanie
-

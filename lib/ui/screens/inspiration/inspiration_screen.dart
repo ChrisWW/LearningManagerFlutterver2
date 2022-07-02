@@ -19,7 +19,6 @@ class _InspirationScreenState extends State<InspirationScreen> {
   void initState() {
     super.initState();
     screenshotController = ScreenshotController();
-
     BlocProvider.of<InspirationCubit>(context).getInspiration();
   }
 
@@ -35,15 +34,15 @@ class _InspirationScreenState extends State<InspirationScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<InspirationCubit, InspirationState>(
-        builder: (context, state) {
-      if (state is InProgressInspirationState) {
-        return const Center(child: CircularProgressIndicator());
-      } else if (state is ShowInspirationState) {
-        return Scaffold(
-          backgroundColor: grey,
-          body: Screenshot<dynamic>(
-            controller: screenshotController,
-            child: Stack(
+      builder: (context, state) {
+        if (state is InProgressInspirationState) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is ShowInspirationState) {
+          return Scaffold(
+            backgroundColor: grey,
+            body: Screenshot<dynamic>(
+              controller: screenshotController,
+              child: Stack(
                 alignment: Alignment.center,
                 fit: StackFit.expand,
                 children: <Widget>[
@@ -56,58 +55,69 @@ class _InspirationScreenState extends State<InspirationScreen> {
                     },
                   ),
                   Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          stops: [0, 0.6, 1],
-                          colors: [
-                            grey!.withAlpha(70),
-                            grey!.withAlpha(220),
-                            grey!.withAlpha(255),
-                          ],
-                        ),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        stops: [0, 0.6, 1],
+                        colors: [
+                          grey!.withAlpha(70),
+                          grey!.withAlpha(220),
+                          grey!.withAlpha(255),
+                        ],
                       ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 100),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            RichText(
-                              textAlign: TextAlign.center,
-                              text: TextSpan(
-                                  text: state.inspiration.quoteText,
-                                  style: const TextStyle(
-                                      fontFamily: "Ic",
-                                      color: Colors.green,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 30),
-                                  children: [
-                                    TextSpan(
-                                        text: state.inspiration.quoteText,
-                                        style: const TextStyle(
-                                            fontFamily: "Ic",
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 22)),
-                                    TextSpan(
-                                        text: state.inspiration.quoteText,
-                                        style: const TextStyle(
-                                            fontFamily: "Ic",
-                                            fontWeight: FontWeight.w700,
-                                            color: Colors.green,
-                                            fontSize: 30))
-                                  ]),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 100),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            text: state.inspiration.quoteText,
+                            style: const TextStyle(
+                              fontFamily: "Ic",
+                              color: Colors.green,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 30,
                             ),
-                            Text(state.inspiration.quoteAuthor,
-                                textAlign: TextAlign.center,
+                            children: [
+                              TextSpan(
+                                text: state.inspiration.quoteText,
                                 style: const TextStyle(
-                                    fontFamily: "Ic",
-                                    color: Colors.white,
-                                    fontSize: 18)),
-                          ])),
+                                  fontFamily: "Ic",
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 22,
+                                ),
+                              ),
+                              TextSpan(
+                                text: state.inspiration.quoteText,
+                                style: const TextStyle(
+                                  fontFamily: "Ic",
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.green,
+                                  fontSize: 30,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Text(
+                          state.inspiration.quoteAuthor,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontFamily: "Ic",
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   AppBar(
                     title: const Text(
                       "Motivational Quote",
@@ -119,9 +129,10 @@ class _InspirationScreenState extends State<InspirationScreen> {
                     elevation: 0,
                     centerTitle: true,
                   ),
-                ]),
-          ),
-          floatingActionButton: Row(
+                ],
+              ),
+            ),
+            floatingActionButton: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 InkWell(
@@ -139,17 +150,21 @@ class _InspirationScreenState extends State<InspirationScreen> {
                   child: const Icon(Icons.share, size: 30, color: Colors.white),
                 ),
                 InkWell(
-                  onTap: state.inspiration.quoteText.isNotEmpty ? () => null : null,
+                  onTap: state.inspiration.quoteText.isNotEmpty
+                      ? () => null
+                      : null,
                   child: const Icon(Icons.add_box_outlined,
                       size: 30, color: Colors.white),
-                )
-              ]),
-        );
-      } else {
-        return const Center(
-          child: Text("Error occurred"),
-        );
-      }
-    });
+                ),
+              ],
+            ),
+          );
+        } else {
+          return const Center(
+            child: Text("Error occurred"),
+          );
+        }
+      },
+    );
   }
 }

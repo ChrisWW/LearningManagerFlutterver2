@@ -23,9 +23,9 @@ Map<String, dynamic> _$$_WikipediaPageResponseToJson(
 _$_WikipediaPageQuery _$$_WikipediaPageQueryFromJson(
         Map<String, dynamic> json) =>
     _$_WikipediaPageQuery(
-      pages: (json['pages'] as Map<String, WikipediaPage>?)?.map(
-            (k, e) =>
-                MapEntry(k, WikipediaPage.fromJson(dynamic as Map<String, dynamic>)),
+      pages: (json['pages'] as Map<String, dynamic>?)?.map(
+            (k, dynamic e) =>
+                MapEntry(k, WikipediaPage.fromJson(e as Map<String, dynamic>)),
           ) ??
           {},
     );
