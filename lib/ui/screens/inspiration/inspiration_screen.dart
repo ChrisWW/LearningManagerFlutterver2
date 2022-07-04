@@ -74,38 +74,19 @@ class _InspirationScreenState extends State<InspirationScreen> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        RichText(
+                        Center(child: RichText(
                           textAlign: TextAlign.center,
                           text: TextSpan(
-                            text: state.inspiration.quoteText,
+                            text:
+                            state.inspiration.quoteText.replaceAll("â", " "),
                             style: const TextStyle(
                               fontFamily: "Ic",
-                              color: Colors.green,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 30,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 25,
                             ),
-                            children: [
-                              TextSpan(
-                                text: state.inspiration.quoteText,
-                                style: const TextStyle(
-                                  fontFamily: "Ic",
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 22,
-                                ),
-                              ),
-                              TextSpan(
-                                text: state.inspiration.quoteText,
-                                style: const TextStyle(
-                                  fontFamily: "Ic",
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.green,
-                                  fontSize: 30,
-                                ),
-                              )
-                            ],
                           ),
-                        ),
+                        ),),
                         Text(
                           state.inspiration.quoteAuthor,
                           textAlign: TextAlign.center,

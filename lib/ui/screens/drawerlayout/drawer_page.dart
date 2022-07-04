@@ -6,6 +6,7 @@ import 'dart:math';
 import 'package:flutter_production_boilerplate/ui/screens/home/home_screen.dart';
 
 class DrawerPage extends StatefulWidget {
+  static const String route = '/home';
   const DrawerPage({Key? key}) : super(key: key);
 
   @override

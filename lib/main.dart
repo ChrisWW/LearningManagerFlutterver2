@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_production_boilerplate/ui/screens/drawerlayout/drawer_page.dart';
 import 'package:logger/logger.dart';
 import 'firebase_options.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -101,7 +102,7 @@ class MyApp extends StatelessWidget {
             builder: EasyLoading.init(),
             routes: {
               '/login': (_) => const LoginScreen(),
-              '/home': (_) => const HomeScreen(),
+              '/home': (_) => const DrawerPage(),
             },
           );
         },

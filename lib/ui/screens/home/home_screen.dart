@@ -10,7 +10,6 @@ import 'package:flutter_production_boilerplate/ui/screens/notes/notes_screen.dar
 import 'package:flutter_production_boilerplate/ui/widgets/login/screen_with_appbar.dart';
 
 class HomeScreen extends StatefulWidget {
-  static const String route = '/home';
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -32,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return DefaultTabController(
           length: 3,
           child: Scaffold(
-            drawer: const DrawerPage(),
+            // drawer: const DrawerPage(),
             appBar: AppBar(
                 foregroundColor: Colors.black,
                 title: Text("Learning Manager"),
