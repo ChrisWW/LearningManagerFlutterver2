@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return DefaultTabController(
           length: 3,
           child: Scaffold(
-            // drawer: const DrawerPage(),
+            drawer: const DrawerPage(),
             appBar: AppBar(
                 foregroundColor: Colors.black,
                 title: Text("Learning Manager"),
