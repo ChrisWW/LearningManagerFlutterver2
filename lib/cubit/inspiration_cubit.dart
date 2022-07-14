@@ -8,6 +8,9 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 part 'inspiration_state.dart';
 
 class InspirationCubit extends HydratedCubit<InspirationState> {
+  static const String prefix = 'InspirationCubit';
+  static const String inspirationKey = 'inspiration';
+
   final InspirationRepository _inspirationRepository;
 
   InspirationCubit(this._inspirationRepository)
@@ -17,6 +20,7 @@ class InspirationCubit extends HydratedCubit<InspirationState> {
   // TODO retorfit-> service ktory bedzie tworyzl te 2 zapytania i przkeaze link do obrazka do stanu i inspiracja
   // wyciaganie danych z responsa// service w retrofit i obiekt modelu, ktory freezed biblioteka do serializacji,// obiekt i wyciagae zmienna// przekazac zawartosc do UI
   Future<void> getInspiration() async {
+    final InspirationState previousState = state;
     try {
       emit(const InProgressInspirationState());
       final InspirationResponse inspirationResponse =
@@ -28,7 +32,12 @@ class InspirationCubit extends HydratedCubit<InspirationState> {
           .query!.pages.entries.first.value.thumbnail!.source;
       emit(ShowInspirationState(inspirationResponse, imageUrl));
     } catch (e) {
-      emit(const ErrorInspirationState());
+      if (previousState is ShowInspirationState) {
+        emit(previousState);
+      } else {
+        emit(const ErrorInspirationState());
+      }
+
       print("Error in PostQuote InspirationCubit");
       print(e.toString());
     }
@@ -36,12 +45,27 @@ class InspirationCubit extends HydratedCubit<InspirationState> {
 
   @override
   InspirationState? fromJson(Map<String, dynamic> json) {
-    return InitialInspirationState();
+    if (json.containsKey(inspirationKey)) {
+      return ShowInspirationState(
+        InspirationResponse.fromJson(
+          json[inspirationKey] as Map<String, dynamic>,
+        ),
+        '',
+      );
+    } else {
+      return InitialInspirationState();
+    }
   }
 
   @override
   Map<String, dynamic>? toJson(InspirationState state) {
-    return <String, dynamic>{};
+    if (state is ShowInspirationState) {
+      return <String, dynamic>{
+        inspirationKey: state.inspiration.toJson(),
+      };
+    } else {
+      return <String, dynamic>{};
+    }
   }
 }
 
