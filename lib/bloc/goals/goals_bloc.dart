@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_production_boilerplate/data/models/Goal.dart';
+import 'package:flutter_production_boilerplate/data/models/goal/goal.dart';
 import 'package:flutter_production_boilerplate/repositories/goals_repository.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:equatable/equatable.dart';

@@ -37,8 +37,7 @@ dependencies:
 
 #  freezed: ^0.15.0+1
   freezed_annotation: ^2.0.3
-  json_annotation: ^4.3.0
-  json_serializable: ^6.2.0
+  json_annotation: ^4.6.0
 #  json_annotation: ^4.6.0
   logger: ^1.1.0
   flutter_easyloading: ^3.0.2
