@@ -11,6 +11,8 @@ class InspirationBloc extends HydratedBloc<InspirationEvent, InspirationState> {
   static const String prefix = 'InspirationBloc';
   static const String profileKey = 'profile';
 
+  // TODO czy to jest potrzebne do usunięcia? i event i state wszystko jest w cubicie.
+
   final InspirationRepository _inspirationRepository;
 
   InspirationBloc(this._inspirationRepository) : super(TestState());

@@ -4,9 +4,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_production_boilerplate/api/api_service.dart';
+import 'package:flutter_production_boilerplate/bloc/goals/goals_bloc.dart';
 import 'package:flutter_production_boilerplate/cubit/inspiration_cubit.dart';
 import 'package:flutter_production_boilerplate/cubit/theme_cubit.dart';
 import 'package:flutter_production_boilerplate/main.dart';
+import 'package:flutter_production_boilerplate/repositories/goals_repository.dart';
 import 'package:flutter_production_boilerplate/repositories/inspiration_repository.dart';
 import 'package:flutter_production_boilerplate/repositories/user_account_repository.dart';
 import 'package:flutter_production_boilerplate/ui/screens/login/login_screen.dart';
@@ -59,6 +61,11 @@ class GlobalProviders extends StatelessWidget {
         BlocProvider<InspirationCubit>(
           create: (BuildContext context) => InspirationCubit(
             RepositoryProvider.of<InspirationRepository>(context),
+          ),
+        ),
+        BlocProvider<GoalsBloc>(
+          create: (BuildContext context) => GoalsBloc(
+            RepositoryProvider.of<GoalsRepository>(context),
           ),
         )
       ];

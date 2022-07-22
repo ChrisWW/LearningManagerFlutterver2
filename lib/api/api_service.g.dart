@@ -22,7 +22,7 @@ class _ApiService implements ApiService {
       r'format': format,
       r'lang': lang
     };
-    queryParameters.removeWhere((k, dynamic v) => v == null);
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(

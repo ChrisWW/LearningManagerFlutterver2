@@ -11,7 +11,6 @@ class InspirationScreen extends StatefulWidget {
 }
 
 class _InspirationScreenState extends State<InspirationScreen> {
-  // TODO
   final grey = Colors.blueGrey[800];
   late ScreenshotController screenshotController;
 

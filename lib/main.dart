@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_production_boilerplate/ui/screens/drawerlayout/drawer_page.dart';
+import 'package:flutter_production_boilerplate/ui/screens/goals/add_edit_goal_screen.dart';
 import 'package:logger/logger.dart';
 import 'firebase_options.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -103,6 +104,7 @@ class MyApp extends StatelessWidget {
             routes: {
               '/login': (_) => const LoginScreen(),
               '/home': (_) => const DrawerPage(),
+              '/addEditGoals': (_) => const AddEditGoalScreen()
             },
           );
         },
