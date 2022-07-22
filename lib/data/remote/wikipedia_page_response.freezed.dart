@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'wikipedia_page_response.dart';
@@ -11,30 +12,12 @@ part of 'wikipedia_page_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 WikipediaPageResponse _$WikipediaPageResponseFromJson(
     Map<String, dynamic> json) {
   return _WikipediaPageResponse.fromJson(json);
 }
-
-/// @nodoc
-class _$WikipediaPageResponseTearOff {
-  const _$WikipediaPageResponseTearOff();
-
-  _WikipediaPageResponse call({WikipediaPageQuery? query}) {
-    return _WikipediaPageResponse(
-      query: query,
-    );
-  }
-
-  WikipediaPageResponse fromJson(Map<String, Object?> json) {
-    return WikipediaPageResponse.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $WikipediaPageResponse = _$WikipediaPageResponseTearOff();
 
 /// @nodoc
 mixin _$WikipediaPageResponse {
@@ -90,11 +73,11 @@ class _$WikipediaPageResponseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$WikipediaPageResponseCopyWith<$Res>
+abstract class _$$_WikipediaPageResponseCopyWith<$Res>
     implements $WikipediaPageResponseCopyWith<$Res> {
-  factory _$WikipediaPageResponseCopyWith(_WikipediaPageResponse value,
-          $Res Function(_WikipediaPageResponse) then) =
-      __$WikipediaPageResponseCopyWithImpl<$Res>;
+  factory _$$_WikipediaPageResponseCopyWith(_$_WikipediaPageResponse value,
+          $Res Function(_$_WikipediaPageResponse) then) =
+      __$$_WikipediaPageResponseCopyWithImpl<$Res>;
   @override
   $Res call({WikipediaPageQuery? query});
 
@@ -103,21 +86,22 @@ abstract class _$WikipediaPageResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$WikipediaPageResponseCopyWithImpl<$Res>
+class __$$_WikipediaPageResponseCopyWithImpl<$Res>
     extends _$WikipediaPageResponseCopyWithImpl<$Res>
-    implements _$WikipediaPageResponseCopyWith<$Res> {
-  __$WikipediaPageResponseCopyWithImpl(_WikipediaPageResponse _value,
-      $Res Function(_WikipediaPageResponse) _then)
-      : super(_value, (v) => _then(v as _WikipediaPageResponse));
+    implements _$$_WikipediaPageResponseCopyWith<$Res> {
+  __$$_WikipediaPageResponseCopyWithImpl(_$_WikipediaPageResponse _value,
+      $Res Function(_$_WikipediaPageResponse) _then)
+      : super(_value, (v) => _then(v as _$_WikipediaPageResponse));
 
   @override
-  _WikipediaPageResponse get _value => super._value as _WikipediaPageResponse;
+  _$_WikipediaPageResponse get _value =>
+      super._value as _$_WikipediaPageResponse;
 
   @override
   $Res call({
     Object? query = freezed,
   }) {
-    return _then(_WikipediaPageResponse(
+    return _then(_$_WikipediaPageResponse(
       query: query == freezed
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
@@ -156,17 +140,19 @@ class _$_WikipediaPageResponse
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _WikipediaPageResponse &&
-            (identical(other.query, query) || other.query == query));
+            other is _$_WikipediaPageResponse &&
+            const DeepCollectionEquality().equals(other.query, query));
   }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, query);
 
   @JsonKey(ignore: true)
   @override
-  _$WikipediaPageResponseCopyWith<_WikipediaPageResponse> get copyWith =>
-      __$WikipediaPageResponseCopyWithImpl<_WikipediaPageResponse>(
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(query));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_WikipediaPageResponseCopyWith<_$_WikipediaPageResponse> get copyWith =>
+      __$$_WikipediaPageResponseCopyWithImpl<_$_WikipediaPageResponse>(
           this, _$identity);
 
   @override
@@ -176,7 +162,7 @@ class _$_WikipediaPageResponse
 }
 
 abstract class _WikipediaPageResponse implements WikipediaPageResponse {
-  factory _WikipediaPageResponse({WikipediaPageQuery? query}) =
+  factory _WikipediaPageResponse({final WikipediaPageQuery? query}) =
       _$_WikipediaPageResponse;
 
   factory _WikipediaPageResponse.fromJson(Map<String, dynamic> json) =
@@ -186,32 +172,13 @@ abstract class _WikipediaPageResponse implements WikipediaPageResponse {
   WikipediaPageQuery? get query;
   @override
   @JsonKey(ignore: true)
-  _$WikipediaPageResponseCopyWith<_WikipediaPageResponse> get copyWith =>
+  _$$_WikipediaPageResponseCopyWith<_$_WikipediaPageResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 WikipediaPageQuery _$WikipediaPageQueryFromJson(Map<String, dynamic> json) {
   return _WikipediaPageQuery.fromJson(json);
 }
-
-/// @nodoc
-class _$WikipediaPageQueryTearOff {
-  const _$WikipediaPageQueryTearOff();
-
-  _WikipediaPageQuery call(
-      {Map<String, WikipediaPage> pages = const <String, WikipediaPage>{}}) {
-    return _WikipediaPageQuery(
-      pages: pages,
-    );
-  }
-
-  WikipediaPageQuery fromJson(Map<String, Object?> json) {
-    return WikipediaPageQuery.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $WikipediaPageQuery = _$WikipediaPageQueryTearOff();
 
 /// @nodoc
 mixin _$WikipediaPageQuery {
@@ -254,33 +221,33 @@ class _$WikipediaPageQueryCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$WikipediaPageQueryCopyWith<$Res>
+abstract class _$$_WikipediaPageQueryCopyWith<$Res>
     implements $WikipediaPageQueryCopyWith<$Res> {
-  factory _$WikipediaPageQueryCopyWith(
-          _WikipediaPageQuery value, $Res Function(_WikipediaPageQuery) then) =
-      __$WikipediaPageQueryCopyWithImpl<$Res>;
+  factory _$$_WikipediaPageQueryCopyWith(_$_WikipediaPageQuery value,
+          $Res Function(_$_WikipediaPageQuery) then) =
+      __$$_WikipediaPageQueryCopyWithImpl<$Res>;
   @override
   $Res call({Map<String, WikipediaPage> pages});
 }
 
 /// @nodoc
-class __$WikipediaPageQueryCopyWithImpl<$Res>
+class __$$_WikipediaPageQueryCopyWithImpl<$Res>
     extends _$WikipediaPageQueryCopyWithImpl<$Res>
-    implements _$WikipediaPageQueryCopyWith<$Res> {
-  __$WikipediaPageQueryCopyWithImpl(
-      _WikipediaPageQuery _value, $Res Function(_WikipediaPageQuery) _then)
-      : super(_value, (v) => _then(v as _WikipediaPageQuery));
+    implements _$$_WikipediaPageQueryCopyWith<$Res> {
+  __$$_WikipediaPageQueryCopyWithImpl(
+      _$_WikipediaPageQuery _value, $Res Function(_$_WikipediaPageQuery) _then)
+      : super(_value, (v) => _then(v as _$_WikipediaPageQuery));
 
   @override
-  _WikipediaPageQuery get _value => super._value as _WikipediaPageQuery;
+  _$_WikipediaPageQuery get _value => super._value as _$_WikipediaPageQuery;
 
   @override
   $Res call({
     Object? pages = freezed,
   }) {
-    return _then(_WikipediaPageQuery(
+    return _then(_$_WikipediaPageQuery(
       pages: pages == freezed
-          ? _value.pages
+          ? _value._pages
           : pages // ignore: cast_nullable_to_non_nullable
               as Map<String, WikipediaPage>,
     ));
@@ -292,14 +259,21 @@ class __$WikipediaPageQueryCopyWithImpl<$Res>
 class _$_WikipediaPageQuery
     with DiagnosticableTreeMixin
     implements _WikipediaPageQuery {
-  _$_WikipediaPageQuery({this.pages = const <String, WikipediaPage>{}});
+  _$_WikipediaPageQuery(
+      {final Map<String, WikipediaPage> pages =
+          const <String, WikipediaPage>{}})
+      : _pages = pages;
 
   factory _$_WikipediaPageQuery.fromJson(Map<String, dynamic> json) =>
       _$$_WikipediaPageQueryFromJson(json);
 
-  @JsonKey(defaultValue: const <String, WikipediaPage>{})
+  final Map<String, WikipediaPage> _pages;
   @override
-  final Map<String, WikipediaPage> pages;
+  @JsonKey()
+  Map<String, WikipediaPage> get pages {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_pages);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -318,18 +292,20 @@ class _$_WikipediaPageQuery
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _WikipediaPageQuery &&
-            const DeepCollectionEquality().equals(other.pages, pages));
+            other is _$_WikipediaPageQuery &&
+            const DeepCollectionEquality().equals(other._pages, _pages));
   }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(pages));
 
   @JsonKey(ignore: true)
   @override
-  _$WikipediaPageQueryCopyWith<_WikipediaPageQuery> get copyWith =>
-      __$WikipediaPageQueryCopyWithImpl<_WikipediaPageQuery>(this, _$identity);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_pages));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_WikipediaPageQueryCopyWith<_$_WikipediaPageQuery> get copyWith =>
+      __$$_WikipediaPageQueryCopyWithImpl<_$_WikipediaPageQuery>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -338,7 +314,7 @@ class _$_WikipediaPageQuery
 }
 
 abstract class _WikipediaPageQuery implements WikipediaPageQuery {
-  factory _WikipediaPageQuery({Map<String, WikipediaPage> pages}) =
+  factory _WikipediaPageQuery({final Map<String, WikipediaPage> pages}) =
       _$_WikipediaPageQuery;
 
   factory _WikipediaPageQuery.fromJson(Map<String, dynamic> json) =
@@ -348,31 +324,13 @@ abstract class _WikipediaPageQuery implements WikipediaPageQuery {
   Map<String, WikipediaPage> get pages;
   @override
   @JsonKey(ignore: true)
-  _$WikipediaPageQueryCopyWith<_WikipediaPageQuery> get copyWith =>
+  _$$_WikipediaPageQueryCopyWith<_$_WikipediaPageQuery> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 WikipediaPage _$WikipediaPageFromJson(Map<String, dynamic> json) {
   return _WikipediaPage.fromJson(json);
 }
-
-/// @nodoc
-class _$WikipediaPageTearOff {
-  const _$WikipediaPageTearOff();
-
-  _WikipediaPage call({WikipediaPageThumbnail? thumbnail}) {
-    return _WikipediaPage(
-      thumbnail: thumbnail,
-    );
-  }
-
-  WikipediaPage fromJson(Map<String, Object?> json) {
-    return WikipediaPage.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $WikipediaPage = _$WikipediaPageTearOff();
 
 /// @nodoc
 mixin _$WikipediaPage {
@@ -428,11 +386,11 @@ class _$WikipediaPageCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$WikipediaPageCopyWith<$Res>
+abstract class _$$_WikipediaPageCopyWith<$Res>
     implements $WikipediaPageCopyWith<$Res> {
-  factory _$WikipediaPageCopyWith(
-          _WikipediaPage value, $Res Function(_WikipediaPage) then) =
-      __$WikipediaPageCopyWithImpl<$Res>;
+  factory _$$_WikipediaPageCopyWith(
+          _$_WikipediaPage value, $Res Function(_$_WikipediaPage) then) =
+      __$$_WikipediaPageCopyWithImpl<$Res>;
   @override
   $Res call({WikipediaPageThumbnail? thumbnail});
 
@@ -441,21 +399,21 @@ abstract class _$WikipediaPageCopyWith<$Res>
 }
 
 /// @nodoc
-class __$WikipediaPageCopyWithImpl<$Res>
+class __$$_WikipediaPageCopyWithImpl<$Res>
     extends _$WikipediaPageCopyWithImpl<$Res>
-    implements _$WikipediaPageCopyWith<$Res> {
-  __$WikipediaPageCopyWithImpl(
-      _WikipediaPage _value, $Res Function(_WikipediaPage) _then)
-      : super(_value, (v) => _then(v as _WikipediaPage));
+    implements _$$_WikipediaPageCopyWith<$Res> {
+  __$$_WikipediaPageCopyWithImpl(
+      _$_WikipediaPage _value, $Res Function(_$_WikipediaPage) _then)
+      : super(_value, (v) => _then(v as _$_WikipediaPage));
 
   @override
-  _WikipediaPage get _value => super._value as _WikipediaPage;
+  _$_WikipediaPage get _value => super._value as _$_WikipediaPage;
 
   @override
   $Res call({
     Object? thumbnail = freezed,
   }) {
-    return _then(_WikipediaPage(
+    return _then(_$_WikipediaPage(
       thumbnail: thumbnail == freezed
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
@@ -492,18 +450,19 @@ class _$_WikipediaPage with DiagnosticableTreeMixin implements _WikipediaPage {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _WikipediaPage &&
-            (identical(other.thumbnail, thumbnail) ||
-                other.thumbnail == thumbnail));
+            other is _$_WikipediaPage &&
+            const DeepCollectionEquality().equals(other.thumbnail, thumbnail));
   }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, thumbnail);
 
   @JsonKey(ignore: true)
   @override
-  _$WikipediaPageCopyWith<_WikipediaPage> get copyWith =>
-      __$WikipediaPageCopyWithImpl<_WikipediaPage>(this, _$identity);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(thumbnail));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_WikipediaPageCopyWith<_$_WikipediaPage> get copyWith =>
+      __$$_WikipediaPageCopyWithImpl<_$_WikipediaPage>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -512,7 +471,7 @@ class _$_WikipediaPage with DiagnosticableTreeMixin implements _WikipediaPage {
 }
 
 abstract class _WikipediaPage implements WikipediaPage {
-  factory _WikipediaPage({WikipediaPageThumbnail? thumbnail}) =
+  factory _WikipediaPage({final WikipediaPageThumbnail? thumbnail}) =
       _$_WikipediaPage;
 
   factory _WikipediaPage.fromJson(Map<String, dynamic> json) =
@@ -522,7 +481,7 @@ abstract class _WikipediaPage implements WikipediaPage {
   WikipediaPageThumbnail? get thumbnail;
   @override
   @JsonKey(ignore: true)
-  _$WikipediaPageCopyWith<_WikipediaPage> get copyWith =>
+  _$$_WikipediaPageCopyWith<_$_WikipediaPage> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -530,24 +489,6 @@ WikipediaPageThumbnail _$WikipediaPageThumbnailFromJson(
     Map<String, dynamic> json) {
   return _WikipediaPageThumbnail.fromJson(json);
 }
-
-/// @nodoc
-class _$WikipediaPageThumbnailTearOff {
-  const _$WikipediaPageThumbnailTearOff();
-
-  _WikipediaPageThumbnail call({String source = ''}) {
-    return _WikipediaPageThumbnail(
-      source: source,
-    );
-  }
-
-  WikipediaPageThumbnail fromJson(Map<String, Object?> json) {
-    return WikipediaPageThumbnail.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $WikipediaPageThumbnail = _$WikipediaPageThumbnailTearOff();
 
 /// @nodoc
 mixin _$WikipediaPageThumbnail {
@@ -590,31 +531,32 @@ class _$WikipediaPageThumbnailCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$WikipediaPageThumbnailCopyWith<$Res>
+abstract class _$$_WikipediaPageThumbnailCopyWith<$Res>
     implements $WikipediaPageThumbnailCopyWith<$Res> {
-  factory _$WikipediaPageThumbnailCopyWith(_WikipediaPageThumbnail value,
-          $Res Function(_WikipediaPageThumbnail) then) =
-      __$WikipediaPageThumbnailCopyWithImpl<$Res>;
+  factory _$$_WikipediaPageThumbnailCopyWith(_$_WikipediaPageThumbnail value,
+          $Res Function(_$_WikipediaPageThumbnail) then) =
+      __$$_WikipediaPageThumbnailCopyWithImpl<$Res>;
   @override
   $Res call({String source});
 }
 
 /// @nodoc
-class __$WikipediaPageThumbnailCopyWithImpl<$Res>
+class __$$_WikipediaPageThumbnailCopyWithImpl<$Res>
     extends _$WikipediaPageThumbnailCopyWithImpl<$Res>
-    implements _$WikipediaPageThumbnailCopyWith<$Res> {
-  __$WikipediaPageThumbnailCopyWithImpl(_WikipediaPageThumbnail _value,
-      $Res Function(_WikipediaPageThumbnail) _then)
-      : super(_value, (v) => _then(v as _WikipediaPageThumbnail));
+    implements _$$_WikipediaPageThumbnailCopyWith<$Res> {
+  __$$_WikipediaPageThumbnailCopyWithImpl(_$_WikipediaPageThumbnail _value,
+      $Res Function(_$_WikipediaPageThumbnail) _then)
+      : super(_value, (v) => _then(v as _$_WikipediaPageThumbnail));
 
   @override
-  _WikipediaPageThumbnail get _value => super._value as _WikipediaPageThumbnail;
+  _$_WikipediaPageThumbnail get _value =>
+      super._value as _$_WikipediaPageThumbnail;
 
   @override
   $Res call({
     Object? source = freezed,
   }) {
-    return _then(_WikipediaPageThumbnail(
+    return _then(_$_WikipediaPageThumbnail(
       source: source == freezed
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
@@ -633,8 +575,8 @@ class _$_WikipediaPageThumbnail
   factory _$_WikipediaPageThumbnail.fromJson(Map<String, dynamic> json) =>
       _$$_WikipediaPageThumbnailFromJson(json);
 
-  @JsonKey(defaultValue: '')
   @override
+  @JsonKey()
   final String source;
 
   @override
@@ -654,17 +596,19 @@ class _$_WikipediaPageThumbnail
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _WikipediaPageThumbnail &&
-            (identical(other.source, source) || other.source == source));
+            other is _$_WikipediaPageThumbnail &&
+            const DeepCollectionEquality().equals(other.source, source));
   }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, source);
 
   @JsonKey(ignore: true)
   @override
-  _$WikipediaPageThumbnailCopyWith<_WikipediaPageThumbnail> get copyWith =>
-      __$WikipediaPageThumbnailCopyWithImpl<_WikipediaPageThumbnail>(
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(source));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_WikipediaPageThumbnailCopyWith<_$_WikipediaPageThumbnail> get copyWith =>
+      __$$_WikipediaPageThumbnailCopyWithImpl<_$_WikipediaPageThumbnail>(
           this, _$identity);
 
   @override
@@ -674,7 +618,8 @@ class _$_WikipediaPageThumbnail
 }
 
 abstract class _WikipediaPageThumbnail implements WikipediaPageThumbnail {
-  factory _WikipediaPageThumbnail({String source}) = _$_WikipediaPageThumbnail;
+  factory _WikipediaPageThumbnail({final String source}) =
+      _$_WikipediaPageThumbnail;
 
   factory _WikipediaPageThumbnail.fromJson(Map<String, dynamic> json) =
       _$_WikipediaPageThumbnail.fromJson;
@@ -683,6 +628,6 @@ abstract class _WikipediaPageThumbnail implements WikipediaPageThumbnail {
   String get source;
   @override
   @JsonKey(ignore: true)
-  _$WikipediaPageThumbnailCopyWith<_WikipediaPageThumbnail> get copyWith =>
+  _$$_WikipediaPageThumbnailCopyWith<_$_WikipediaPageThumbnail> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -6,6 +6,8 @@ part of 'api_service.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 class _ApiService implements ApiService {
   _ApiService(this._dio, {this.baseUrl});
 
@@ -22,7 +24,7 @@ class _ApiService implements ApiService {
       r'format': format,
       r'lang': lang
     };
-    queryParameters.removeWhere((k, v) => v == null);
+    queryParameters.removeWhere((k, dynamic v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(

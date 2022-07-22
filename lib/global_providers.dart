@@ -44,7 +44,10 @@ class GlobalProviders extends StatelessWidget {
         ),
         RepositoryProvider<InspirationRepository>(
           create: (BuildContext context) => InspirationRepository(_apiService),
-        )
+        ),
+        RepositoryProvider<GoalsRepository>(
+          create: (BuildContext context) => GoalsRepository(),
+        ),
       ];
 
   List<BlocProvider<dynamic>> _buildBlocProviders(BuildContext context) =>
