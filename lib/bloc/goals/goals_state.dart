@@ -15,6 +15,7 @@ class InitialGoalsState extends GoalsState {}
 // przekazywanie jednego natenczas inspiracje
 @immutable
 class ShowGoalsState extends GoalsState {
+  // final List<Goal> goalsList;
   final Goal goal;
 
   const ShowGoalsState(this.goal);
@@ -28,7 +29,10 @@ class InProgressGoalsState extends GoalsState {
 
 }
 
+class AddGoalState extends GoalsState {
+  const AddGoalState();
+}
+
 class ErrorGoalsState extends GoalsState {
   const ErrorGoalsState();
-
 }

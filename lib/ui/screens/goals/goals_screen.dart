@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_production_boilerplate/bloc/goals/goals_bloc.dart';
+import 'package:flutter_production_boilerplate/components/custom_appbar.dart';
+import 'package:flutter_production_boilerplate/components/searchbar.dart';
 
 class GoalsScreen extends StatefulWidget {
   const GoalsScreen({Key? key}) : super(key: key);
@@ -43,30 +45,18 @@ class _GoalsScreenState extends State<GoalsScreen> {
         // }
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(
-            title: Text(
-              'Goals',
-              style: TextStyle(fontSize: 24, color: Colors.black),
-            ),
-            backgroundColor: Colors.white,
-          ),
-          body: Container(
-            child: Column(
+          // appBar: AppBar(
+          //   title: Text(
+          //     'Goals',
+          //     style: TextStyle(fontSize: 24, color: Colors.black),
+          //   ),
+          //   backgroundColor: Colors.white,
+          // ),
+          body: SafeArea(
+            child: ListView(
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: TextField(
-                    onChanged: (value) {},
-                    controller: editingController,
-                    decoration: InputDecoration(
-                        labelText: "Search",
-                        hintText: "Search",
-                        prefixIcon: Icon(Icons.search),
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(25.0)))),
-                  ),
-                ),
+                const CustomAppBar(),
+                const SearchBar(),
                 SingleChildScrollView(
                   child: ExpansionPanelList(
                     expansionCallback: (index, isExpanded) {
@@ -74,17 +64,17 @@ class _GoalsScreenState extends State<GoalsScreen> {
                     },
                     children: items
                         .map((item) => ExpansionPanel(
-                              canTapOnHeader: true,
-                              isExpanded: item.isExpanded,
-                              headerBuilder: (context, isExpanded) => ListTile(
-                                  title: Text(
-                                item.header,
-                                style: TextStyle(fontSize: 20),
-                              )),
-                              body: ListTile(
-                                  title: Text(item.body,
-                                      style: TextStyle(fontSize: 16))),
-                            ))
+                      canTapOnHeader: true,
+                      isExpanded: item.isExpanded,
+                      headerBuilder: (context, isExpanded) => ListTile(
+                          title: Text(
+                            item.header,
+                            style: TextStyle(fontSize: 20),
+                          )),
+                      body: ListTile(
+                          title: Text(item.body,
+                              style: TextStyle(fontSize: 16))),
+                    ))
                         .toList(),
                   ),
                 )
@@ -99,6 +89,64 @@ class _GoalsScreenState extends State<GoalsScreen> {
             },
           ),
         );
+
+        // return Scaffold(
+        //   appBar: AppBar(
+        //     title: Text(
+        //       'Goals',
+        //       style: TextStyle(fontSize: 24, color: Colors.black),
+        //     ),
+        //     backgroundColor: Colors.white,
+        //   ),
+        //   body: Container(
+        //     child: Column(
+        //       children: <Widget>[
+        //         Padding(
+        //           padding: EdgeInsets.all(8.0),
+        //           child: TextField(
+        //             onChanged: (value) {},
+        //             controller: editingController,
+        //             decoration: InputDecoration(
+        //                 labelText: "Search",
+        //                 hintText: "Search",
+        //                 prefixIcon: Icon(Icons.search),
+        //                 border: OutlineInputBorder(
+        //                     borderRadius:
+        //                         BorderRadius.all(Radius.circular(25.0)))),
+        //           ),
+        //         ),
+        //         SingleChildScrollView(
+        //           child: ExpansionPanelList(
+        //             expansionCallback: (index, isExpanded) {
+        //               setState(() => items[index].isExpanded = !isExpanded);
+        //             },
+        //             children: items
+        //                 .map((item) => ExpansionPanel(
+        //                       canTapOnHeader: true,
+        //                       isExpanded: item.isExpanded,
+        //                       headerBuilder: (context, isExpanded) => ListTile(
+        //                           title: Text(
+        //                         item.header,
+        //                         style: TextStyle(fontSize: 20),
+        //                       )),
+        //                       body: ListTile(
+        //                           title: Text(item.body,
+        //                               style: TextStyle(fontSize: 16))),
+        //                     ))
+        //                 .toList(),
+        //           ),
+        //         )
+        //       ],
+        //     ),
+        //   ),
+        //   floatingActionButton: FloatingActionButton(
+        //     backgroundColor: Colors.black,
+        //     child: Icon(Icons.add),
+        //     onPressed: () async {
+        //       Navigator.of(context).pushReplacementNamed("/addEditGoals");
+        //     },
+        //   ),
+        // );
       },
     );
   }

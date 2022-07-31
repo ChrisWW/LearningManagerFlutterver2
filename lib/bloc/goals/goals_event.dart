@@ -4,8 +4,8 @@ abstract class GoalsEvent extends Equatable {
 
 }
 
-class SetGoal extends GoalsEvent {
-  SetGoal();
+class SetGoals extends GoalsEvent {
+  SetGoals();
 
   @override
   List<Object?> get props => [];
@@ -23,4 +23,12 @@ class SearchForGoal extends GoalsEvent {
 
   @override
   List<Object?> get props => [];
+}
+
+class AddGoal extends GoalsEvent {
+  AddGoal();
+
+  @override
+  List<Object?> get props => [];
+
 }

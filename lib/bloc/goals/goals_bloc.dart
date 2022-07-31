@@ -19,8 +19,7 @@ class GoalsBloc extends HydratedBloc<GoalsEvent, GoalsState> {
   GoalsState? fromJson(Map<String, dynamic> json) {
     if (json.containsKey(goalsKey)) {
       return ShowGoalsState(
-        Goal.fromJson(
-          json[goalsKey] as Map<String, dynamic>,
+        Goal.fromJson(json[goalsKey] as Map<String, dynamic>,
         ),
         // here element GOAL? TODO
       );
@@ -42,8 +41,36 @@ class GoalsBloc extends HydratedBloc<GoalsEvent, GoalsState> {
 
   @override
   Stream<GoalsState> mapEventToState(GoalsEvent event) async* {
-    if (event is SetGoal) {
+    if (event is SetGoals) {
+      yield* _mapTryToSetGoals(event);
+    } else if (event is AddGoal) {
+      yield* _mapTryToAddGoal(event);
+    }
+  }
 
+  Stream<GoalsState> _mapTryToSetGoals(SetGoals event) async* {
+    try {
+      yield InitialGoalsState();
+
+      yield InProgressGoalsState();
+
+      final myListGoals = await _goalsRepository.loadGoalsData();
+      // it should be list??
+      yield ShowGoalsState(myListGoals);
+    } catch(e) {
+      yield ErrorGoalsState();
+    }
+  }
+
+  Stream<GoalsState> _mapTryToAddGoal(AddGoal event) async* {
+    try {
+      yield AddGoalState();
+
+      yield InProgressGoalsState();
+      // // it should be list??
+      // yield ShowGoalsState(myListGoals);
+    } catch(e) {
+      yield ErrorGoalsState();
     }
   }
 }
