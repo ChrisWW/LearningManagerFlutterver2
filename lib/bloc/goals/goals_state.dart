@@ -5,32 +5,19 @@ abstract class GoalsState extends Equatable {
   const GoalsState();
 
   @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }
-
-@immutable
-class InitialGoalsState extends GoalsState {}
 
 // przekazywanie jednego natenczas inspiracje
 @immutable
 class ShowGoalsState extends GoalsState {
-  // final List<Goal> goalsList;
-  final Goal goal;
+  final List<Goal> goalsList;
+  // final Goal goal;
 
-  const ShowGoalsState(this.goal);
+  const ShowGoalsState(this.goalsList);
 
   @override
-  List<Object?> get props => [goal];
-}
-
-class InProgressGoalsState extends GoalsState {
-  const InProgressGoalsState();
-
-}
-
-class AddGoalState extends GoalsState {
-  const AddGoalState();
+  List<Object?> get props => [goalsList];
 }
 
 class ErrorGoalsState extends GoalsState {

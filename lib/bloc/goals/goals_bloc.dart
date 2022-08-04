@@ -13,26 +13,29 @@ class GoalsBloc extends HydratedBloc<GoalsEvent, GoalsState> {
 
   final GoalsRepository _goalsRepository;
 
-  GoalsBloc(this._goalsRepository) : super(InitialGoalsState());
+  // user uruchomi poraz pierwszy apke to zainicjalizuje pusta tablice
+  GoalsBloc(this._goalsRepository) : super(const ShowGoalsState([]));
 
   @override
   GoalsState? fromJson(Map<String, dynamic> json) {
     if (json.containsKey(goalsKey)) {
+      final List<String> dataList = json[goalsKey] as List<String>;
+
       return ShowGoalsState(
-        Goal.fromJson(json[goalsKey] as Map<String, dynamic>,
-        ),
-        // here element GOAL? TODO
+          dataList.map((String e) => Goal.fromJson(e)).toList()
       );
     } else {
       return InitialGoalsState();
     }
   }
 
+
+  // Kazdy obiekt w goalslist zostanie zrzucony do Jsona
   @override
   Map<String, dynamic>? toJson(GoalsState state) {
     if (state is ShowGoalsState) {
       return <String, dynamic>{
-        goalsKey: state.goal.toJson(),
+        goalsKey: state.goalsList.map((e) => e.toJson()).toList(),
       };
     } else {
       return <String, dynamic>{};
@@ -65,6 +68,7 @@ class GoalsBloc extends HydratedBloc<GoalsEvent, GoalsState> {
   Stream<GoalsState> _mapTryToAddGoal(AddGoal event) async* {
     try {
       yield AddGoalState();
+      // Future ktory dodaje dane do bazy danych
 
       yield InProgressGoalsState();
       // // it should be list??
