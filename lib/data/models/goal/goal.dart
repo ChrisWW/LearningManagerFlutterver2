@@ -5,9 +5,22 @@ part 'goal.freezed.dart';
 part 'goal.g.dart';
 
 @freezed
+class Goals with _$Goals {
+  factory Goals({
+    @Default(<Goal>[]) List<Goal> goals,
+  }) = _Goals;
+
+  Goals._();
+
+  factory Goals.fromJson(Map<String, dynamic> json) => _$GoalsFromJson(json);
+
+  static Goals empty() => Goals(goals: <Goal>[]);
+}
+
+@unfreezed
 class Goal with _$Goal {
   factory Goal({
-    @Default('') String id,
+    @Default('') final String id,
     @Default('') String goal,
     @Default(0) int intenseGoal,
     @Default(0) int timeGoal,

@@ -1,34 +1,26 @@
 part of 'goals_bloc.dart';
 
 abstract class GoalsEvent extends Equatable {
-
-}
-
-class SetGoals extends GoalsEvent {
-  SetGoals();
-
-  @override
-  List<Object?> get props => [];
-}
-
-class MarkGoalAsDone extends GoalsEvent {
-  MarkGoalAsDone();
-
-  @override
-  List<Object?> get props => [];
-}
-
-class SearchForGoal extends GoalsEvent {
-  SearchForGoal();
+  const GoalsEvent();
 
   @override
   List<Object?> get props => [];
 }
 
 class AddGoal extends GoalsEvent {
-  AddGoal();
+  final Goal goal;
+
+  const AddGoal(this.goal);
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [goal];
+}
 
+class MarkGoalAsDone extends GoalsEvent {
+  final Goal goal;
+
+  const MarkGoalAsDone(this.goal);
+
+  @override
+  List<Object?> get props => [goal];
 }

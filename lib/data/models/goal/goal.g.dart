@@ -6,6 +6,17 @@ part of 'goal.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+_$_Goals _$$_GoalsFromJson(Map<String, dynamic> json) => _$_Goals(
+      goals: (json['goals'] as List<dynamic>?)
+              ?.map((dynamic e) => Goal.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <Goal>[],
+    );
+
+Map<String, dynamic> _$$_GoalsToJson(_$_Goals instance) => <String, dynamic>{
+      'goals': instance.goals,
+    };
+
 _$_Goal _$$_GoalFromJson(Map<String, dynamic> json) => _$_Goal(
       id: json['id'] as String? ?? '',
       goal: json['goal'] as String? ?? '',

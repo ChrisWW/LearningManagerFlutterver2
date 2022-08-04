@@ -14,6 +14,146 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+Goals _$GoalsFromJson(Map<String, dynamic> json) {
+  return _Goals.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Goals {
+  List<Goal> get goals => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $GoalsCopyWith<Goals> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $GoalsCopyWith<$Res> {
+  factory $GoalsCopyWith(Goals value, $Res Function(Goals) then) =
+      _$GoalsCopyWithImpl<$Res>;
+  $Res call({List<Goal> goals});
+}
+
+/// @nodoc
+class _$GoalsCopyWithImpl<$Res> implements $GoalsCopyWith<$Res> {
+  _$GoalsCopyWithImpl(this._value, this._then);
+
+  final Goals _value;
+  // ignore: unused_field
+  final $Res Function(Goals) _then;
+
+  @override
+  $Res call({
+    Object? goals = freezed,
+  }) {
+    return _then(_value.copyWith(
+      goals: goals == freezed
+          ? _value.goals
+          : goals // ignore: cast_nullable_to_non_nullable
+              as List<Goal>,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_GoalsCopyWith<$Res> implements $GoalsCopyWith<$Res> {
+  factory _$$_GoalsCopyWith(_$_Goals value, $Res Function(_$_Goals) then) =
+      __$$_GoalsCopyWithImpl<$Res>;
+  @override
+  $Res call({List<Goal> goals});
+}
+
+/// @nodoc
+class __$$_GoalsCopyWithImpl<$Res> extends _$GoalsCopyWithImpl<$Res>
+    implements _$$_GoalsCopyWith<$Res> {
+  __$$_GoalsCopyWithImpl(_$_Goals _value, $Res Function(_$_Goals) _then)
+      : super(_value, (v) => _then(v as _$_Goals));
+
+  @override
+  _$_Goals get _value => super._value as _$_Goals;
+
+  @override
+  $Res call({
+    Object? goals = freezed,
+  }) {
+    return _then(_$_Goals(
+      goals: goals == freezed
+          ? _value._goals
+          : goals // ignore: cast_nullable_to_non_nullable
+              as List<Goal>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Goals extends _Goals with DiagnosticableTreeMixin {
+  _$_Goals({final List<Goal> goals = const <Goal>[]})
+      : _goals = goals,
+        super._();
+
+  factory _$_Goals.fromJson(Map<String, dynamic> json) =>
+      _$$_GoalsFromJson(json);
+
+  final List<Goal> _goals;
+  @override
+  @JsonKey()
+  List<Goal> get goals {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_goals);
+  }
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'Goals(goals: $goals)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Goals'))
+      ..add(DiagnosticsProperty('goals', goals));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Goals &&
+            const DeepCollectionEquality().equals(other._goals, _goals));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_goals));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_GoalsCopyWith<_$_Goals> get copyWith =>
+      __$$_GoalsCopyWithImpl<_$_Goals>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_GoalsToJson(this);
+  }
+}
+
+abstract class _Goals extends Goals {
+  factory _Goals({final List<Goal> goals}) = _$_Goals;
+  _Goals._() : super._();
+
+  factory _Goals.fromJson(Map<String, dynamic> json) = _$_Goals.fromJson;
+
+  @override
+  List<Goal> get goals;
+  @override
+  @JsonKey(ignore: true)
+  _$$_GoalsCopyWith<_$_Goals> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 Goal _$GoalFromJson(Map<String, dynamic> json) {
   return _Goal.fromJson(json);
 }
@@ -22,14 +162,23 @@ Goal _$GoalFromJson(Map<String, dynamic> json) {
 mixin _$Goal {
   String get id => throw _privateConstructorUsedError;
   String get goal => throw _privateConstructorUsedError;
+  set goal(String value) => throw _privateConstructorUsedError;
   int get intenseGoal => throw _privateConstructorUsedError;
+  set intenseGoal(int value) => throw _privateConstructorUsedError;
   int get timeGoal => throw _privateConstructorUsedError;
+  set timeGoal(int value) => throw _privateConstructorUsedError;
   String get editDate => throw _privateConstructorUsedError;
+  set editDate(String value) => throw _privateConstructorUsedError;
   String get initialDate => throw _privateConstructorUsedError;
+  set initialDate(String value) => throw _privateConstructorUsedError;
   int get color => throw _privateConstructorUsedError;
+  set color(int value) => throw _privateConstructorUsedError;
   String get eventGoogleId => throw _privateConstructorUsedError;
+  set eventGoogleId(String value) => throw _privateConstructorUsedError;
   bool get wasAcceptedToday => throw _privateConstructorUsedError;
+  set wasAcceptedToday(bool value) => throw _privateConstructorUsedError;
   bool get isFinished => throw _privateConstructorUsedError;
+  set isFinished(bool value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -226,31 +375,31 @@ class _$_Goal with DiagnosticableTreeMixin implements _Goal {
   final String id;
   @override
   @JsonKey()
-  final String goal;
+  String goal;
   @override
   @JsonKey()
-  final int intenseGoal;
+  int intenseGoal;
   @override
   @JsonKey()
-  final int timeGoal;
+  int timeGoal;
   @override
   @JsonKey()
-  final String editDate;
+  String editDate;
   @override
   @JsonKey()
-  final String initialDate;
+  String initialDate;
   @override
   @JsonKey()
-  final int color;
+  int color;
   @override
   @JsonKey()
-  final String eventGoogleId;
+  String eventGoogleId;
   @override
   @JsonKey()
-  final bool wasAcceptedToday;
+  bool wasAcceptedToday;
   @override
   @JsonKey()
-  final bool isFinished;
+  bool isFinished;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -274,43 +423,6 @@ class _$_Goal with DiagnosticableTreeMixin implements _Goal {
       ..add(DiagnosticsProperty('isFinished', isFinished));
   }
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Goal &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.goal, goal) &&
-            const DeepCollectionEquality()
-                .equals(other.intenseGoal, intenseGoal) &&
-            const DeepCollectionEquality().equals(other.timeGoal, timeGoal) &&
-            const DeepCollectionEquality().equals(other.editDate, editDate) &&
-            const DeepCollectionEquality()
-                .equals(other.initialDate, initialDate) &&
-            const DeepCollectionEquality().equals(other.color, color) &&
-            const DeepCollectionEquality()
-                .equals(other.eventGoogleId, eventGoogleId) &&
-            const DeepCollectionEquality()
-                .equals(other.wasAcceptedToday, wasAcceptedToday) &&
-            const DeepCollectionEquality()
-                .equals(other.isFinished, isFinished));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(goal),
-      const DeepCollectionEquality().hash(intenseGoal),
-      const DeepCollectionEquality().hash(timeGoal),
-      const DeepCollectionEquality().hash(editDate),
-      const DeepCollectionEquality().hash(initialDate),
-      const DeepCollectionEquality().hash(color),
-      const DeepCollectionEquality().hash(eventGoogleId),
-      const DeepCollectionEquality().hash(wasAcceptedToday),
-      const DeepCollectionEquality().hash(isFinished));
-
   @JsonKey(ignore: true)
   @override
   _$$_GoalCopyWith<_$_Goal> get copyWith =>
@@ -325,15 +437,15 @@ class _$_Goal with DiagnosticableTreeMixin implements _Goal {
 abstract class _Goal implements Goal {
   factory _Goal(
       {final String id,
-      final String goal,
-      final int intenseGoal,
-      final int timeGoal,
-      final String editDate,
-      final String initialDate,
-      final int color,
-      final String eventGoogleId,
-      final bool wasAcceptedToday,
-      final bool isFinished}) = _$_Goal;
+      String goal,
+      int intenseGoal,
+      int timeGoal,
+      String editDate,
+      String initialDate,
+      int color,
+      String eventGoogleId,
+      bool wasAcceptedToday,
+      bool isFinished}) = _$_Goal;
 
   factory _Goal.fromJson(Map<String, dynamic> json) = _$_Goal.fromJson;
 
@@ -341,22 +453,31 @@ abstract class _Goal implements Goal {
   String get id;
   @override
   String get goal;
+  set goal(String value);
   @override
   int get intenseGoal;
+  set intenseGoal(int value);
   @override
   int get timeGoal;
+  set timeGoal(int value);
   @override
   String get editDate;
+  set editDate(String value);
   @override
   String get initialDate;
+  set initialDate(String value);
   @override
   int get color;
+  set color(int value);
   @override
   String get eventGoogleId;
+  set eventGoogleId(String value);
   @override
   bool get wasAcceptedToday;
+  set wasAcceptedToday(bool value);
   @override
   bool get isFinished;
+  set isFinished(bool value);
   @override
   @JsonKey(ignore: true)
   _$$_GoalCopyWith<_$_Goal> get copyWith => throw _privateConstructorUsedError;

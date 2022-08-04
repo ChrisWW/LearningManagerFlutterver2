@@ -5,6 +5,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:equatable/equatable.dart';
 
 part 'goals_event.dart';
+
 part 'goals_state.dart';
 
 class GoalsBloc extends HydratedBloc<GoalsEvent, GoalsState> {
@@ -14,67 +15,67 @@ class GoalsBloc extends HydratedBloc<GoalsEvent, GoalsState> {
   final GoalsRepository _goalsRepository;
 
   // user uruchomi poraz pierwszy apke to zainicjalizuje pusta tablice
-  GoalsBloc(this._goalsRepository) : super(const ShowGoalsState([]));
+  GoalsBloc(this._goalsRepository) : super(ShowGoalsState(Goals.empty()));
+
+  Goals get goals {
+    if (state is ShowGoalsState) {
+      return (state as ShowGoalsState).goals;
+    } else {
+      return Goals.empty();
+    }
+  }
+
+  @override
+  Stream<GoalsState> mapEventToState(GoalsEvent event) async* {
+    if (event is AddGoal) {
+      yield* _mapAddGoal(event);
+    } else if (event is MarkGoalAsDone) {
+      yield* _mapMarkGoalAsDone(event);
+    }
+  }
+
+  Stream<GoalsState> _mapAddGoal(AddGoal event) async* {
+    try {
+      final Goals newGoals = goals;
+      goals.goals.add(event.goal);
+      yield ShowGoalsState(newGoals);
+    } catch (e) {
+      yield const ErrorGoalsState();
+    }
+  }
+
+  Stream<GoalsState> _mapMarkGoalAsDone(MarkGoalAsDone event) async* {
+    try {
+      final Goal goal = goals.goals.where((e) => e.id == event.goal.id).first;
+      goal.isFinished = true;
+      yield ShowGoalsState(goals);
+    } on StateError catch (_) {
+      yield ShowGoalsState(goals);
+    } catch (e) {
+      yield const ErrorGoalsState();
+    }
+  }
 
   @override
   GoalsState? fromJson(Map<String, dynamic> json) {
     if (json.containsKey(goalsKey)) {
-      final List<String> dataList = json[goalsKey] as List<String>;
-
       return ShowGoalsState(
-          dataList.map((String e) => Goal.fromJson(e)).toList()
+        Goals.fromJson(json[goalsKey] as Map<String, dynamic>),
       );
     } else {
-      return InitialGoalsState();
+      return ShowGoalsState(Goals.empty());
     }
   }
-
 
   // Kazdy obiekt w goalslist zostanie zrzucony do Jsona
   @override
   Map<String, dynamic>? toJson(GoalsState state) {
     if (state is ShowGoalsState) {
       return <String, dynamic>{
-        goalsKey: state.goalsList.map((e) => e.toJson()).toList(),
+        goalsKey: state.goals.toJson(),
       };
     } else {
       return <String, dynamic>{};
-    }
-  }
-
-  @override
-  Stream<GoalsState> mapEventToState(GoalsEvent event) async* {
-    if (event is SetGoals) {
-      yield* _mapTryToSetGoals(event);
-    } else if (event is AddGoal) {
-      yield* _mapTryToAddGoal(event);
-    }
-  }
-
-  Stream<GoalsState> _mapTryToSetGoals(SetGoals event) async* {
-    try {
-      yield InitialGoalsState();
-
-      yield InProgressGoalsState();
-
-      final myListGoals = await _goalsRepository.loadGoalsData();
-      // it should be list??
-      yield ShowGoalsState(myListGoals);
-    } catch(e) {
-      yield ErrorGoalsState();
-    }
-  }
-
-  Stream<GoalsState> _mapTryToAddGoal(AddGoal event) async* {
-    try {
-      yield AddGoalState();
-      // Future ktory dodaje dane do bazy danych
-
-      yield InProgressGoalsState();
-      // // it should be list??
-      // yield ShowGoalsState(myListGoals);
-    } catch(e) {
-      yield ErrorGoalsState();
     }
   }
 }

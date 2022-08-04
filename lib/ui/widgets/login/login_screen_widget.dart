@@ -91,16 +91,18 @@ class _LoginScreenWidget extends State<LoginScreenWidget> {
                   ),
                 ),
                 Container(
-                    height: 50,
-                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child: ElevatedButton(
-                      child: const Text('Login with Google'),
-                      onPressed: () {
-                        // logging, using blocprovider and event from useraccountbloc->event
-                        BlocProvider.of<UserAccountBloc>(context).add(
-                            TryToLogIn());
-                      },
-                    )),
+                  height: 50,
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child: ElevatedButton(
+                    child: const Text('Login with Google'),
+                    onPressed: () {
+                      // logging, using blocprovider and event from useraccountbloc->event
+                      BlocProvider.of<UserAccountBloc>(context).add(
+                        TryToLogIn(),
+                      );
+                    },
+                  ),
+                ),
                 Row(
                   children: <Widget>[
                     const Text('Does not have account?'),

@@ -87,7 +87,8 @@ class UserAccountBloc extends HydratedBloc<UserAccountEvent, UserAccountState> {
   UserAccountState? fromJson(Map<String, dynamic> json) {
     if (json.containsKey(profileKey)) {
       return UserLoggedInState(
-          UserProfile.fromJson(json[profileKey] as Map<String, dynamic>));
+        UserProfile.fromJson(json[profileKey] as Map<String, dynamic>),
+      );
     } else {
       return UserLoggedOutState();
     }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_production_boilerplate/data/models/goal/goal.dart';
 import 'package:flutter_production_boilerplate/ui/screens/goals/product.dart';
 
 class AddEditGoalScreen extends StatefulWidget {
@@ -75,7 +76,13 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
               children: [
                 Spacer(),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    /*Goal(
+                      id: uuid(),
+                      goal: nameCont.value.text,
+                      color:
+                    );*/
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.white,

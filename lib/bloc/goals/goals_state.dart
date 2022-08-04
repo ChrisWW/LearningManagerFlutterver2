@@ -11,13 +11,12 @@ abstract class GoalsState extends Equatable {
 // przekazywanie jednego natenczas inspiracje
 @immutable
 class ShowGoalsState extends GoalsState {
-  final List<Goal> goalsList;
-  // final Goal goal;
+  final Goals goals;
 
-  const ShowGoalsState(this.goalsList);
+  const ShowGoalsState(this.goals);
 
   @override
-  List<Object?> get props => [goalsList];
+  List<Object?> get props => [goals];
 }
 
 class ErrorGoalsState extends GoalsState {
