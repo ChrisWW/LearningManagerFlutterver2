@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_production_boilerplate/bloc/goals/goals_bloc.dart';
 import 'package:flutter_production_boilerplate/data/models/goal/goal.dart';
 import 'package:flutter_production_boilerplate/ui/screens/goals/product.dart';
 
@@ -18,7 +20,6 @@ class AddEditGoalScreen extends StatefulWidget {
 //   }
 // }
 
-
 // import 'package:flutter/material.dart';
 // import 'package:todo_app/model/list_model.dart';
 //
@@ -30,6 +31,13 @@ class AddEditGoalScreen extends StatefulWidget {
 // }
 
 class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
+  TextEditingController goalTitle = TextEditingController();
+  TextEditingController goalDescription = TextEditingController();
+  TextEditingController _date = new TextEditingController();
+  bool value = false;
+  bool valueSecond = true;
+  DateTime selectedDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,21 +49,28 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
         actionsIconTheme: const IconThemeData(color: Colors.black),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              BlocProvider.of<GoalsBloc>(context).add(
+                AddGoal(
+                  Goal(
+                      id: UniqueKey().hashCode.toString(),
+                      goal: goalTitle.value.text,
+                      editDate: DateTime.now().toString(),
+                      eventGoogleId: 0.toString(),
+                      initialDate: "",
+                      // goalDescription.value.text.toString()
+                      intenseGoal: 0,
+                      timeGoal: 0,
+                      wasAcceptedToday: true,
+                      isFinished: false,
+                      color: 0),
+                ),
+              );
+              Navigator.pop(context);
+              // ALSO try to show state?
+            },
             icon: const Icon(
-              Icons.push_pin_outlined,
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.notifications_outlined,
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.dashboard_outlined,
+              Icons.save,
             ),
           ),
         ],
@@ -76,13 +91,7 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
               children: [
                 Spacer(),
                 InkWell(
-                  onTap: () {
-                    /*Goal(
-                      id: uuid(),
-                      goal: nameCont.value.text,
-                      color:
-                    );*/
-                  },
+                  onTap: () {},
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -116,6 +125,7 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
           children: [
             //title
             TextFormField(
+              controller: goalTitle,
               style: const TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 20,
@@ -132,9 +142,10 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
             ),
 
             TextFormField(
+              controller: goalDescription,
               style: const TextStyle(fontSize: 16, color: Colors.black),
               decoration: const InputDecoration(
-                hintText: "Enter description",
+                hintText: "How many minutes per day?",
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide.none,
                 ),
@@ -142,6 +153,64 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
                   borderSide: BorderSide.none,
                 ),
               ),
+            ),
+            GestureDetector(
+              onTap: () => _selectDate(context),
+              child: AbsorbPointer(
+                child: TextFormField(
+                  controller: _date,
+                  keyboardType: TextInputType.datetime,
+                  decoration: InputDecoration(
+                    hintText: 'How long set your goal in days?',
+                    prefixIcon: Icon(
+                      Icons.dialpad,
+                      color: Colors.white70,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Row(
+              children: <Widget>[
+                SizedBox(
+                  width: 10,
+                ), //SizedBox
+                Text(
+                  'Save in Google Calendar',
+                  style: TextStyle(fontSize: 17.0),
+                ), //Text
+                SizedBox(width: 10), //SizedBox
+                /** Checkbox Widget **/
+                Checkbox(
+                  value: this.value,
+                  onChanged: (value) {
+                    setState(() {
+                      this.value = value!;
+                    });
+                  },
+                ), //Checkbox
+              ], //<Widget>[]
+            ),
+            Row(
+              children: <Widget>[
+                SizedBox(
+                  width: 10,
+                ), //SizedBox
+                Text(
+                  'Additional one day when daily is not done',
+                  style: TextStyle(fontSize: 17.0),
+                ), //Text
+                SizedBox(width: 10), //SizedBox
+                /** Checkbox Widget **/
+                Checkbox(
+                  value: this.valueSecond,
+                  onChanged: (valueSecond) {
+                    setState(() {
+                      this.valueSecond = valueSecond!;
+                    });
+                  },
+                ), //Checkbox
+              ], //<Widget>[]
             ),
           ],
         ),
@@ -164,4 +233,29 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
       ),
     );
   }
+
+  Future<Null> _selectDate(BuildContext context) async {
+    await CalendarDatePicker(
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(
+          DateTime.now().year, DateTime.now().month, DateTime.now().day + 1),
+      onDateChanged: (DateTime value) {
+        setState(() {});
+      },
+    );
+  }
+
+// Future<Null> _selectDate(BuildContext context) async {
+//   final DateTime? picked = await showDatePicker(
+//       context: context,
+//       initialDate: selectedDate,
+//       firstDate: DateTime(1901, 1),
+//       lastDate: DateTime(2100));
+//   if (picked != null && picked != selectedDate)
+//     setState(() {
+//       selectedDate = picked;
+//       _date.value = TextEditingValue(text: picked.toString());
+//     });
+// }
 }

@@ -7,6 +7,8 @@ import 'package:flutter_production_boilerplate/components/searchbar.dart';
 class GoalsScreen extends StatefulWidget {
   const GoalsScreen({Key? key}) : super(key: key);
 
+  static const String route = '/goalsScreen';
+
   @override
   State<GoalsScreen> createState() => _GoalsScreenState();
 }
@@ -45,13 +47,6 @@ class _GoalsScreenState extends State<GoalsScreen> {
         // }
       builder: (context, state) {
         return Scaffold(
-          // appBar: AppBar(
-          //   title: Text(
-          //     'Goals',
-          //     style: TextStyle(fontSize: 24, color: Colors.black),
-          //   ),
-          //   backgroundColor: Colors.white,
-          // ),
           body: SafeArea(
             child: ListView(
               children: <Widget>[
