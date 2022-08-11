@@ -37,8 +37,8 @@ class GoalsBloc extends HydratedBloc<GoalsEvent, GoalsState> {
   Stream<GoalsState> _mapAddGoal(AddGoal event) async* {
     try {
       final Goals newGoals = goals;
-      goals.goals.add(event.goal);
-      yield ShowGoalsState(newGoals);
+      final List<Goal> newList = [...goals.goals, event.goal];
+      yield ShowGoalsState(newGoals.copyWith(goals: newList));
     } catch (e) {
       yield const ErrorGoalsState();
     }
