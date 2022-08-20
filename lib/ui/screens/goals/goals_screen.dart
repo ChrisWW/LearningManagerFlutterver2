@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_production_boilerplate/bloc/goals/goals_bloc.dart';
-import 'package:flutter_production_boilerplate/components/custom_appbar.dart';
-import 'package:flutter_production_boilerplate/components/searchbar.dart';
-import 'package:flutter_production_boilerplate/data/models/goal/goal.dart';
+import 'package:flutter_production_boilerplate/bloc/goals/goals_search_cubit.dart';
 import 'package:flutter_production_boilerplate/ui/widgets/goals/goals_expansion_panel_list.dart';
 import 'package:flutter_production_boilerplate/ui/widgets/my_prefilled_search.dart';
+
+import '../../../bloc/goals/goals_search_cubit.dart';
 
 class GoalsScreen extends StatefulWidget {
   const GoalsScreen({Key? key}) : super(key: key);
@@ -17,58 +17,91 @@ class GoalsScreen extends StatefulWidget {
 }
 
 class _GoalsScreenState extends State<GoalsScreen> {
+  late final GoalsSearchCubit goalsSearchCubit;
   TextEditingController editingController = TextEditingController();
   bool isLoading = false;
 
-  List<Item> getItems(ShowGoalsState state) {
-    return state.goals.goals
+  List<Item> getItems(GoalsListState state) {
+    return state.goals
         .map(
             (e) => Item(header: e.goal.toString(), body: e.timeGoal.toString()))
         .toList();
   }
 
+  @override
+  void initState() {
+    super.initState();
+
+    // Zroci referencje do goalsSearchCubit i wykona initSearch() syntax sugar
+    // init danych
+    // subskrybcja moze zwiekszac 'coupling' powizanie miedzy blocami w duzych aplikacjach
+    // druga opcja to listener na screenie
+    goalsSearchCubit = GoalsSearchCubit.create(context)..initSearch();
+  }
 
   @override
   Widget build(BuildContext context) {
 // 1 typ klasa bloku, klasa stanu
-
-    return Scaffold(
-      body: SafeArea(
-        child: ListView(
-          children: <Widget>[
-
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Text("Goals"),
+    return BlocProvider<GoalsSearchCubit>.value(
+      value: goalsSearchCubit,
+      child: BlocListener<GoalsBloc, GoalsState>(
+        listener: (context, state) {
+          // do stuff here based on BlocA's state
+          // do zmiany stanow, nawigacji listener, setState
+          if (state is ShowGoalsState) {
+            goalsSearchCubit.initSearch();
+          } else if (state is ErrorGoalsState) {
+            print("Error in blocListener");
+          }
+        },
+        child: Scaffold(
+          body: SafeArea(
+            child: ListView(
+              children: <Widget>[
+                // TODO przesunac Notes
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Text("Goals"),
+                    ),
+                    Expanded(
+                      child: BlocBuilder<GoalsSearchCubit, GoalsSearchState>(
+                        builder: (context, state) {
+                          return MyPrefilledSearch(
+                            onChanged: (String value) =>
+                                BlocProvider.of<GoalsSearchCubit>(context)
+                                    .search(value),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-                Expanded(child: MyPrefilledSearch()),
+                // const CustomAppBar(),
+                // const SearchBar(),
+                BlocBuilder<GoalsSearchCubit, GoalsSearchState>(
+                  builder: (context, state) {
+                    if (state is GoalsListState) {
+                      final List<Item> itemsGoals = getItems(state);
+                      return SingleChildScrollView(
+                          child: GoalsExpansionPanelList(items: itemsGoals));
+                    } else {
+                      return Text("Error");
+                    }
+                  },
+                ),
               ],
             ),
-            // const CustomAppBar(),
-            // const SearchBar(),
-            BlocBuilder<GoalsBloc, GoalsState>(
-              builder: (context, state) {
-                if (state is ShowGoalsState) {
-                  final List<Item> itemsGoals = getItems(state);
-                  return SingleChildScrollView(
-                    child: GoalsExpansionPanelList(items: itemsGoals)
-                  );
-                } else {
-                  return Text("Error");
-                }
-              },
-            ),
-          ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.black,
+            child: Icon(Icons.add),
+            onPressed: () async {
+              Navigator.of(context).pushNamed("/addEditGoals");
+            },
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
-        child: Icon(Icons.add),
-        onPressed: () async {
-          Navigator.of(context).pushNamed("/addEditGoals");
-        },
       ),
     );
   }
