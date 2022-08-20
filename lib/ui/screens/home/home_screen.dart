@@ -35,43 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
             appBar: AppBar(
                 foregroundColor: Colors.black,
                 title: Text("Learning Manager"),
-                actions: [
-                  // IconButton(
-                  //     icon: Icon(Icons.notifications_none),
-                  //     color: AppColors.PRIMARY_COLOR,
-                  //     onPressed: () {
-                  //       print("Go to Notification center");
-                  //     }),
-
-                  // ???git
-                  IconButton(
-                    icon: Icon(Icons.archive),
-                    color: Colors.orange,
-                    onPressed: () {
-                      print("Go to Favourites");
-                    },
-                  ),
-                  IconButton(
-                    color: Colors.orange,
-                    icon: Icon(Icons.settings),
-                    onPressed: () {
-                      print("Go to Profle");
-                    },
-                  )
-                ],
                 backgroundColor: Colors.white,
-                // flexibleSpace: Container(
-                //   decoration: BoxDecoration(
-                //     gradient: LinearGradient(
-                //       colors: [Colors.purple, Colors.red],
-                //       begin: Alignment.bottomRight,
-                //       end: Alignment.topLeft,
-                //     ),
-                //   ),
-                // ),
-
                 bottom: const TabBar(
-                  //isScrollable: true,
                   unselectedLabelColor: Colors.grey,
                   labelColor: Colors.black,
                   indicatorColor: Colors.black,

@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_production_boilerplate/data/remote/inspiration_response.dart';
 import 'package:flutter_production_boilerplate/data/remote/wikipedia_page_response.dart';
 import 'package:flutter_production_boilerplate/repositories/inspiration_repository.dart';
@@ -42,6 +43,32 @@ class InspirationCubit extends HydratedCubit<InspirationState> {
       print(e.toString());
     }
   }
+
+  Future<void> makeCopyQuote(String quote, String owner, BuildContext context) async {
+      Clipboard.setData(ClipboardData(text: (quote + "\n- " + owner))).then((_){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Quote Copied")));
+      });
+
+      // Deprecated clipboard ubt Toast is ok
+      // ClipboardManager.copyToClipBoard(quote + "\n- " + owner).then((result) {
+      //   Toast.show("Quote Copied", context, duration: Toast.LENGTH_SHORT);
+      // });
+  }
+
+  // // When share button clicked, share a text and screnshot of the quote
+  // Future<void> shareQuote() async {
+  //   final directory = (await getApplicationDocumentsDirectory())
+  //       .path; //from path_provide package
+  //   String path =
+  //       '$directory/screenshots${DateTime.now().toIso8601String()}.png';
+  //
+  //   //path: path in argument with nev versions?
+  //   screenshotController.capture().then((_) {
+  //     Share.shareFiles([path], text: quote);
+  //   }).catchError((onError) {
+  //     print(onError);
+  //   });
+  // }
 
   @override
   InspirationState? fromJson(Map<String, dynamic> json) {

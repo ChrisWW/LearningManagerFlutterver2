@@ -87,11 +87,11 @@ class _DrawerPageState extends State<DrawerPage> {
                       ListTile(
                         onTap: () {},
                         leading: const Icon(
-                          Icons.settings,
+                          Icons.event,
                           color: Colors.white,
                         ),
                         title: const Text(
-                          "Settings",
+                          "Inspirations",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),

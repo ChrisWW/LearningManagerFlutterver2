@@ -5,6 +5,7 @@ import 'package:flutter_production_boilerplate/components/custom_appbar.dart';
 import 'package:flutter_production_boilerplate/components/searchbar.dart';
 import 'package:flutter_production_boilerplate/data/models/goal/goal.dart';
 import 'package:flutter_production_boilerplate/ui/widgets/goals/goals_expansion_panel_list.dart';
+import 'package:flutter_production_boilerplate/ui/widgets/my_prefilled_search.dart';
 
 class GoalsScreen extends StatefulWidget {
   const GoalsScreen({Key? key}) : super(key: key);
@@ -35,8 +36,18 @@ class _GoalsScreenState extends State<GoalsScreen> {
       body: SafeArea(
         child: ListView(
           children: <Widget>[
-            const CustomAppBar(),
-            const SearchBar(),
+
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Text("Goals"),
+                ),
+                Expanded(child: MyPrefilledSearch()),
+              ],
+            ),
+            // const CustomAppBar(),
+            // const SearchBar(),
             BlocBuilder<GoalsBloc, GoalsState>(
               builder: (context, state) {
                 if (state is ShowGoalsState) {

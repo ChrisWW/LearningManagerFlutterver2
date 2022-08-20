@@ -116,20 +116,17 @@ class _InspirationScreenState extends State<InspirationScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 InkWell(
-                  onTap: null,
+                  onTap: () => BlocProvider.of<InspirationCubit>(context).getInspiration(),
                   child:
                       const Icon(Icons.refresh, size: 35, color: Colors.white),
                 ),
                 InkWell(
-                  onTap: null,
+                  onTap: () => BlocProvider.of<InspirationCubit>(context).makeCopyQuote(state.inspiration.quoteText.replaceAll("â", " "), state.inspiration.quoteAuthor, context),
                   child: const Icon(Icons.content_copy,
                       size: 30, color: Colors.white),
                 ),
                 InkWell(
-                  onTap: null,
-                  child: const Icon(Icons.share, size: 30, color: Colors.white),
-                ),
-                InkWell(
+                  // TODO ADD to firebase
                   onTap: state.inspiration.quoteText.isNotEmpty
                       ? () => null
                       : null,
