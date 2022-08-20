@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../../data/models/notes/Note.dart';
+import '../../../data/models/notes/note.dart';
 
 final _lightColors = [
   Colors.amber.shade300,
@@ -26,7 +26,7 @@ class NoteCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     /// Pick colors from the accent colors based on index
     final color = _lightColors[index % _lightColors.length];
-    final time = DateFormat.yMMMd().format(note.createdTime);
+    final time = note.date;
     final minHeight = getMinHeight(index);
 
     return Card(

@@ -5,11 +5,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_production_boilerplate/api/api_service.dart';
 import 'package:flutter_production_boilerplate/bloc/goals/goals_bloc.dart';
+import 'package:flutter_production_boilerplate/bloc/notes/notes_bloc.dart';
 import 'package:flutter_production_boilerplate/cubit/inspiration_cubit.dart';
 import 'package:flutter_production_boilerplate/cubit/theme_cubit.dart';
 import 'package:flutter_production_boilerplate/main.dart';
 import 'package:flutter_production_boilerplate/repositories/goals_repository.dart';
 import 'package:flutter_production_boilerplate/repositories/inspiration_repository.dart';
+import 'package:flutter_production_boilerplate/repositories/notes_repository.dart';
 import 'package:flutter_production_boilerplate/repositories/user_account_repository.dart';
 import 'package:flutter_production_boilerplate/ui/screens/login/login_screen.dart';
 
@@ -48,6 +50,9 @@ class GlobalProviders extends StatelessWidget {
         RepositoryProvider<GoalsRepository>(
           create: (BuildContext context) => GoalsRepository(),
         ),
+        RepositoryProvider<NotesRepository>(
+          create: (BuildContext context) => NotesRepository(),
+        ),
       ];
 
   List<BlocProvider<dynamic>> _buildBlocProviders(BuildContext context) =>
@@ -69,6 +74,11 @@ class GlobalProviders extends StatelessWidget {
         BlocProvider<GoalsBloc>(
           create: (BuildContext context) => GoalsBloc(
             RepositoryProvider.of<GoalsRepository>(context),
+          ),
+        ),
+        BlocProvider<NotesBloc>(
+          create: (BuildContext context) => NotesBloc(
+            RepositoryProvider.of<NotesRepository>(context),
           ),
         )
       ];

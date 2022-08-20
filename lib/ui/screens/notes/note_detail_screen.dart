@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_production_boilerplate/data/models/notes/Note.dart';
-import 'package:flutter_production_boilerplate/ui/screens/notes/edit_note_screen.dart';
+import 'package:flutter_production_boilerplate/data/models/notes/note.dart';
+import 'package:flutter_production_boilerplate/ui/screens/notes/add_edit_note_screen.dart';
 import 'package:intl/intl.dart';
 
 class NoteDetailScreen extends StatefulWidget {
@@ -17,7 +17,8 @@ class NoteDetailScreen extends StatefulWidget {
 
 class _NoteDetailScreenState extends State<NoteDetailScreen> {
   // late Note note
-  Note note = Note(isImportant: false, createdTime: DateTime.now(), title: '', description: '', number: 1);
+  Note note = Note(date: "", title: '', content: '', color: -1);
+
   bool isLoading = false;
 
   @override
@@ -64,12 +65,12 @@ class _NoteDetailScreenState extends State<NoteDetailScreen> {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      DateFormat.yMMMd().format(note.createdTime),
+                      note.date,
                       style: TextStyle(color: Colors.white38),
                     ),
                     SizedBox(height: 8),
                     Text(
-                      note.description,
+                      note.content,
                       style: TextStyle(color: Colors.white70, fontSize: 18),
                     )
                   ],
@@ -85,7 +86,7 @@ class _NoteDetailScreenState extends State<NoteDetailScreen> {
         // maybe:
         // Navigator.of(context).pushNamed("/addEditGoals");
         await Navigator.of(context).push(MaterialPageRoute<void>(
-          builder: (context) => AddEditNoteScreen(note: note),
+          builder: (context) => AddEditNoteScreen(),
         ));
 
         refreshNote();
