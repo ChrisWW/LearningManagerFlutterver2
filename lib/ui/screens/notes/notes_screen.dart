@@ -32,8 +32,7 @@ class _NotesScreenState extends State<NotesScreen> {
 
     // refreshNotes();
 
-    notesSearchCubit = NotesSearchCubit.create(context)
-      ..initSearch();
+    notesSearchCubit = NotesSearchCubit.create(context)..initSearch();
   }
 
   @override
@@ -73,8 +72,8 @@ class _NotesScreenState extends State<NotesScreen> {
                 // TODO przesunac Notes
                 Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(24.0),
+                    const Padding(
+                      padding: EdgeInsets.all(24.0),
                       child: Text("Notes"),
                     ),
                     Expanded(
@@ -88,6 +87,7 @@ class _NotesScreenState extends State<NotesScreen> {
                         },
                       ),
                     ),
+                    const SizedBox(width: 24.0),
                   ],
                 ),
                 // const CustomAppBar(),
@@ -95,14 +95,14 @@ class _NotesScreenState extends State<NotesScreen> {
                 BlocBuilder<NotesSearchCubit, NotesSearchState>(
                   builder: (context, state) {
                     if (state is NotesListState) {
-                      if(getItems(state).isNotEmpty) {
+                      if (getItems(state).isNotEmpty) {
                         final List<Note> itemsNotes = getItems(state);
-                        return buildNotes(itemsNotes);
+                        return NotesGridView(itemsNotes: itemsNotes);
                       } else {
-                        return Text("Empty list");
+                        return const Text("Empty list");
                       }
                     } else {
-                      return Text("Error");
+                      return const Text("Error");
                     }
                   },
                 ),
@@ -111,13 +111,9 @@ class _NotesScreenState extends State<NotesScreen> {
           ),
           floatingActionButton: FloatingActionButton(
             backgroundColor: Colors.black,
-            child: Icon(Icons.add),
+            child: const Icon(Icons.add),
             onPressed: () async {
-              await Navigator.of(context).push(
-                MaterialPageRoute<void>(
-                    builder: (context) => AddEditNoteScreen()),
-              );
-
+              Navigator.of(context).pushNamed(AddEditNoteScreen.route);
               // refreshNotes();
             },
           ),
@@ -125,33 +121,38 @@ class _NotesScreenState extends State<NotesScreen> {
       ),
     );
   }
+}
 
-  Widget buildNotes(List<Note> itemsNotes) =>
-      StaggeredGridView.countBuilder(
-        padding: EdgeInsets.all(8),
-        itemCount: itemsNotes.length,
-        staggeredTileBuilder: (index) => StaggeredTile.fit(2),
-        crossAxisCount: 4,
-        mainAxisSpacing: 4,
-        crossAxisSpacing: 4,
-        itemBuilder: (context, index) {
-          // TODO change from container to onclick
-          return Container();
-          // final note = itemsNotes[index];
-          //
-          // // TODO parse int
-          // return GestureDetector(
-          //   onTap: () async {
-          //     await Navigator.of(context).push(MaterialPageRoute<void>(
-          //       builder: (context) =>
-          //           NoteDetailScreen(noteId: int.parse(note.id),
-          //           ),),);
-          //
-          //     // refreshNotes();
-          //   },
-          //   child: NoteCardWidget(note: note, index: index),
-          // );
-        },
-      );
+class NotesGridView extends StatelessWidget {
+  final List<Note> itemsNotes;
 
+  const NotesGridView({
+    Key? key,
+    required this.itemsNotes,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return StaggeredGridView.countBuilder(
+      shrinkWrap: true,
+      padding: const EdgeInsets.all(8),
+      itemCount: itemsNotes.length,
+      staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
+      crossAxisCount: 4,
+      mainAxisSpacing: 4,
+      crossAxisSpacing: 4,
+      itemBuilder: (context, index) {
+        final Note note = itemsNotes[index];
+        return InkWell(
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              NoteDetailScreen.route,
+              arguments: NoteDetailScreenArgs(note.id),
+            );
+          },
+          child: NoteCardWidget(note: note, index: index),
+        );
+      },
+    );
+  }
 }

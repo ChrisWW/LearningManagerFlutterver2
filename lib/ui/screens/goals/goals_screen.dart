@@ -61,8 +61,8 @@ class _GoalsScreenState extends State<GoalsScreen> {
                 // TODO przesunac Notes
                 Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(24.0),
+                    const Padding(
+                      padding: EdgeInsets.all(24.0),
                       child: Text("Goals"),
                     ),
                     Expanded(
@@ -76,6 +76,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
                         },
                       ),
                     ),
+                    const SizedBox(width: 24.0),
                   ],
                 ),
                 // const CustomAppBar(),

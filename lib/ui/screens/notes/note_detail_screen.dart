@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_production_boilerplate/data/models/notes/note.dart';
 import 'package:flutter_production_boilerplate/ui/screens/notes/add_edit_note_screen.dart';
-import 'package:intl/intl.dart';
+
+class NoteDetailScreenArgs {
+  final String noteId;
+
+  const NoteDetailScreenArgs(this.noteId);
+}
 
 class NoteDetailScreen extends StatefulWidget {
-  final int noteId;
+  static const String route = '/note-details';
 
   const NoteDetailScreen({
     Key? key,
-    required this.noteId,
   }) : super(key: key);
 
   @override
@@ -17,15 +21,21 @@ class NoteDetailScreen extends StatefulWidget {
 
 class _NoteDetailScreenState extends State<NoteDetailScreen> {
   // late Note note
-  Note note = Note(date: "", title: '', content: '', color: -1);
+  late NoteDetailScreenArgs args;
+  bool isInitialized = false;
 
+  Note note = Note(date: "", title: '', content: '', color: -1);
   bool isLoading = false;
 
   @override
-  void initState() {
-    super.initState();
-
-    refreshNote();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!isInitialized) {
+      args =
+          ModalRoute.of(context)!.settings.arguments! as NoteDetailScreenArgs;
+      refreshNote();
+      isInitialized = true;
+    }
   }
 
   Future refreshNote() async {
