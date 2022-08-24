@@ -1,8 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_production_boilerplate/bloc/notes/notes_bloc.dart';
 import 'package:flutter_production_boilerplate/data/models/notes/note.dart';
 import 'package:flutter_production_boilerplate/ui/screens/goals/product.dart';
+
+class AddEditNoteScreenArgs {
+  final Note? note;
+
+  const AddEditNoteScreenArgs(this.note);
+}
 
 class AddEditNoteScreen extends StatefulWidget {
   static const String route = '/addEditNotes';
@@ -12,23 +19,6 @@ class AddEditNoteScreen extends StatefulWidget {
   @override
   State<AddEditNoteScreen> createState() => _AddEditNoteScreenState();
 }
-// TODO goals
-// class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
-
-// import 'package:flutter/material.dart';
-// import 'package:todo_app/model/list_model.dart';
-//
-// class Addtodo extends StatefulWidget {
-//   const Addtodo({Key? key}) : super(key: key);
-//
-//   @override
-//   _AddtodoState createState() => _AddtodoState();
-// }
 
 class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
   TextEditingController noteTitle = TextEditingController();
@@ -37,6 +27,50 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
   bool value = false;
   bool valueSecond = true;
   DateTime selectedDate = DateTime.now();
+  String? formattedDate = "";
+
+  late AddEditNoteScreenArgs args;
+  bool isInitialized = false;
+
+  Note note = Note(date: "", title: '', content: '', color: -1);
+  bool isLoading = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!isInitialized) {
+      args =
+          ModalRoute.of(context)!.settings.arguments! as AddEditNoteScreenArgs;
+      refreshNote();
+      // TODO przyspisac description
+
+      noteTitle.text = args.note?.title ?? '';
+      noteDescription.text = args.note?.content ?? '';
+      if(args.note?.date != null && args.note?.date != "") {
+        formattedDate = args.note?.date;
+      } else {
+        formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(selectedDate);
+      }
+
+      isInitialized = true;
+    }
+  }
+
+  // TODO USUNAC refresh?
+  Future refreshNote() async {
+    setState(() => isLoading = true);
+    try {
+      // TODO
+      //refresh maybe using state?
+      // this.note = await NotesDatabase.instance.readNote(widget.noteId);
+    } catch (e) {
+      // Handle error here, either show some information or dialog.
+      // print() is only for debugging purpose.
+      print(e);
+    } finally {
+      setState(() => isLoading = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,22 +88,58 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
+          title: FilterChip(
+            label: Text(formattedDate!),
+            padding: EdgeInsets.only(left: 40.0, right: 40.0),
+            backgroundColor: Colors.transparent,
+            shape: StadiumBorder(side: BorderSide()),
+            onSelected: (bool value) {},
+          ),
           backgroundColor: Colors.transparent,
           elevation: 0,
           iconTheme: const IconThemeData(color: Colors.black),
           actionsIconTheme: const IconThemeData(color: Colors.black),
           actions: [
+            if (args.note != null)
+              IconButton(
+                onPressed: () {
+                  // TODO id properly
+                  print(args.note!.id);
+                  BlocProvider.of<NotesBloc>(context).add(
+                    DeleteNote(
+                      args.note!.id,
+                    ),
+                  );
+                },
+                icon: const Icon(
+                  Icons.delete,
+                ),
+              ),
             IconButton(
               onPressed: () {
-                BlocProvider.of<NotesBloc>(context).add(
-                  AddNote(
-                    Note(
-                        id: DateTime.now().millisecondsSinceEpoch.toString(),
-                        title: noteTitle.value.text,
-                        date: DateTime.now().toString(),
-                        color: -1),
-                  ),
-                );
+                if (args.note == null) {
+                  BlocProvider.of<NotesBloc>(context).add(
+                    AddNote(
+                      Note(
+                          id: DateTime.now().millisecondsSinceEpoch.toString(),
+                          title: noteTitle.value.text,
+                          content: noteDescription.value.text,
+                          date: formattedDate!,
+                          color: -1),
+                    ),
+                  );
+                } else {
+                  BlocProvider.of<NotesBloc>(context).add(
+                    UpdateNote(
+                      Note(
+                          id: args.note!.id,
+                          title: noteTitle.value.text,
+                          content: noteDescription.value.text,
+                          date: formattedDate!,
+                          color: -1),
+                    ),
+                  );
+                }
               },
               icon: const Icon(
                 Icons.save,
@@ -147,7 +217,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
                 controller: noteDescription,
                 style: const TextStyle(fontSize: 16, color: Colors.black),
                 decoration: const InputDecoration(
-                  hintText: "How many minutes per day?",
+                  hintText: "Description",
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide.none,
                   ),
@@ -155,64 +225,6 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
                     borderSide: BorderSide.none,
                   ),
                 ),
-              ),
-              GestureDetector(
-                onTap: () => _selectDate(context),
-                child: AbsorbPointer(
-                  child: TextFormField(
-                    controller: date,
-                    keyboardType: TextInputType.datetime,
-                    decoration: InputDecoration(
-                      hintText: 'How long set your goal in days?',
-                      prefixIcon: Icon(
-                        Icons.dialpad,
-                        color: Colors.white70,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Row(
-                children: <Widget>[
-                  SizedBox(
-                    width: 10,
-                  ), //SizedBox
-                  Text(
-                    'Save in Google Calendar',
-                    style: TextStyle(fontSize: 17.0),
-                  ), //Text
-                  SizedBox(width: 10), //SizedBox
-                  /** Checkbox Widget **/
-                  Checkbox(
-                    value: this.value,
-                    onChanged: (value) {
-                      setState(() {
-                        this.value = value!;
-                      });
-                    },
-                  ), //Checkbox
-                ], //<Widget>[]
-              ),
-              Row(
-                children: <Widget>[
-                  SizedBox(
-                    width: 10,
-                  ), //SizedBox
-                  Text(
-                    'Additional one day when daily is not done',
-                    style: TextStyle(fontSize: 17.0),
-                  ), //Text
-                  SizedBox(width: 10), //SizedBox
-                  /** Checkbox Widget **/
-                  Checkbox(
-                    value: this.valueSecond,
-                    onChanged: (valueSecond) {
-                      setState(() {
-                        this.valueSecond = valueSecond!;
-                      });
-                    },
-                  ), //Checkbox
-                ], //<Widget>[]
               ),
             ],
           ),
@@ -235,34 +247,5 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
         ),
       ),
     );
-  }
-
-  // Future<void> _selectDate(BuildContext context) async {
-  //   await CalendarDatePicker(
-  //     initialDate: DateTime.now(),
-  //     firstDate: DateTime.now(),
-  //     lastDate: DateTime(
-  //         DateTime.now().year, DateTime.now().month, DateTime.now().day + 1),
-  //     onDateChanged: (DateTime value) {
-  //       setState(() {});
-  //     },
-  //   );
-  // }
-
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime.now(),
-        lastDate: DateTime(2100));
-    if (picked != null && picked != selectedDate)
-      setState(() {
-        selectedDate = picked;
-        final difference = selectedDate.difference(DateTime.now()).inDays + 1;
-        // funkcja wybrana data - DateTime.now()
-        // epoch time
-        DateTime.now().millisecondsSinceEpoch;
-        date.text = difference.toString();
-      });
   }
 }

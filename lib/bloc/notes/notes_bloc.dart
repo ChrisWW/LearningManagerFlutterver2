@@ -5,6 +5,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:equatable/equatable.dart';
 
 part 'notes_event.dart';
+
 part 'notes_state.dart';
 
 class NotesBloc extends HydratedBloc<NotesEvent, NotesState> {
@@ -28,7 +29,11 @@ class NotesBloc extends HydratedBloc<NotesEvent, NotesState> {
   Stream<NotesState> mapEventToState(NotesEvent event) async* {
     if (event is AddNote) {
       yield* _mapAddNote(event);
-    } else  {
+    } if (event is UpdateNote) {
+      yield* _mapUpdateNote(event);
+    } if (event is DeleteNote) {
+      yield* _mapDeleteNote(event);
+    } else {
       print("Else in MapEventToState");
     }
   }
@@ -37,6 +42,30 @@ class NotesBloc extends HydratedBloc<NotesEvent, NotesState> {
     try {
       final Notes newNotes = notes;
       final List<Note> newList = [...notes.notes, event.note];
+      yield ShowNotesState(newNotes.copyWith(notes: newList));
+    } catch (e) {
+      yield const ErrorNotesState();
+    }
+  }
+
+  Stream<NotesState> _mapDeleteNote(DeleteNote event) async* {
+    try {
+      final Notes newNotes = notes;
+      final List<Note> newList = [...notes.notes];
+      newList.removeWhere((element) => element.id == event.id);
+      yield ShowNotesState(newNotes.copyWith(notes: newList));
+    } catch (e) {
+      yield const ErrorNotesState();
+    }
+  }
+
+  Stream<NotesState> _mapUpdateNote(UpdateNote event) async* {
+    try {
+      final Notes newNotes = notes;
+      final List<Note> newList = [...notes.notes];
+      final indexItemToUpdate =
+          newList.indexWhere((element) => element.id == event.note.id);
+      newList[indexItemToUpdate] = event.note;
       yield ShowNotesState(newNotes.copyWith(notes: newList));
     } catch (e) {
       yield const ErrorNotesState();

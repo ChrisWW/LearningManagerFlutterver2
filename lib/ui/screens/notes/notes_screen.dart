@@ -112,8 +112,11 @@ class _NotesScreenState extends State<NotesScreen> {
           floatingActionButton: FloatingActionButton(
             backgroundColor: Colors.black,
             child: const Icon(Icons.add),
-            onPressed: () async {
-              Navigator.of(context).pushNamed(AddEditNoteScreen.route);
+            onPressed: () {
+              Navigator.of(context).pushNamed(
+                AddEditNoteScreen.route,
+                arguments: AddEditNoteScreenArgs(null),
+              );
               // refreshNotes();
             },
           ),
@@ -146,8 +149,8 @@ class NotesGridView extends StatelessWidget {
         return InkWell(
           onTap: () {
             Navigator.of(context).pushNamed(
-              NoteDetailScreen.route,
-              arguments: NoteDetailScreenArgs(note.id),
+              AddEditNoteScreen.route,
+              arguments: AddEditNoteScreenArgs(note),
             );
           },
           child: NoteCardWidget(note: note, index: index),

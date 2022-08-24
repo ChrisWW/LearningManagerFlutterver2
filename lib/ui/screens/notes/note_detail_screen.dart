@@ -2,12 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_production_boilerplate/data/models/notes/note.dart';
 import 'package:flutter_production_boilerplate/ui/screens/notes/add_edit_note_screen.dart';
 
-class NoteDetailScreenArgs {
-  final String noteId;
-
-  const NoteDetailScreenArgs(this.noteId);
-}
-
 class NoteDetailScreen extends StatefulWidget {
   static const String route = '/note-details';
 
@@ -21,7 +15,7 @@ class NoteDetailScreen extends StatefulWidget {
 
 class _NoteDetailScreenState extends State<NoteDetailScreen> {
   // late Note note
-  late NoteDetailScreenArgs args;
+  late AddEditNoteScreenArgs args;
   bool isInitialized = false;
 
   Note note = Note(date: "", title: '', content: '', color: -1);
@@ -32,7 +26,7 @@ class _NoteDetailScreenState extends State<NoteDetailScreen> {
     super.didChangeDependencies();
     if (!isInitialized) {
       args =
-          ModalRoute.of(context)!.settings.arguments! as NoteDetailScreenArgs;
+          ModalRoute.of(context)!.settings.arguments! as AddEditNoteScreenArgs;
       refreshNote();
       isInitialized = true;
     }

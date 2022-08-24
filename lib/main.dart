@@ -21,6 +21,8 @@ import 'package:hive/hive.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'ui/screens/notes/add_edit_note_screen.dart';
+
 /// Try using const constructors as much as possible!
 
 void main() async {
@@ -106,7 +108,7 @@ class MyApp extends StatelessWidget {
               '/login': (_) => const LoginScreen(),
               '/home': (_) => const DrawerPage(),
               AddEditGoalScreen.route: (_) => const AddEditGoalScreen(),
-              NoteDetailScreen.route: (_) => const NoteDetailScreen(),
+              AddEditNoteScreen.route: (_) => const AddEditNoteScreen(),
             },
           );
         },
