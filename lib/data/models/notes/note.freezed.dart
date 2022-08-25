@@ -275,13 +275,14 @@ class __$$_NoteCopyWithImpl<$Res> extends _$NoteCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Note with DiagnosticableTreeMixin implements _Note {
+class _$_Note extends _Note with DiagnosticableTreeMixin {
   _$_Note(
       {this.id = '',
       this.title = '',
       this.content = '',
       this.date = '',
-      this.color = -1});
+      this.color = -1})
+      : super._();
 
   factory _$_Note.fromJson(Map<String, dynamic> json) => _$$_NoteFromJson(json);
 
@@ -329,13 +330,14 @@ class _$_Note with DiagnosticableTreeMixin implements _Note {
   }
 }
 
-abstract class _Note implements Note {
+abstract class _Note extends Note {
   factory _Note(
       {final String id,
       String title,
       String content,
       String date,
       int color}) = _$_Note;
+  _Note._() : super._();
 
   factory _Note.fromJson(Map<String, dynamic> json) = _$_Note.fromJson;
 

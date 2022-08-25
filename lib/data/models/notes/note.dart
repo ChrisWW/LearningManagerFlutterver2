@@ -1,4 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_production_boilerplate/ui/screens/notes/add_edit_note_screen.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'note.freezed.dart';
@@ -27,5 +29,17 @@ class Note with _$Note {
     @Default(-1) int color,
   }) = _Note;
 
+  // trick do freezed, zeby generator akceptowal funkcje
+  // freezed ma taka mozliwosc, zeby zaakceptowac customowe funkcje w klasie
+
+  Note._();
   factory Note.fromJson(Map<String, dynamic> json) => _$NoteFromJson(json);
+
+  static Note empty() => Note(date: "", title: '', content: '', color: NoteColor.white.index);
+
+  NoteColor get noteColor => NoteColor.values[color];
+
+  Color get uiColor => noteColor.mapToColor();
+
+  static Color indexToColor(int index) => NoteColor.values[index].mapToColor();
 }

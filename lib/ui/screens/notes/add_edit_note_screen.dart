@@ -3,12 +3,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_production_boilerplate/bloc/notes/notes_bloc.dart';
 import 'package:flutter_production_boilerplate/data/models/notes/note.dart';
-import 'package:flutter_production_boilerplate/ui/screens/goals/product.dart';
 
 class AddEditNoteScreenArgs {
   final Note? note;
 
   const AddEditNoteScreenArgs(this.note);
+}
+
+// TODO ADD MORE COLORS
+enum NoteColor { white, red, blue, orange, purple }
+
+extension NoteColorExt on NoteColor {
+  Color mapToColor() {
+    switch (this) {
+      case NoteColor.white:
+        return Color(0xFFFFFFFF);
+      case NoteColor.red:
+        return Color(0xFFff6374);
+      case NoteColor.blue:
+        return Color(0xFF71b8ff);
+      case NoteColor.orange:
+        return Color(0xFFffaa5b);
+      case NoteColor.purple:
+        return Color(0xFF9ba0fc);
+      default:
+        return Color(0xFFFFFFFF);
+    }
+  }
+
+  static List<Color> list() {
+    return NoteColor.values.map((e) => e.mapToColor()).toList();
+  }
 }
 
 class AddEditNoteScreen extends StatefulWidget {
@@ -28,11 +53,13 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
   bool valueSecond = true;
   DateTime selectedDate = DateTime.now();
   String? formattedDate = "";
+  Color selectedColor = NoteColor.white.mapToColor();
+  List<Color> colors = NoteColorExt.list();
 
   late AddEditNoteScreenArgs args;
   bool isInitialized = false;
 
-  Note note = Note(date: "", title: '', content: '', color: -1);
+  Note note = Note.empty();
   bool isLoading = false;
 
   @override
@@ -42,16 +69,18 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
       args =
           ModalRoute.of(context)!.settings.arguments! as AddEditNoteScreenArgs;
       refreshNote();
-      // TODO przyspisac description
+      if (args.note != null) {
+        note = args.note!;
+        selectedColor = note.uiColor;
+      }
 
       noteTitle.text = args.note?.title ?? '';
       noteDescription.text = args.note?.content ?? '';
-      if(args.note?.date != null && args.note?.date != "") {
+      if (args.note?.date != null && args.note?.date != "") {
         formattedDate = args.note?.date;
       } else {
         formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(selectedDate);
       }
-
       isInitialized = true;
     }
   }
@@ -86,7 +115,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
         }
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: selectedColor,
         appBar: AppBar(
           title: FilterChip(
             label: Text(formattedDate!),
@@ -162,29 +191,9 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
               Column(
                 children: [
                   Spacer(),
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.blue.withOpacity(0.5),
-                              spreadRadius: 2.0,
-                              blurRadius: 8.0,
-                            )
-                          ]),
-                      padding: const EdgeInsets.all(10.0),
-                      child: const Icon(
-                        Icons.check,
-                      ),
-                    ),
-                  ),
-                  Spacer(),
                   Row(
                     children: List.generate(
-                        products.length, (index) => colorSelection(index)),
+                        colors.length, (index) => colorSelection(index)),
                   ),
                   Spacer(),
                 ],
@@ -237,12 +246,16 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
     return Padding(
       padding: const EdgeInsets.only(left: 10.0),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          setState(() {
+            selectedColor = Note.indexToColor(index);
+          });
+        },
         child: Container(
           height: 30,
           width: 30,
           decoration: BoxDecoration(
-              color: products[index].color,
+              color: colors[index],
               borderRadius: BorderRadius.circular(10.0)),
         ),
       ),

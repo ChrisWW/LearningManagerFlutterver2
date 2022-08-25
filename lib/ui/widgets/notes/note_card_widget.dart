@@ -25,7 +25,7 @@ class NoteCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// Pick colors from the accent colors based on index
-    final color = _lightColors[index % _lightColors.length];
+    final color = note.uiColor;
     final time = note.date;
     final minHeight = getMinHeight(index);
 
@@ -49,6 +49,14 @@ class NoteCardWidget extends StatelessWidget {
                 color: Colors.black,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              note.content,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 14,
+                fontWeight: FontWeight.normal,
               ),
             ),
           ],
