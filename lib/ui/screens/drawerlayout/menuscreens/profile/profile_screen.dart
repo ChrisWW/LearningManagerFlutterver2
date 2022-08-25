@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_production_boilerplate/bloc/goals/goals_bloc.dart';
 import 'package:flutter_production_boilerplate/bloc/profile/profile_bloc.dart';
 import 'package:flutter_production_boilerplate/data/models/goal/goal.dart';
-import 'package:flutter_production_boilerplate/ui/screens/goals/product.dart';
 
 class ProfileScreen extends StatefulWidget {
   static const String route = '/profile';

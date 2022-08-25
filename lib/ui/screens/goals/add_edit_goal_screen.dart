@@ -32,7 +32,8 @@ class AddEditGoalScreen extends StatefulWidget {
 class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
   TextEditingController goalTitle = TextEditingController();
   TextEditingController goalDescription = TextEditingController();
-  TextEditingController date = new TextEditingController();
+  TextEditingController date = TextEditingController();
+
   bool value = false;
   bool valueSecond = true;
   DateTime selectedDate = DateTime.now();
@@ -63,17 +64,18 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
                 BlocProvider.of<GoalsBloc>(context).add(
                   AddGoal(
                     Goal(
-                        id: UniqueKey().hashCode.toString(),
-                        goal: goalTitle.value.text,
-                        editDate: DateTime.now().toString(),
-                        eventGoogleId: 0.toString(),
-                        initialDate:
-                            DateTime.now().millisecondsSinceEpoch.toString(),
-                        intenseGoal: int.parse(goalDescription.value.text),
-                        timeGoal: int.parse(date.value.text),
-                        wasAcceptedToday: true,
-                        isFinished: false,
-                        color: -1),
+                      id: UniqueKey().hashCode.toString(),
+                      goal: goalTitle.value.text,
+                      editDate: DateTime.now().toString(),
+                      eventGoogleId: 0.toString(),
+                      initialDate:
+                          DateTime.now().millisecondsSinceEpoch.toString(),
+                      intenseGoal: int.parse(goalDescription.value.text),
+                      timeGoal: int.parse(date.value.text),
+                      wasAcceptedToday: true,
+                      isFinished: false,
+                      color: -1,
+                    ),
                   ),
                 );
               },
@@ -82,51 +84,6 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
               ),
             ),
           ],
-        ),
-        bottomNavigationBar: Container(
-          height: 100,
-          decoration: BoxDecoration(color: Colors.white, boxShadow: [
-            BoxShadow(
-              color: Colors.blue.withOpacity(0.5),
-              spreadRadius: 2.0,
-              blurRadius: 8.0,
-            )
-          ]),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  Spacer(),
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.blue.withOpacity(0.5),
-                              spreadRadius: 2.0,
-                              blurRadius: 8.0,
-                            )
-                          ]),
-                      padding: const EdgeInsets.all(10.0),
-                      child: const Icon(
-                        Icons.check,
-                      ),
-                    ),
-                  ),
-                  Spacer(),
-                  Row(
-                    children: List.generate(
-                        products.length, (index) => colorSelection(index)),
-                  ),
-                  Spacer(),
-                ],
-              ),
-            ],
-          ),
         ),
         body: SafeArea(
           child: Column(
@@ -148,7 +105,6 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
                   ),
                 ),
               ),
-
               TextFormField(
                 controller: goalDescription,
                 style: const TextStyle(fontSize: 16, color: Colors.black),
@@ -228,22 +184,6 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
     );
   }
 
-  Padding colorSelection(int index) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 10.0),
-      child: InkWell(
-        onTap: () {},
-        child: Container(
-          height: 30,
-          width: 30,
-          decoration: BoxDecoration(
-              color: products[index].color,
-              borderRadius: BorderRadius.circular(10.0)),
-        ),
-      ),
-    );
-  }
-
   // Future<void> _selectDate(BuildContext context) async {
   //   await CalendarDatePicker(
   //     initialDate: DateTime.now(),
@@ -262,7 +202,7 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
         initialDate: selectedDate,
         firstDate: DateTime.now(),
         lastDate: DateTime(2100));
-    if (picked != null && picked != selectedDate)
+    if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
         final difference = selectedDate.difference(DateTime.now()).inDays + 1;
@@ -271,5 +211,6 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
         DateTime.now().millisecondsSinceEpoch;
         date.text = difference.toString();
       });
+    }
   }
 }

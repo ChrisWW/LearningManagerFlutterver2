@@ -17,21 +17,21 @@ extension NoteColorExt on NoteColor {
   Color mapToColor() {
     switch (this) {
       case NoteColor.white:
-        return Color(0xFFFFFFFF);
+        return const Color(0xFFFFFFFF);
       case NoteColor.red:
-        return Color(0xFFff6374);
+        return const Color(0xFFff6374);
       case NoteColor.blue:
-        return Color(0xFF71b8ff);
+        return const Color(0xFF71b8ff);
       case NoteColor.orange:
-        return Color(0xFFffaa5b);
+        return const Color(0xFFffaa5b);
       case NoteColor.purple:
-        return Color(0xFF9ba0fc);
+        return const Color(0xFF9ba0fc);
       default:
-        return Color(0xFFFFFFFF);
+        return const Color(0xFFFFFFFF);
     }
   }
 
-  static List<Color> list() {
+  static List<Color> toList() {
     return NoteColor.values.map((e) => e.mapToColor()).toList();
   }
 }
@@ -48,13 +48,14 @@ class AddEditNoteScreen extends StatefulWidget {
 class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
   TextEditingController noteTitle = TextEditingController();
   TextEditingController noteDescription = TextEditingController();
-  TextEditingController date = new TextEditingController();
+  TextEditingController date = TextEditingController();
+
   bool value = false;
   bool valueSecond = true;
   DateTime selectedDate = DateTime.now();
   String? formattedDate = "";
   Color selectedColor = NoteColor.white.mapToColor();
-  List<Color> colors = NoteColorExt.list();
+  List<Color> colors = NoteColorExt.toList();
 
   late AddEditNoteScreenArgs args;
   bool isInitialized = false;
@@ -68,7 +69,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
     if (!isInitialized) {
       args =
           ModalRoute.of(context)!.settings.arguments! as AddEditNoteScreenArgs;
-      refreshNote();
+
       if (args.note != null) {
         note = args.note!;
         selectedColor = note.uiColor;
@@ -82,22 +83,6 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
         formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(selectedDate);
       }
       isInitialized = true;
-    }
-  }
-
-  // TODO USUNAC refresh?
-  Future refreshNote() async {
-    setState(() => isLoading = true);
-    try {
-      // TODO
-      //refresh maybe using state?
-      // this.note = await NotesDatabase.instance.readNote(widget.noteId);
-    } catch (e) {
-      // Handle error here, either show some information or dialog.
-      // print() is only for debugging purpose.
-      print(e);
-    } finally {
-      setState(() => isLoading = false);
     }
   }
 
@@ -119,9 +104,9 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
         appBar: AppBar(
           title: FilterChip(
             label: Text(formattedDate!),
-            padding: EdgeInsets.only(left: 40.0, right: 40.0),
+            padding: const EdgeInsets.only(left: 40.0, right: 40.0),
             backgroundColor: Colors.transparent,
-            shape: StadiumBorder(side: BorderSide()),
+            shape: const StadiumBorder(side: BorderSide()),
             onSelected: (bool value) {},
           ),
           backgroundColor: Colors.transparent,
@@ -150,11 +135,12 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
                   BlocProvider.of<NotesBloc>(context).add(
                     AddNote(
                       Note(
-                          id: DateTime.now().millisecondsSinceEpoch.toString(),
-                          title: noteTitle.value.text,
-                          content: noteDescription.value.text,
-                          date: formattedDate!,
-                          color: -1),
+                        id: DateTime.now().millisecondsSinceEpoch.toString(),
+                        title: noteTitle.value.text,
+                        content: noteDescription.value.text,
+                        date: formattedDate!,
+                        color: -1,
+                      ),
                     ),
                   );
                 } else {
@@ -178,24 +164,29 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
         ),
         bottomNavigationBar: Container(
           height: 100,
-          decoration: BoxDecoration(color: Colors.white, boxShadow: [
-            BoxShadow(
-              color: Colors.blue.withOpacity(0.5),
-              spreadRadius: 2.0,
-              blurRadius: 8.0,
-            )
-          ]),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.blue.withOpacity(0.5),
+                spreadRadius: 2.0,
+                blurRadius: 8.0,
+              )
+            ],
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Column(
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   Row(
                     children: List.generate(
-                        colors.length, (index) => colorSelection(index)),
+                      colors.length,
+                      (index) => colorSelection(index),
+                    ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                 ],
               ),
             ],
@@ -221,7 +212,6 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
                   ),
                 ),
               ),
-
               TextFormField(
                 controller: noteDescription,
                 style: const TextStyle(fontSize: 16, color: Colors.black),
@@ -255,8 +245,9 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
           height: 30,
           width: 30,
           decoration: BoxDecoration(
-              color: colors[index],
-              borderRadius: BorderRadius.circular(10.0)),
+            color: colors[index],
+            borderRadius: BorderRadius.circular(10.0),
+          ),
         ),
       ),
     );
