@@ -1,36 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_production_boilerplate/bloc/goals/goals_bloc.dart';
+import 'package:flutter_production_boilerplate/bloc/profile/profile_bloc.dart';
 import 'package:flutter_production_boilerplate/data/models/goal/goal.dart';
 import 'package:flutter_production_boilerplate/ui/screens/goals/product.dart';
 
-class AddEditGoalScreen extends StatefulWidget {
-  static const String route = '/addEditGoals';
+class MyInspirationsScreen extends StatefulWidget {
+  static const String route = '/myInspirations';
 
-  const AddEditGoalScreen({Key? key}) : super(key: key);
+  const MyInspirationsScreen({Key? key}) : super(key: key);
 
   @override
-  State<AddEditGoalScreen> createState() => _AddEditGoalScreenState();
+  State<MyInspirationsScreen> createState() => _MyInspirationsScreenState();
 }
-// TODO goals
-// class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
 
-// import 'package:flutter/material.dart';
-// import 'package:todo_app/model/list_model.dart';
-//
-// class Addtodo extends StatefulWidget {
-//   const Addtodo({Key? key}) : super(key: key);
-//
-//   @override
-//   _AddtodoState createState() => _AddtodoState();
-// }
-
-class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
+class _MyInspirationsScreenState extends State<MyInspirationsScreen> {
   TextEditingController goalTitle = TextEditingController();
   TextEditingController goalDescription = TextEditingController();
   TextEditingController date = new TextEditingController();
@@ -40,16 +24,14 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<GoalsBloc, GoalsState>(
+    return BlocListener<ProfileBloc, ProfileState>(
       listener: (context, state) {
-        // do stuff here based on BlocA's state
-        // do zmiany stanow, nawigacji listener, setState
-        if (state is ShowGoalsState) {
-          Navigator.pop(context);
-          print("SHOW");
-        } else if (state is ErrorGoalsState) {
-          print("ERROR");
-        }
+        // if (state is ShowGoalsState) {
+        //   Navigator.pop(context);
+        //   print("SHOW");
+        // } else if (state is ErrorGoalsState) {
+        //   print("ERROR");
+        // }
       },
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -69,7 +51,7 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
                         editDate: DateTime.now().toString(),
                         eventGoogleId: 0.toString(),
                         initialDate:
-                            DateTime.now().millisecondsSinceEpoch.toString(),
+                        DateTime.now().millisecondsSinceEpoch.toString(),
                         intenseGoal: int.parse(goalDescription.value.text),
                         timeGoal: int.parse(date.value.text),
                         wasAcceptedToday: true,
@@ -118,12 +100,6 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
                       ),
                     ),
                   ),
-                  Spacer(),
-                  Row(
-                    children: List.generate(
-                        products.length, (index) => colorSelection(index)),
-                  ),
-                  Spacer(),
                 ],
               ),
             ],
@@ -164,7 +140,7 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
                 ),
               ),
               GestureDetector(
-                onTap: () => _selectDate(context),
+                // onTap:
                 child: AbsorbPointer(
                   child: TextFormField(
                     style: const TextStyle(fontSize: 16, color: Colors.black),
@@ -227,50 +203,5 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
         ),
       ),
     );
-  }
-
-  Padding colorSelection(int index) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 10.0),
-      child: InkWell(
-        onTap: () {},
-        child: Container(
-          height: 30,
-          width: 30,
-          decoration: BoxDecoration(
-              color: products[index].color,
-              borderRadius: BorderRadius.circular(10.0)),
-        ),
-      ),
-    );
-  }
-
-  // Future<void> _selectDate(BuildContext context) async {
-  //   await CalendarDatePicker(
-  //     initialDate: DateTime.now(),
-  //     firstDate: DateTime.now(),
-  //     lastDate: DateTime(
-  //         DateTime.now().year, DateTime.now().month, DateTime.now().day + 1),
-  //     onDateChanged: (DateTime value) {
-  //       setState(() {});
-  //     },
-  //   );
-  // }
-
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime.now(),
-        lastDate: DateTime(2100));
-    if (picked != null && picked != selectedDate)
-      setState(() {
-        selectedDate = picked;
-        final difference = selectedDate.difference(DateTime.now()).inDays + 1;
-        // funkcja wybrana data - DateTime.now()
-        // epoch time
-        DateTime.now().millisecondsSinceEpoch;
-        date.text = difference.toString();
-      });
   }
 }

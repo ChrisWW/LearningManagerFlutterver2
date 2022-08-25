@@ -1,8 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_production_boilerplate/bloc/user_account/user_account_bloc.dart';
-import 'package:flutter_production_boilerplate/ui/widgets/base/custom_app_bar.dart';
-import 'package:flutter_production_boilerplate/ui/widgets/login/login_screen_test_app_bar.dart';
 import 'package:flutter_production_boilerplate/ui/widgets/login/screen_with_appbar.dart';
 
 import '../../widgets/login/login_screen_widget.dart';

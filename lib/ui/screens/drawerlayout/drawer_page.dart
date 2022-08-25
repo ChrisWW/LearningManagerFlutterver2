@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_production_boilerplate/bloc/user_account/user_account_bloc.dart';
+import 'package:flutter_production_boilerplate/ui/screens/drawerlayout/menuscreens/myinspirations/my_inspirations_screen.dart';
+import 'package:flutter_production_boilerplate/ui/screens/drawerlayout/menuscreens/profile/profile_screen.dart';
 import 'dart:math';
 
 import 'package:flutter_production_boilerplate/ui/screens/home/home_screen.dart';
 
 class DrawerPage extends StatefulWidget {
   static const String route = '/home';
+
   const DrawerPage({Key? key}) : super(key: key);
 
   @override
@@ -63,7 +66,10 @@ class _DrawerPageState extends State<DrawerPage> {
                   Expanded(
                     child: ListView(children: [
                       ListTile(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pop(context);
+                          Navigator.of(context).pushNamed(DrawerPage.route);
+                        },
                         leading: const Icon(
                           Icons.home,
                           color: Colors.white,
@@ -74,7 +80,9 @@ class _DrawerPageState extends State<DrawerPage> {
                         ),
                       ),
                       ListTile(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).pushNamed(ProfileScreen.route);
+                        },
                         leading: const Icon(
                           Icons.person,
                           color: Colors.white,
@@ -85,7 +93,10 @@ class _DrawerPageState extends State<DrawerPage> {
                         ),
                       ),
                       ListTile(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed(MyInspirationsScreen.route);
+                        },
                         leading: const Icon(
                           Icons.event,
                           color: Colors.white,
@@ -100,6 +111,8 @@ class _DrawerPageState extends State<DrawerPage> {
                           BlocProvider.of<UserAccountBloc>(context).add(
                             TryToLogOut(),
                           );
+                          // TODO
+                          Navigator.pop(context);
                         },
                         leading: const Icon(
                           Icons.logout,
@@ -127,8 +140,7 @@ class _DrawerPageState extends State<DrawerPage> {
                       ..setEntry(0, 3, 200 * val)
                       ..rotateY((pi / 6) * val),
                     // TODO
-                    child: const HomeScreen()
-                    ));
+                    child: const HomeScreen()));
               }),
           GestureDetector(
             onHorizontalDragUpdate: (e) {

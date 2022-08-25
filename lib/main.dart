@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_production_boilerplate/ui/screens/drawerlayout/drawer_page.dart';
+import 'package:flutter_production_boilerplate/ui/screens/drawerlayout/menuscreens/myinspirations/my_inspirations_screen.dart';
+import 'package:flutter_production_boilerplate/ui/screens/drawerlayout/menuscreens/profile/profile_screen.dart';
 import 'package:flutter_production_boilerplate/ui/screens/goals/add_edit_goal_screen.dart';
 import 'package:flutter_production_boilerplate/ui/screens/notes/note_detail_screen.dart';
 import 'package:logger/logger.dart';
@@ -105,10 +107,12 @@ class MyApp extends StatelessWidget {
             locale: context.locale,
             builder: EasyLoading.init(),
             routes: {
-              '/login': (_) => const LoginScreen(),
-              '/home': (_) => const DrawerPage(),
+              LoginScreen.route: (_) => const LoginScreen(),
+              DrawerPage.route: (_) => const DrawerPage(),
               AddEditGoalScreen.route: (_) => const AddEditGoalScreen(),
               AddEditNoteScreen.route: (_) => const AddEditNoteScreen(),
+              ProfileScreen.route: (_) => const ProfileScreen(),
+              MyInspirationsScreen.route: (_) => const MyInspirationsScreen(),
             },
           );
         },
