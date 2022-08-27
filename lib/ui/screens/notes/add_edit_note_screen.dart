@@ -54,7 +54,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
   bool valueSecond = true;
   DateTime selectedDate = DateTime.now();
   String? formattedDate = "";
-  Color selectedColor = NoteColor.white.mapToColor();
+  NoteColor selectedColor = NoteColor.white;
   List<Color> colors = NoteColorExt.toList();
 
   late AddEditNoteScreenArgs args;
@@ -72,7 +72,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
 
       if (args.note != null) {
         note = args.note!;
-        selectedColor = note.uiColor;
+        selectedColor = note.noteColor;
       }
 
       noteTitle.text = args.note?.title ?? '';
@@ -100,7 +100,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
         }
       },
       child: Scaffold(
-        backgroundColor: selectedColor,
+        backgroundColor: selectedColor.mapToColor(),
         appBar: AppBar(
           title: FilterChip(
             label: Text(formattedDate!),
@@ -139,7 +139,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
                         title: noteTitle.value.text,
                         content: noteDescription.value.text,
                         date: formattedDate!,
-                        color: -1,
+                        color: selectedColor.index,
                       ),
                     ),
                   );
@@ -151,7 +151,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
                           title: noteTitle.value.text,
                           content: noteDescription.value.text,
                           date: formattedDate!,
-                          color: -1),
+                          color: selectedColor.index),
                     ),
                   );
                 }
@@ -238,7 +238,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
       child: InkWell(
         onTap: () {
           setState(() {
-            selectedColor = Note.indexToColor(index);
+            selectedColor = Note.indexToNoteColor(index);
           });
         },
         child: Container(

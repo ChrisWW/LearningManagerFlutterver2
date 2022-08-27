@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +15,6 @@ import 'package:flutter_production_boilerplate/repositories/my_inspirations_repo
 import 'package:flutter_production_boilerplate/repositories/notes_repository.dart';
 import 'package:flutter_production_boilerplate/repositories/profile_repository.dart';
 import 'package:flutter_production_boilerplate/repositories/user_account_repository.dart';
-import 'package:flutter_production_boilerplate/ui/screens/login/login_screen.dart';
 
 import 'bloc/user_account/user_account_bloc.dart';
 

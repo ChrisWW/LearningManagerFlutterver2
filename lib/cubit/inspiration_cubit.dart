@@ -38,7 +38,6 @@ class InspirationCubit extends HydratedCubit<InspirationState> {
       } else {
         emit(const ErrorInspirationState());
       }
-
       print("Error in PostQuote InspirationCubit");
       print(e.toString());
     }

@@ -41,5 +41,5 @@ class Note with _$Note {
 
   Color get uiColor => noteColor.mapToColor();
 
-  static Color indexToColor(int index) => NoteColor.values[index].mapToColor();
+  static NoteColor indexToNoteColor(int index) => NoteColor.values[index];
 }
