@@ -1,206 +1,150 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_production_boilerplate/bloc/goals/goals_bloc.dart';
-import 'package:flutter_production_boilerplate/bloc/profile/profile_bloc.dart';
-import 'package:flutter_production_boilerplate/data/models/goal/goal.dart';
+import 'package:flutter_production_boilerplate/bloc/notes/notes_bloc.dart';
+import 'package:flutter_production_boilerplate/bloc/notes/notes_search_cubit.dart';
+import 'package:flutter_production_boilerplate/data/models/inspiration/inspiration.dart';
+import 'package:flutter_production_boilerplate/data/models/notes/note.dart';
+import 'package:flutter_production_boilerplate/ui/screens/drawerlayout/menuscreens/myinspirations/add_edit_my_inspiration_screen.dart';
+import 'package:flutter_production_boilerplate/ui/widgets/my_prefilled_search.dart';
 
 class MyInspirationsScreen extends StatefulWidget {
-  static const String route = '/myInspirations';
-
-  const MyInspirationsScreen({Key? key}) : super(key: key);
+  static const String route = '/myInspirationsScreen';
 
   @override
-  State<MyInspirationsScreen> createState() => _MyInspirationsScreenState();
+  _MyInspirationsScreenState createState() => _MyInspirationsScreenState();
 }
 
 class _MyInspirationsScreenState extends State<MyInspirationsScreen> {
-  TextEditingController goalTitle = TextEditingController();
-  TextEditingController goalDescription = TextEditingController();
-  TextEditingController date = new TextEditingController();
-  bool value = false;
-  bool valueSecond = true;
-  DateTime selectedDate = DateTime.now();
+  late final NotesSearchCubit notesSearchCubit;
+  TextEditingController editingController = TextEditingController();
+  bool isLoading = false;
+
+  final Inspiration inspiration = Inspiration();
+  List<Note> getItems(NotesListState state) {
+    return state.notes;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // refreshNotes();
+
+    notesSearchCubit = NotesSearchCubit.create(context)..initSearch();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    // NotesDatabase.instance.close();
+  }
+
+  // Future refreshNotes() async {
+  //   setState(() => isLoading = true);
+  //
+  //   // TODO
+  //   // this.notes = await NotesDatabase.instance.readAllNotes();
+  //
+  //   setState(() => isLoading = false);
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ProfileBloc, ProfileState>(
-      listener: (context, state) {
-        // if (state is ShowGoalsState) {
-        //   Navigator.pop(context);
-        //   print("SHOW");
-        // } else if (state is ErrorGoalsState) {
-        //   print("ERROR");
-        // }
-      },
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          iconTheme: const IconThemeData(color: Colors.black),
-          actionsIconTheme: const IconThemeData(color: Colors.black),
-          actions: [
-            IconButton(
-              onPressed: () {
-                BlocProvider.of<GoalsBloc>(context).add(
-                  AddGoal(
-                    Goal(
-                        id: UniqueKey().hashCode.toString(),
-                        goal: goalTitle.value.text,
-                        editDate: DateTime.now().toString(),
-                        eventGoogleId: 0.toString(),
-                        initialDate:
-                        DateTime.now().millisecondsSinceEpoch.toString(),
-                        intenseGoal: int.parse(goalDescription.value.text),
-                        timeGoal: int.parse(date.value.text),
-                        wasAcceptedToday: true,
-                        isFinished: false,
-                        color: -1),
-                  ),
-                );
-              },
-              icon: const Icon(
-                Icons.save,
-              ),
+    return BlocProvider<NotesSearchCubit>.value(
+      value: notesSearchCubit,
+      child: BlocListener<NotesBloc, NotesState>(
+        listener: (context, state) {
+          // do stuff here based on BlocA's state
+          // do zmiany stanow, nawigacji listener, setState
+          if (state is ShowNotesState) {
+            notesSearchCubit.initSearch();
+          } else if (state is ErrorNotesState) {
+            print("Error in blocListener notes");
+          }
+        },
+        child: Scaffold(
+          body: SafeArea(
+            child: ListView(
+              children: <Widget>[
+                // TODO przesunac Notes
+                Row(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(24.0),
+                      child: Text("Notes"),
+                    ),
+                    Expanded(
+                      child: BlocBuilder<NotesSearchCubit, NotesSearchState>(
+                        builder: (context, state) {
+                          return MyPrefilledSearch(
+                            onChanged: (String value) =>
+                                BlocProvider.of<NotesSearchCubit>(context)
+                                    .search(value),
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 24.0),
+                  ],
+                ),
+                // const CustomAppBar(),
+                // const SearchBar(),
+                BlocBuilder<NotesSearchCubit, NotesSearchState>(
+                  builder: (context, state) {
+                    return Container();
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
-        bottomNavigationBar: Container(
-          height: 100,
-          decoration: BoxDecoration(color: Colors.white, boxShadow: [
-            BoxShadow(
-              color: Colors.blue.withOpacity(0.5),
-              spreadRadius: 2.0,
-              blurRadius: 8.0,
-            )
-          ]),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  Spacer(),
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.blue.withOpacity(0.5),
-                              spreadRadius: 2.0,
-                              blurRadius: 8.0,
-                            )
-                          ]),
-                      padding: const EdgeInsets.all(10.0),
-                      child: const Icon(
-                        Icons.check,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
           ),
-        ),
-        body: SafeArea(
-          child: Column(
-            children: [
-              //title
-              TextFormField(
-                controller: goalTitle,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20,
-                ),
-                decoration: const InputDecoration(
-                  hintText: "Enter title",
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-              ),
-
-              TextFormField(
-                controller: goalDescription,
-                style: const TextStyle(fontSize: 16, color: Colors.black),
-                decoration: const InputDecoration(
-                  hintText: "How many minutes per day?",
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-              ),
-              GestureDetector(
-                // onTap:
-                child: AbsorbPointer(
-                  child: TextFormField(
-                    style: const TextStyle(fontSize: 16, color: Colors.black),
-                    controller: date,
-                    keyboardType: TextInputType.datetime,
-                    decoration: InputDecoration(
-                      hintText: 'How long set your goal in days?',
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                      ),
-                      contentPadding: const EdgeInsets.only(left: 12.5),
-                    ),
-                  ),
-                ),
-              ),
-              Row(
-                children: <Widget>[
-                  SizedBox(
-                    width: 10,
-                  ), //SizedBox
-                  Text(
-                    'Save in Google Calendar',
-                    style: TextStyle(fontSize: 16.0),
-                  ), //Text
-                  SizedBox(width: 10), //SizedBox
-                  /** Checkbox Widget **/
-                  Checkbox(
-                    value: this.value,
-                    onChanged: (value) {
-                      setState(() {
-                        this.value = value!;
-                      });
-                    },
-                  ), //Checkbox
-                ], //<Widget>[]
-              ),
-              Row(
-                children: <Widget>[
-                  SizedBox(
-                    width: 10,
-                  ), //SizedBox
-                  Text(
-                    'Additional one day when daily is not done',
-                    style: TextStyle(fontSize: 16.0),
-                  ), //Text
-                  SizedBox(width: 10), //SizedBox
-                  /** Checkbox Widget **/
-                  Checkbox(
-                    value: this.valueSecond,
-                    onChanged: (valueSecond) {
-                      setState(() {
-                        this.valueSecond = valueSecond!;
-                      });
-                    },
-                  ), //Checkbox
-                ], //<Widget>[]
-              ),
-            ],
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.black,
+            child: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.of(context).pushNamed(
+                AddEditMyInspirationScreen.route,
+                arguments: AddEditMyInspirationScreenArgs(null),
+              );
+              // refreshNotes();
+            },
           ),
         ),
       ),
     );
   }
 }
+//
+// class NotesGridView extends StatelessWidget {
+//   final List<Note> itemsNotes;
+//
+//   const NotesGridView({
+//     Key? key,
+//     required this.itemsNotes,
+//   }) : super(key: key);
+//
+//   // @override
+//   // Widget build(BuildContext context) {
+//   //   return StaggeredGridView.countBuilder(
+//   //     shrinkWrap: true,
+//   //     padding: const EdgeInsets.all(8),
+//   //     itemCount: itemsNotes.length,
+//   //     staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
+//   //     crossAxisCount: 4,
+//   //     mainAxisSpacing: 4,
+//   //     crossAxisSpacing: 4,
+//   //     itemBuilder: (context, index) {
+//   //       final Note note = itemsNotes[index];
+//   //       return InkWell(
+//   //         onTap: () {
+//   //           Navigator.of(context).pushNamed(
+//   //             AddEditMyInspirationScreen.route,
+//   //             arguments: AddEditMyInspirationScreenArgs(inspiration),
+//   //           );
+//   //         },
+//   //         child: NoteCardWidget(note: note, index: index),
+//   //       );
+//   //     },
+//   //   );
+//   // }
+// }

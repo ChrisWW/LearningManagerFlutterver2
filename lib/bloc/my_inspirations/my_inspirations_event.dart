@@ -8,16 +8,16 @@ abstract class MyInspirationsEvent extends Equatable {
 }
 
 class AddMyInspiration extends MyInspirationsEvent {
-
-  const AddMyInspiration();
+  final Inspiration inspiration;
+  const AddMyInspiration(this.inspiration);
 
   @override
   List<Object?> get props => [];
 }
 
 class AddMyImage extends MyInspirationsEvent {
-
-  const AddMyImage();
+  final String imageUrl;
+  const AddMyImage(this.imageUrl);
 
   @override
   List<Object?> get props => [];

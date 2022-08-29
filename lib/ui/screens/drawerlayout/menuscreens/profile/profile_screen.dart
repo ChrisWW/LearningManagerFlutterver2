@@ -13,13 +13,29 @@ class ProfileScreen extends StatefulWidget {
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+
+
+class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMixin {
+  late AnimationController controller;
   TextEditingController goalTitle = TextEditingController();
   TextEditingController goalDescription = TextEditingController();
   TextEditingController date = new TextEditingController();
   bool value = false;
   bool valueSecond = true;
   DateTime selectedDate = DateTime.now();
+
+
+  @override
+  void initState() {
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 5),
+    )..addListener(() {
+      setState(() {});
+    });
+    controller.repeat(reverse: true);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,97 +55,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
           elevation: 0,
           iconTheme: const IconThemeData(color: Colors.black),
           actionsIconTheme: const IconThemeData(color: Colors.black),
-          actions: [
-            IconButton(
-              onPressed: () {
-                BlocProvider.of<GoalsBloc>(context).add(
-                  AddGoal(
-                    Goal(
-                        id: UniqueKey().hashCode.toString(),
-                        goal: goalTitle.value.text,
-                        editDate: DateTime.now().toString(),
-                        eventGoogleId: 0.toString(),
-                        initialDate:
-                        DateTime.now().millisecondsSinceEpoch.toString(),
-                        intenseGoal: int.parse(goalDescription.value.text),
-                        timeGoal: int.parse(date.value.text),
-                        wasAcceptedToday: true,
-                        isFinished: false,
-                        color: -1),
-                  ),
-                );
-              },
-              icon: const Icon(
-                Icons.save,
-              ),
-            ),
-          ],
-        ),
-        bottomNavigationBar: Container(
-          height: 100,
-          decoration: BoxDecoration(color: Colors.white, boxShadow: [
-            BoxShadow(
-              color: Colors.blue.withOpacity(0.5),
-              spreadRadius: 2.0,
-              blurRadius: 8.0,
-            )
-          ]),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  Spacer(),
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.blue.withOpacity(0.5),
-                              spreadRadius: 2.0,
-                              blurRadius: 8.0,
-                            )
-                          ]),
-                      padding: const EdgeInsets.all(10.0),
-                      child: const Icon(
-                        Icons.check,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
         ),
         body: SafeArea(
           child: Column(
             children: [
-              //title
-              TextFormField(
-                controller: goalTitle,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20,
-                ),
-                decoration: const InputDecoration(
-                  hintText: "Enter title",
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-              ),
-
               TextFormField(
                 controller: goalDescription,
                 style: const TextStyle(fontSize: 16, color: Colors.black),
                 decoration: const InputDecoration(
-                  hintText: "How many minutes per day?",
+                  hintText: "You've done x / 4 goals so far.",
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide.none,
                   ),
@@ -138,20 +72,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
-              GestureDetector(
-                // onTap:
-                child: AbsorbPointer(
-                  child: TextFormField(
-                    style: const TextStyle(fontSize: 16, color: Colors.black),
-                    controller: date,
-                    keyboardType: TextInputType.datetime,
-                    decoration: InputDecoration(
-                      hintText: 'How long set your goal in days?',
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                      ),
-                      contentPadding: const EdgeInsets.only(left: 12.5),
-                    ),
+              TextFormField(
+                controller: goalDescription,
+                style: const TextStyle(fontSize: 16, color: Colors.black),
+                decoration: const InputDecoration(
+                  hintText: "Total hours on tasks: x / 40",
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+              ),
+              LinearProgressIndicator(
+                value: controller.value,
+                semanticsLabel: 'Linear progress indicator',
+              ),
+              TextFormField(
+                controller: goalDescription,
+                style: const TextStyle(fontSize: 16, color: Colors.black),
+                decoration: const InputDecoration(
+                  hintText: "You've saved x inspirations.",
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+              ),
+              TextFormField(
+                controller: goalDescription,
+                style: const TextStyle(fontSize: 16, color: Colors.black),
+                decoration: const InputDecoration(
+                  hintText: "You've saved x notes.",
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide.none,
                   ),
                 ),
               ),
@@ -161,28 +121,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     width: 10,
                   ), //SizedBox
                   Text(
-                    'Save in Google Calendar',
-                    style: TextStyle(fontSize: 16.0),
-                  ), //Text
-                  SizedBox(width: 10), //SizedBox
-                  /** Checkbox Widget **/
-                  Checkbox(
-                    value: this.value,
-                    onChanged: (value) {
-                      setState(() {
-                        this.value = value!;
-                      });
-                    },
-                  ), //Checkbox
-                ], //<Widget>[]
-              ),
-              Row(
-                children: <Widget>[
-                  SizedBox(
-                    width: 10,
-                  ), //SizedBox
-                  Text(
-                    'Additional one day when daily is not done',
+                    'Enable notifications in SetGoals',
                     style: TextStyle(fontSize: 16.0),
                   ), //Text
                   SizedBox(width: 10), //SizedBox

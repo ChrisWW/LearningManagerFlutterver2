@@ -9,8 +9,9 @@ abstract class MyInspirationsState extends Equatable {
 
 @immutable
 class ShowMyInspirationsDataState extends MyInspirationsState {
+  final Inspirations inspirations;
 
-  const ShowMyInspirationsDataState();
+  const ShowMyInspirationsDataState(this.inspirations);
 
   @override
   List<Object?> get props => [];

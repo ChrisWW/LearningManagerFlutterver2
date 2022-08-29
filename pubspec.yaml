@@ -83,6 +83,7 @@ flutter:
     - assets/translations/
     - img/offline.jpg
     - img/logo_learning_manager.png
+    - img/gif_clickme.gif
 
   fonts:
     - family: Poppins

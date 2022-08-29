@@ -18,7 +18,9 @@ class _InspirationScreenState extends State<InspirationScreen> {
   void initState() {
     super.initState();
     screenshotController = ScreenshotController();
-    BlocProvider.of<InspirationCubit>(context).getInspiration();
+    Future.delayed(const Duration(milliseconds: 300), () {
+      BlocProvider.of<InspirationCubit>(context).getInspiration();
+    });
   }
 
   // if it is offline, show a fixed Quote

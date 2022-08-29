@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_production_boilerplate/ui/screens/drawerlayout/drawer_page.dart';
+import 'package:flutter_production_boilerplate/ui/screens/drawerlayout/menuscreens/myinspirations/add_edit_my_inspiration_screen.dart';
 import 'package:flutter_production_boilerplate/ui/screens/drawerlayout/menuscreens/myinspirations/my_inspirations_screen.dart';
 import 'package:flutter_production_boilerplate/ui/screens/drawerlayout/menuscreens/profile/profile_screen.dart';
 import 'package:flutter_production_boilerplate/ui/screens/goals/add_edit_goal_screen.dart';
@@ -67,30 +68,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return BlocProvider(
-  //     create: (context) => AuthenticationBloc(
-  //       authenticationRepository: AuthenticationRepository(
-  //         authenticationFirebaseProvider: AuthenticationFirebaseProvider(
-  //           firebaseAuth: FirebaseAuth.instance,
-  //         ),
-  //         googleSignInProvider: GoogleSignInProvider(
-  //           googleSignIn: GoogleSignIn(),
-  //         ),
-  //       ),
-  //     ),
-  //     child: MaterialApp(
-  //       title: 'Flutter Demo',
-  //       theme: ThemeData(
-  //         primarySwatch: Colors.blue,
-  //         visualDensity: VisualDensity.adaptivePlatformDensity,
-  //       ),
-  //       home: HomeMainView(),
-  //     ),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ThemeCubit>(
@@ -112,7 +89,8 @@ class MyApp extends StatelessWidget {
               AddEditGoalScreen.route: (_) => const AddEditGoalScreen(),
               AddEditNoteScreen.route: (_) => const AddEditNoteScreen(),
               ProfileScreen.route: (_) => const ProfileScreen(),
-              MyInspirationsScreen.route: (_) => const MyInspirationsScreen(),
+              MyInspirationsScreen.route: (_) => MyInspirationsScreen(),
+              AddEditMyInspirationScreen.route: (_) => const AddEditMyInspirationScreen()
             },
           );
         },
