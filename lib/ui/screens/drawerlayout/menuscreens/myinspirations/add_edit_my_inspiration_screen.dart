@@ -1,10 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_production_boilerplate/bloc/goals/goals_bloc.dart';
 import 'package:flutter_production_boilerplate/bloc/my_inspirations/my_inspirations_bloc.dart';
-import 'package:flutter_production_boilerplate/bloc/profile/profile_bloc.dart';
-import 'package:flutter_production_boilerplate/data/models/goal/goal.dart';
 import 'package:flutter_production_boilerplate/data/models/inspiration/inspiration.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddEditMyInspirationScreenArgs {
   final Inspiration? inspiration;
@@ -30,6 +30,7 @@ class _AddEditMyInspirationScreenState
   bool value = false;
   bool valueSecond = true;
   DateTime selectedDate = DateTime.now();
+  XFile? _imageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -108,14 +109,16 @@ class _AddEditMyInspirationScreenState
                 ),
               ),
               GestureDetector(
-                onTap: () {
-                  print("on clicked image");
-                }, // Image tapped
-                child: Image.asset(
-                  'img/gif_clickme.gif',
-                  fit: BoxFit.cover, // Fixes border issues
-                ),
-              ),
+                  onTap: () {
+                    getImage(true);
+                    print("on clicked image");
+                  }, // Image tapped
+                  child: _imageFile != null
+                      ? Image.file(File(_imageFile!.path), fit: BoxFit.cover)
+                      : Image.asset(
+                          'img/gif_clickme.gif',
+                          fit: BoxFit.cover, // Fixes border issues
+                        )),
               ElevatedButton(
                 child: Text('Accept Picture'),
                 onPressed: () {
@@ -127,5 +130,18 @@ class _AddEditMyInspirationScreenState
         ),
       ),
     );
+  }
+
+  Future getImage(bool isCamera) async {
+    XFile? image;
+    final ImagePicker picker = ImagePicker();
+    if (isCamera) {
+      image = await picker.pickImage(source: ImageSource.camera);
+    } else {
+      image = await picker.pickImage(source: ImageSource.gallery);
+    }
+    setState(() {
+      _imageFile = image!;
+    });
   }
 }
