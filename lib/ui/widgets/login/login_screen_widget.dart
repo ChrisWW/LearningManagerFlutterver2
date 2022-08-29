@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_production_boilerplate/bloc/user_account/user_account_bloc.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
@@ -34,26 +33,30 @@ class _LoginScreenWidget extends State<LoginScreenWidget> {
         return Center(
           child: Padding(
             padding: const EdgeInsets.all(10),
-            child: ListView(
+            child: Column(
               children: <Widget>[
                 if (state is UserLogInErrorState) const Text("Error Message"),
                 Column(
                   children: [
                     Center(
-                      child: Image.asset("img/logo_learning_manager.png",
-                          fit: BoxFit.cover),
+                      child: Image.asset(
+                        "img/logo_learning_manager.png",
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                    Container(
+                    Center(
+                      child: Container(
                       height: 50,
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: SignInButton(
-                        Buttons.GoogleDark,
-                        text: "Sign in with Google",
-                        onPressed: () {
-                          BlocProvider.of<UserAccountBloc>(context).add(
-                            TryToLogIn(),
-                          );
-                        },
+                          Buttons.GoogleDark,
+                          text: "Sign in with Google",
+                          onPressed: () {
+                            BlocProvider.of<UserAccountBloc>(context).add(
+                              TryToLogIn(),
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ],

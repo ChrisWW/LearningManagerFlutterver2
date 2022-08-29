@@ -23,8 +23,11 @@ class _GoalsScreenState extends State<GoalsScreen> {
 
   List<Item> getItems(GoalsListState state) {
     return state.goals
-        .map(
-            (e) => Item(header: e.goal.toString(), body: e.timeGoal.toString()))
+        .map((goal) => Item(
+              goal,
+              header: goal.goal.toString(),
+              body: goal.timeGoal.toString(),
+            ))
         .toList();
   }
 
@@ -86,9 +89,10 @@ class _GoalsScreenState extends State<GoalsScreen> {
                     if (state is GoalsListState) {
                       final List<Item> itemsGoals = getItems(state);
                       return SingleChildScrollView(
-                          child: GoalsExpansionPanelList(items: itemsGoals));
+                        child: GoalsExpansionPanelList(items: itemsGoals),
+                      );
                     } else {
-                      return Text("Error");
+                      return const Text("Error");
                     }
                   },
                 ),
