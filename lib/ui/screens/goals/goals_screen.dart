@@ -62,11 +62,15 @@ class _GoalsScreenState extends State<GoalsScreen> {
             child: ListView(
               children: <Widget>[
                 // TODO przesunac Notes
-                Row(
-                  children: [
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.all(24.0),
-                      child: Text("Goals"),
+                      child: Text(
+                        "My Tasks",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 24.0,
+                        ),
+                      ),
                     ),
                     Expanded(
                       child: BlocBuilder<GoalsSearchCubit, GoalsSearchState>(
@@ -79,9 +83,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
                         },
                       ),
                     ),
-                    const SizedBox(width: 24.0),
-                  ],
-                ),
+                    const SizedBox(height: 24.0),
                 // const CustomAppBar(),
                 // const SearchBar(),
                 BlocBuilder<GoalsSearchCubit, GoalsSearchState>(
@@ -112,64 +114,3 @@ class _GoalsScreenState extends State<GoalsScreen> {
   }
 }
 
-// return Scaffold(
-//   appBar: AppBar(
-//     title: Text(
-//       'Goals',
-//       style: TextStyle(fontSize: 24, color: Colors.black),
-//     ),
-//     backgroundColor: Colors.white,
-//   ),
-//   body: Container(
-//     child: Column(
-//       children: <Widget>[
-//         Padding(
-//           padding: EdgeInsets.all(8.0),
-//           child: TextField(
-//             onChanged: (value) {},
-//             controller: editingController,
-//             decoration: InputDecoration(
-//                 labelText: "Search",
-//                 hintText: "Search",
-//                 prefixIcon: Icon(Icons.search),
-//                 border: OutlineInputBorder(
-//                     borderRadius:
-//                         BorderRadius.all(Radius.circular(25.0)))),
-//           ),
-//         ),
-//         SingleChildScrollView(
-//           child: ExpansionPanelList(
-//             expansionCallback: (index, isExpanded) {
-//               setState(() => items[index].isExpanded = !isExpanded);
-//             },
-//             children: items
-//                 .map((item) => ExpansionPanel(
-//                       canTapOnHeader: true,
-//                       isExpanded: item.isExpanded,
-//                       headerBuilder: (context, isExpanded) => ListTile(
-//                           title: Text(
-//                         item.header,
-//                         style: TextStyle(fontSize: 20),
-//                       )),
-//                       body: ListTile(
-//                           title: Text(item.body,
-//                               style: TextStyle(fontSize: 16))),
-//                     ))
-//                 .toList(),
-//           ),
-//         )
-//       ],
-//     ),
-//   ),
-//   floatingActionButton: FloatingActionButton(
-//     backgroundColor: Colors.black,
-//     child: Icon(Icons.add),
-//     onPressed: () async {
-//       Navigator.of(context).pushReplacementNamed("/addEditGoals");
-//     },
-//   ),
-// );
-//     },
-//     ))))};
-//   }
-// }

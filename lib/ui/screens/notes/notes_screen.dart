@@ -36,22 +36,6 @@ class _NotesScreenState extends State<NotesScreen> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-
-    // NotesDatabase.instance.close();
-  }
-
-  // Future refreshNotes() async {
-  //   setState(() => isLoading = true);
-  //
-  //   // TODO
-  //   // this.notes = await NotesDatabase.instance.readAllNotes();
-  //
-  //   setState(() => isLoading = false);
-  // }
-
-  @override
   Widget build(BuildContext context) {
     return BlocProvider<NotesSearchCubit>.value(
       value: notesSearchCubit,
@@ -70,11 +54,15 @@ class _NotesScreenState extends State<NotesScreen> {
             child: ListView(
               children: <Widget>[
                 // TODO przesunac Notes
-                Row(
-                  children: [
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.all(24.0),
-                      child: Text("Notes"),
+                      child: Text(
+                        "Notes",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 24.0,
+                        ),
+                      ),
                     ),
                     Expanded(
                       child: BlocBuilder<NotesSearchCubit, NotesSearchState>(
@@ -88,8 +76,6 @@ class _NotesScreenState extends State<NotesScreen> {
                       ),
                     ),
                     const SizedBox(width: 24.0),
-                  ],
-                ),
                 // const CustomAppBar(),
                 // const SearchBar(),
                 BlocBuilder<NotesSearchCubit, NotesSearchState>(

@@ -10,12 +10,19 @@ class AddEditNoteScreenArgs {
   const AddEditNoteScreenArgs(this.note);
 }
 
-// TODO ADD MORE COLORS
-enum NoteColor { white, red, blue, orange, purple }
+enum NoteColor { white, red, blue, orange, purple, pink, teal, lightGreen, green }
 
 extension NoteColorExt on NoteColor {
   Color mapToColor() {
     switch (this) {
+      case NoteColor.green:
+        return Color(0xFF2FFD50);
+      case NoteColor.lightGreen:
+        return Color(0xFF90EE90);
+      case NoteColor.teal:
+        return Color(0xFF008080);
+      case NoteColor.pink:
+        return Color(0xFFff0092);
       case NoteColor.white:
         return const Color(0xFFFFFFFF);
       case NoteColor.red:
@@ -175,7 +182,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
             ],
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
                 children: [

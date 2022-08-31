@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_production_boilerplate/bloc/my_inspirations/my_inspirations_bloc.dart';
 import 'package:flutter_production_boilerplate/cubit/inspiration_cubit.dart';
+import 'package:flutter_production_boilerplate/data/models/inspiration/inspiration.dart';
+import 'package:flutter_production_boilerplate/helpers/firebase_service.dart';
 import 'package:screenshot/screenshot.dart';
 
 class InspirationScreen extends StatefulWidget {
@@ -75,19 +78,21 @@ class _InspirationScreenState extends State<InspirationScreen> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        Center(child: RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            text:
-                            state.inspiration.quoteText.replaceAll("â", " "),
-                            style: const TextStyle(
-                              fontFamily: "Ic",
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 25,
+                        Center(
+                          child: RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              text: state.inspiration.quoteText
+                                  .replaceAll("â", " "),
+                              style: const TextStyle(
+                                fontFamily: "Ic",
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 25,
+                              ),
                             ),
                           ),
-                        ),),
+                        ),
                         Text(
                           state.inspiration.quoteAuthor,
                           textAlign: TextAlign.center,
@@ -118,20 +123,53 @@ class _InspirationScreenState extends State<InspirationScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 InkWell(
-                  onTap: () => BlocProvider.of<InspirationCubit>(context).getInspiration(),
+                  onTap: () => BlocProvider.of<InspirationCubit>(context)
+                      .getInspiration(),
                   child:
                       const Icon(Icons.refresh, size: 35, color: Colors.white),
                 ),
                 InkWell(
-                  onTap: () => BlocProvider.of<InspirationCubit>(context).makeCopyQuote(state.inspiration.quoteText.replaceAll("â", " "), state.inspiration.quoteAuthor, context),
+                  onTap: () => BlocProvider.of<InspirationCubit>(context)
+                      .makeCopyQuote(
+                          state.inspiration.quoteText.replaceAll("â", " "),
+                          state.inspiration.quoteAuthor,
+                          context),
                   child: const Icon(Icons.content_copy,
                       size: 30, color: Colors.white),
                 ),
                 InkWell(
                   // TODO ADD to firebase
-                  onTap: state.inspiration.quoteText.isNotEmpty
-                      ? () => null
-                      : null,
+                  onTap: () => {
+                    BlocProvider.of<MyInspirationsBloc>(context).add(
+                      AddMyInspiration(
+                        Inspiration(
+                          id: UniqueKey().hashCode.toString(),
+                          title: "",
+                          description: "",
+                          imageUrl: state.imageUrl,
+                          date:
+                              DateTime.now().millisecondsSinceEpoch.toString(),
+                          authorQuote: state.inspiration.quoteAuthor,
+                          quote: state.inspiration.quoteText,
+                          localization: "",
+                        ),
+                      ),
+                    ),
+                    FireStore().addToFireStore(
+                      Inspiration(
+                        id: UniqueKey().hashCode.toString(),
+                        title: "",
+                        description: "",
+                        imageUrl: state.imageUrl,
+                        date: DateTime.now().millisecondsSinceEpoch.toString(),
+                        authorQuote: state.inspiration.quoteAuthor,
+                        quote: state.inspiration.quoteText,
+                        localization: "",
+                      ),
+                    ),
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text("Inspiration Added To Favourite")))
+                  },
                   child: const Icon(Icons.add_box_outlined,
                       size: 30, color: Colors.white),
                 ),

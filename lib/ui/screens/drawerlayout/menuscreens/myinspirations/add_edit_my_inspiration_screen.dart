@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_production_boilerplate/bloc/my_inspirations/my_inspirations_bloc.dart';
 import 'package:flutter_production_boilerplate/data/models/inspiration/inspiration.dart';
+import 'package:flutter_production_boilerplate/helpers/firebase_service.dart';
 import 'package:image_picker/image_picker.dart';
+
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_core/firebase_core.dart' as firebase_core;
 
 class AddEditMyInspirationScreenArgs {
   final Inspiration? inspiration;
@@ -31,17 +35,20 @@ class _AddEditMyInspirationScreenState
   bool valueSecond = true;
   DateTime selectedDate = DateTime.now();
   XFile? _imageFile;
+  String? downloadUrl;
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<MyInspirationsBloc, MyInspirationsState>(
       listener: (context, state) {
-        // if (state is ShowGoalsState) {
-        //   Navigator.pop(context);
-        //   print("SHOW");
-        // } else if (state is ErrorGoalsState) {
-        //   print("ERROR");
-        // }
+        if (state is ShowMyInspirationsDataState) {
+          Navigator.pop(context);
+          print("SHOW");
+        } else if (state is ErrorMyInspirationsState) {
+          print("ERROR");
+        } else {
+          print("NOSTATE ERROR?");
+        }
       },
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -53,19 +60,31 @@ class _AddEditMyInspirationScreenState
           actions: [
             // TODO check bloc provider to inspiration
             IconButton(
-              onPressed: () {
+              onPressed: () async {
                 BlocProvider.of<MyInspirationsBloc>(context).add(
                   AddMyInspiration(
                     Inspiration(
                       id: UniqueKey().hashCode.toString(),
                       title: inspirationTitle.value.text,
-                      description: DateTime.now().toString(),
-                      imageUrl: 0.toString(),
+                      description: inspirationDescription.value.text,
+                      imageUrl: downloadUrl.toString(),
                       date: DateTime.now().millisecondsSinceEpoch.toString(),
                       authorQuote: "",
                       quote: "",
                       localization: "",
                     ),
+                  ),
+                );
+                FireStore().addToFireStore(
+                  Inspiration(
+                    id: UniqueKey().hashCode.toString(),
+                    title: inspirationTitle.value.text,
+                    description: inspirationDescription.value.text,
+                    imageUrl: downloadUrl.toString(),
+                    date: DateTime.now().millisecondsSinceEpoch.toString(),
+                    authorQuote: "",
+                    quote: "",
+                    localization: "",
                   ),
                 );
               },
@@ -76,56 +95,66 @@ class _AddEditMyInspirationScreenState
           ],
         ),
         body: SafeArea(
-          child: Column(
-            children: [
-              //title
-              TextFormField(
-                controller: inspirationTitle,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20,
-                ),
-                decoration: const InputDecoration(
-                  hintText: "Inspiration title",
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
+          child: Expanded(
+            child: Column(
+              children: [
+                //title
+                TextFormField(
+                  controller: inspirationTitle,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-              ),
-              TextFormField(
-                controller: inspirationDescription,
-                style: const TextStyle(fontSize: 16, color: Colors.black),
-                decoration: const InputDecoration(
-                  hintText: "Description",
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
+                  decoration: const InputDecoration(
+                    hintText: "Inspiration title",
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
                   ),
                 ),
-              ),
-              GestureDetector(
+                TextFormField(
+                  controller: inspirationDescription,
+                  style: const TextStyle(fontSize: 16, color: Colors.black),
+                  decoration: const InputDecoration(
+                    hintText: "Description",
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+                GestureDetector(
                   onTap: () {
                     getImage(true);
                     print("on clicked image");
                   }, // Image tapped
                   child: _imageFile != null
-                      ? Image.file(File(_imageFile!.path), fit: BoxFit.cover)
-                      : Image.asset(
-                          'img/gif_clickme.gif',
-                          fit: BoxFit.cover, // Fixes border issues
-                        )),
-              ElevatedButton(
-                child: Text('Accept Picture'),
-                onPressed: () {
-                  print('Accept picture and save it in storage');
-                },
-              ),
-            ],
+                      ? Expanded(
+                          child: Image.file(File(_imageFile!.path),
+                              fit: BoxFit.scaleDown))
+                      : Expanded(
+                          child: Image.asset(
+                            'img/gif_clickme.gif',
+                            fit: BoxFit.scaleDown, // Fixes border issues
+                          ),
+                        ),
+                ),
+                ElevatedButton(
+                  child: Text('Accept Picture'),
+                  onPressed: () async {
+                    downloadUrl = await (await Storage()
+                        .uploadFile(_imageFile!.path, inspirationTitle.text));
+                    print(
+                        'Accept picture and save it in storage ++ $downloadUrl');
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

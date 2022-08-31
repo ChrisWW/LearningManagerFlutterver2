@@ -32,19 +32,14 @@ class MyInspirationsBloc
   @override
   Stream<MyInspirationsState> mapEventToState(
       MyInspirationsEvent event) async* {
-    if (event is AddMyImage) {
-      // ADD IMAGE TO STATE AND SAVE URL TO IMAGE URL FROM FIREBASE
-      print("(event is AddMyImage)");
-    }
     if (event is AddMyInspiration) {
-      // ADD INSPIRATION TO STATE
-      print("(event is AddMyInspiration)");
+      yield* _mapAddMyInspiration(event);
     } else {
       print("error other?");
     }
   }
 
-  Stream<MyInspirationsState> _mapAddGoal(AddMyInspiration event) async* {
+  Stream<MyInspirationsState> _mapAddMyInspiration(AddMyInspiration event) async* {
     try {
       final Inspirations newInspirations = inspirations;
       final List<Inspiration> newList = [...inspirations.inspirations, event.inspiration];

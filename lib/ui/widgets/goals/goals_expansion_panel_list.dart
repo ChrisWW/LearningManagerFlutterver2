@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_production_boilerplate/data/models/goal/goal.dart';
+import 'package:flutter_production_boilerplate/helpers/count_service.dart';
 import 'package:ionicons/ionicons.dart';
 
 class GoalsExpansionPanelList extends StatefulWidget {
@@ -17,10 +18,18 @@ class GoalsExpansionPanelList extends StatefulWidget {
 }
 
 class _GoalsExpansionPanelListState extends State<GoalsExpansionPanelList> {
+  var progressPercentage = 100.toString();
+  var daysLeft = 0.toString();
+  var countHour = double.parse("0");
   @override
   Widget build(BuildContext context) {
     return ExpansionPanelList(
       expansionCallback: (index, isExpanded) {
+        var item = widget.items[index];
+        daysLeft = CountService().getDaysLeft(item.goal.timeGoal.toString(), item.goal.initialDate);
+        progressPercentage = CountService().getProgressPercentages(item.goal.timeGoal.toString(), item.goal.initialDate).toString();
+        countHour = CountService().countHour(item.goal.initialDate, item.goal.intenseGoal.toString(), item.goal.timeGoal.toString());
+
         setState(() => widget.items[index].isExpanded = !isExpanded);
       },
       children: widget.items.map(
@@ -30,15 +39,19 @@ class _GoalsExpansionPanelListState extends State<GoalsExpansionPanelList> {
             canTapOnHeader: true,
             isExpanded: item.isExpanded,
             headerBuilder: (_, bool isExpanded) {
+              daysLeft = CountService().getDaysLeft(item.goal.timeGoal.toString(), item.goal.initialDate);
+              progressPercentage = CountService().getProgressPercentages(item.goal.timeGoal.toString(), item.goal.initialDate).toString();
+              countHour = CountService().countHour(item.goal.initialDate, item.goal.intenseGoal.toString(),item.goal.timeGoal.toString());
               return Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(16.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
                       flex: 3,
                       child: Text(
                         item.header,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 16,
                           color: Colors.black,
                         ),
@@ -46,45 +59,45 @@ class _GoalsExpansionPanelListState extends State<GoalsExpansionPanelList> {
                         maxLines: 2,
                       ),
                     ),
-                    const SizedBox(width: 4.0),
+                    SizedBox(width: 4.0),
                     if (!isExpanded)
-                      const Flexible(
+                      Flexible(
                         flex: 1,
-                        child: ProgressBar(value: 0.3),
+                        child: ProgressBar(value: double.parse(progressPercentage)/100),
                       ),
-                  ],
+                  ]
                 ),
               );
             },
             body: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(16.0),
               child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       Flexible(
                         child: PropertyRow(
                           title: 'Per day',
-                          content: '21 min/day',
+                          content: '${item.goal.intenseGoal} min/day',
                         ),
                       ),
                       Flexible(
                         child: PropertyRow(
                           title: 'Days left',
-                          content: '4.59 days left',
+                          content: '$daysLeft days left',
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8.0),
+                  SizedBox(height: 8.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       Flexible(
                         child: PropertyRow(
                           title: 'Progress',
-                          content: '21 min/day',
+                          content: '$countHour hour',
                         ),
                       ),
                       Flexible(
@@ -92,18 +105,18 @@ class _GoalsExpansionPanelListState extends State<GoalsExpansionPanelList> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8.0),
-                  const Text(
-                    '18%',
+                   SizedBox(height: 8.0),
+                  Text(
+                    '$progressPercentage %',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
-                  const SizedBox(height: 8.0),
-                  const ProgressBar(value: 0.3),
-                  const SizedBox(height: 16.0),
+                  SizedBox(height: 8.0),
+                  ProgressBar(value: double.parse(progressPercentage)/100),
+                   SizedBox(height: 16.0),
                   Row(
                     children: [
                       ElevatedButton(
@@ -228,4 +241,5 @@ class ProgressBar extends StatelessWidget {
       value: value,
     );
   }
+
 }

@@ -156,27 +156,27 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
                   ), //Checkbox
                 ], //<Widget>[]
               ),
-              Row(
-                children: <Widget>[
-                  SizedBox(
-                    width: 10,
-                  ), //SizedBox
-                  Text(
-                    'Additional one day when daily is not done',
-                    style: TextStyle(fontSize: 16.0),
-                  ), //Text
-                  SizedBox(width: 10), //SizedBox
-                  /** Checkbox Widget **/
-                  Checkbox(
-                    value: this.valueSecond,
-                    onChanged: (valueSecond) {
-                      setState(() {
-                        this.valueSecond = valueSecond!;
-                      });
-                    },
-                  ), //Checkbox
-                ], //<Widget>[]
-              ),
+              // Row(
+              //   children: <Widget>[
+              //     SizedBox(
+              //       width: 10,
+              //     ), //SizedBox
+              //     Text(
+              //       'Additional one day when daily is not done',
+              //       style: TextStyle(fontSize: 16.0),
+              //     ), //Text
+              //     SizedBox(width: 10), //SizedBox
+              //     /** Checkbox Widget **/
+              //     Checkbox(
+              //       value: this.valueSecond,
+              //       onChanged: (valueSecond) {
+              //         setState(() {
+              //           this.valueSecond = valueSecond!;
+              //         });
+              //       },
+              //     ), //Checkbox
+              //   ], //<Widget>[]
+              // ),
             ],
           ),
         ),

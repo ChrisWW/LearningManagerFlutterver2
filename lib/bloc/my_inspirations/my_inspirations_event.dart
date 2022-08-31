@@ -14,11 +14,3 @@ class AddMyInspiration extends MyInspirationsEvent {
   @override
   List<Object?> get props => [];
 }
-
-class AddMyImage extends MyInspirationsEvent {
-  final String imageUrl;
-  const AddMyImage(this.imageUrl);
-
-  @override
-  List<Object?> get props => [];
-}

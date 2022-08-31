@@ -9,6 +9,7 @@ class MyPrefilledSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoSearchTextField(
+      padding: EdgeInsets.all(10),
       prefixIcon: const Icon(Ionicons.search),
       suffixIcon: const Icon(Ionicons.enter),
       onChanged: onChanged,
