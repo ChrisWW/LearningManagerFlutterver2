@@ -30,7 +30,7 @@ class _AddEditMyInspirationScreenState
     extends State<AddEditMyInspirationScreen> {
   TextEditingController inspirationTitle = TextEditingController();
   TextEditingController inspirationDescription = TextEditingController();
-  TextEditingController date = new TextEditingController();
+  TextEditingController date = TextEditingController();
   bool value = false;
   bool valueSecond = true;
   DateTime selectedDate = DateTime.now();
@@ -60,37 +60,25 @@ class _AddEditMyInspirationScreenState
           actions: [
             // TODO check bloc provider to inspiration
             IconButton(
-              onPressed: () async {
+              onPressed: () {
+                final inspiration = Inspiration(
+                  id: UniqueKey().hashCode.toString(),
+                  title: inspirationTitle.value.text,
+                  description: inspirationDescription.value.text,
+                  imageUrl: downloadUrl.toString(),
+                  date: DateTime.now().millisecondsSinceEpoch.toString(),
+                  authorQuote: "",
+                  quote: "",
+                  localization: "",
+                );
+
                 BlocProvider.of<MyInspirationsBloc>(context).add(
-                  AddMyInspiration(
-                    Inspiration(
-                      id: UniqueKey().hashCode.toString(),
-                      title: inspirationTitle.value.text,
-                      description: inspirationDescription.value.text,
-                      imageUrl: downloadUrl.toString(),
-                      date: DateTime.now().millisecondsSinceEpoch.toString(),
-                      authorQuote: "",
-                      quote: "",
-                      localization: "",
-                    ),
-                  ),
+                  AddMyInspiration(inspiration),
                 );
-                FireStore().addToFireStore(
-                  Inspiration(
-                    id: UniqueKey().hashCode.toString(),
-                    title: inspirationTitle.value.text,
-                    description: inspirationDescription.value.text,
-                    imageUrl: downloadUrl.toString(),
-                    date: DateTime.now().millisecondsSinceEpoch.toString(),
-                    authorQuote: "",
-                    quote: "",
-                    localization: "",
-                  ),
-                );
+
+                // FireStore().addToFireStore(inspiration);
               },
-              icon: const Icon(
-                Icons.save,
-              ),
+              icon: const Icon(Icons.save),
             ),
           ],
         ),

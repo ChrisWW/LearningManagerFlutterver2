@@ -9,8 +9,9 @@ abstract class MyInspirationsEvent extends Equatable {
 
 class AddMyInspiration extends MyInspirationsEvent {
   final Inspiration inspiration;
+
   const AddMyInspiration(this.inspiration);
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [inspiration];
 }

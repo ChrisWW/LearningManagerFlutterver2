@@ -7,6 +7,7 @@ import 'package:flutter_production_boilerplate/ui/screens/drawerlayout/menuscree
 import 'package:flutter_production_boilerplate/ui/screens/drawerlayout/menuscreens/profile/profile_screen.dart';
 import 'package:flutter_production_boilerplate/ui/screens/goals/add_edit_goal_screen.dart';
 import 'package:flutter_production_boilerplate/ui/screens/notes/note_detail_screen.dart';
+import 'package:flutter_production_boilerplate/utils/work_manager.dart';
 import 'package:logger/logger.dart';
 import 'firebase_options.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -52,6 +53,9 @@ void main() async {
     });
   }
 
+  /// Background Service
+  MyWorkManager.initialize();
+
   runApp(
     EasyLocalization(
       path: 'assets/translations',
@@ -77,7 +81,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'Flutter Production Boilerplate',
             theme: state.themeData,
-            home: const LoginScreen(),
+            home: const DrawerPage(),
             debugShowCheckedModeBanner: false,
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,

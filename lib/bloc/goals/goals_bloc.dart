@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_production_boilerplate/data/models/goal/goal.dart';
 import 'package:flutter_production_boilerplate/repositories/goals_repository.dart';
+import 'package:flutter_production_boilerplate/utils/work_manager.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -37,6 +38,9 @@ class GoalsBloc extends HydratedBloc<GoalsEvent, GoalsState> {
     try {
       final Goals newGoals = goals;
       final List<Goal> newList = [...goals.goals, event.goal];
+
+      MyWorkManager.registerPeriodicTask();
+
       yield ShowGoalsState(newGoals.copyWith(goals: newList));
     } catch (e) {
       yield const ErrorGoalsState();
@@ -47,6 +51,13 @@ class GoalsBloc extends HydratedBloc<GoalsEvent, GoalsState> {
     try {
       final Goal goal = goals.goals.where((e) => e.id == event.goal.id).first;
       goal.isFinished = true;
+
+      final bool isAnyGoalUnfinished = goals.goals.any((g) => !g.isFinished);
+
+      if (!isAnyGoalUnfinished) {
+        MyWorkManager.cancelAll();
+      }
+
       yield ShowGoalsState(goals);
     } on StateError catch (_) {
       yield ShowGoalsState(goals);

@@ -11,11 +11,9 @@ part 'my_inspirations_state.dart';
 class MyInspirationsBloc
     extends HydratedBloc<MyInspirationsEvent, MyInspirationsState> {
   static const String prefix = 'MyInspirationsBloc';
-  static const String profileKey = 'myInspirations';
+  static const String key = 'myInspirations';
 
   final MyInspirationsRepository _myInspirationsRepository;
-
-
 
   // user uruchomi poraz pierwszy apke to zainicjalizuje pusta tablice
   MyInspirationsBloc(this._myInspirationsRepository)
@@ -31,7 +29,8 @@ class MyInspirationsBloc
 
   @override
   Stream<MyInspirationsState> mapEventToState(
-      MyInspirationsEvent event) async* {
+    MyInspirationsEvent event,
+  ) async* {
     if (event is AddMyInspiration) {
       yield* _mapAddMyInspiration(event);
     } else {
@@ -39,11 +38,18 @@ class MyInspirationsBloc
     }
   }
 
-  Stream<MyInspirationsState> _mapAddMyInspiration(AddMyInspiration event) async* {
+  Stream<MyInspirationsState> _mapAddMyInspiration(
+    AddMyInspiration event,
+  ) async* {
     try {
       final Inspirations newInspirations = inspirations;
-      final List<Inspiration> newList = [...inspirations.inspirations, event.inspiration];
-      yield ShowMyInspirationsDataState(newInspirations.copyWith(inspirations: newList));
+      final List<Inspiration> newList = [
+        ...inspirations.inspirations,
+        event.inspiration
+      ];
+      yield ShowMyInspirationsDataState(
+        newInspirations.copyWith(inspirations: newList),
+      );
     } catch (e) {
       yield const ErrorMyInspirationsState();
     }
@@ -61,10 +67,10 @@ class MyInspirationsBloc
 
   @override
   MyInspirationsState? fromJson(Map<String, dynamic> json) {
-    if (json.containsKey(profileKey)) {
+    if (json.containsKey(key)) {
       return ShowMyInspirationsDataState(
-          Inspirations.fromJson(json[profileKey] as Map<String, dynamic>),
-          );
+        Inspirations.fromJson(json[key] as Map<String, dynamic>),
+      );
     } else {
       return ShowMyInspirationsDataState(Inspirations.empty());
     }

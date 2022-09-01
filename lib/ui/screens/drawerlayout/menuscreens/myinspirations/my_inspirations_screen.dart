@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_production_boilerplate/bloc/my_inspirations/my_inspirations_bloc.dart';
 import 'package:flutter_production_boilerplate/bloc/my_inspirations/my_inspirations_search_cubit.dart';
-import 'package:flutter_production_boilerplate/bloc/notes/notes_bloc.dart';
-import 'package:flutter_production_boilerplate/bloc/notes/notes_search_cubit.dart';
 import 'package:flutter_production_boilerplate/data/models/inspiration/inspiration.dart';
-import 'package:flutter_production_boilerplate/data/models/notes/note.dart';
 import 'package:flutter_production_boilerplate/ui/screens/drawerlayout/menuscreens/myinspirations/add_edit_my_inspiration_screen.dart';
 import 'package:flutter_production_boilerplate/ui/widgets/my_prefilled_search.dart';
 

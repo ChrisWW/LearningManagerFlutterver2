@@ -63,6 +63,7 @@ dependencies:
 #  toast: ^0.1.5
   # button google
   flutter_signin_button: ^2.0.0
+  workmanager: ^0.5.0
 
 dev_dependencies:
   flutter_test:
