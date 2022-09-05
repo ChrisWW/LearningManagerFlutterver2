@@ -3,7 +3,7 @@ import 'dart:core';
 import 'package:easy_localization/easy_localization.dart';
 
 class CountService {
-  double? getProgressPercentages(String timeGoalDays, String initData) {
+  static double? getProgressPercentages(String timeGoalDays, String initData) {
     var oneDayEpoch = double.parse("86400000");
     var now = DateTime.now().millisecondsSinceEpoch;
     var stringInitData = initData.toString();
@@ -21,7 +21,7 @@ class CountService {
     return double.parse(df.format(percentageValue));
   }
 
-  String getDaysLeft(String timeGoalDays, String initData) {
+  static String getDaysLeft(String timeGoalDays, String initData) {
     final oneDayEpoch = 86400000.toDouble();
     final now = DateTime.now().millisecondsSinceEpoch;
     var stringInitData = initData.toString();
@@ -38,7 +38,7 @@ class CountService {
     }
   }
 
-  double countHour(String initData, String perDay, String timeGoalDays) {
+  static double countHour(String initData, String perDay, String timeGoalDays) {
     var oneDayEpoch = 86400000.toDouble();
     var stringInitData = initData.toString();
     var stringTimeGoalDays = timeGoalDays.toString();

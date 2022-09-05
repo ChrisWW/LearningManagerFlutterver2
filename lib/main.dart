@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'Flutter Production Boilerplate',
             theme: state.themeData,
-            home: const LoginScreen(),
+            home: const DrawerPage(),
             debugShowCheckedModeBanner: false,
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,

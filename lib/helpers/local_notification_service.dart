@@ -10,13 +10,13 @@ class LocalNotificationService {
 
   final BehaviorSubject<String?> onNotificationClick = BehaviorSubject();
 
-  Future<void> intialize() async {
+  Future<void> initialize() async {
     tz.initializeTimeZones();
     const AndroidInitializationSettings androidInitializationSettings =
-    AndroidInitializationSettings('@drawable/ic_stat_android.png');
+        AndroidInitializationSettings('@drawable/ic_stat_android.png');
 
     IOSInitializationSettings iosInitializationSettings =
-    IOSInitializationSettings(
+        IOSInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
       requestSoundPermission: true,
@@ -36,14 +36,14 @@ class LocalNotificationService {
 
   Future<NotificationDetails> _notificationDetails() async {
     const AndroidNotificationDetails androidNotificationDetails =
-    AndroidNotificationDetails('channel_id', 'channel_name',
-        channelDescription: 'description',
-        importance: Importance.max,
-        priority: Priority.max,
-        playSound: true);
+        AndroidNotificationDetails('channel_id', 'channel_name',
+            channelDescription: 'description',
+            importance: Importance.max,
+            priority: Priority.max,
+            playSound: true);
 
     const IOSNotificationDetails iosNotificationDetails =
-    IOSNotificationDetails();
+        IOSNotificationDetails();
 
     return const NotificationDetails(
       android: androidNotificationDetails,
@@ -60,11 +60,12 @@ class LocalNotificationService {
     await _localNotificationService.show(id, title, body, details);
   }
 
-  Future<void> showScheduledNotification(
-      {required int id,
-        required String title,
-        required String body,
-        required int seconds}) async {
+  Future<void> showScheduledNotification({
+    required int id,
+    required String title,
+    required String body,
+    required int seconds,
+  }) async {
     final details = await _notificationDetails();
     await _localNotificationService.zonedSchedule(
       id,
@@ -77,12 +78,16 @@ class LocalNotificationService {
       details,
       androidAllowWhileIdle: true,
       uiLocalNotificationDateInterpretation:
-      UILocalNotificationDateInterpretation.absoluteTime,
+          UILocalNotificationDateInterpretation.absoluteTime,
     );
   }
 
   void onDidReceiveLocalNotification(
-      int id, String? title, String? body, String? payload) {
+    int id,
+    String? title,
+    String? body,
+    String? payload,
+  ) {
     print('id $id');
   }
 

@@ -14,6 +14,7 @@ class GoalsSearchCubit extends Cubit<GoalsSearchState> {
   final GoalsBloc _goalsBloc;
 
   GoalsSearchCubit(this._goalsBloc) : super(GoalsListState([]));
+
   factory GoalsSearchCubit.create(BuildContext context) {
     return GoalsSearchCubit(BlocProvider.of<GoalsBloc>(context));
   }
@@ -40,7 +41,6 @@ class GoalsSearchCubit extends Cubit<GoalsSearchState> {
     try {
       final List<Goal> newGoals =
           goals.where((goal) => goal.goal.contains(query)).toList();
-
       emit(GoalsListState(newGoals));
     } catch (e) {
       emit(GoalsListErrorState());

@@ -8,13 +8,20 @@ abstract class ProfileState extends Equatable {
 }
 
 @immutable
+class InitialDataState extends ProfileState {
+  const InitialDataState();
+}
+
+@immutable
 class ShowDataState extends ProfileState {
-  const ShowDataState();
+  final Goals goals;
+
+  const ShowDataState(this.goals);
 
   @override
   List<Object?> get props => [];
 }
 
-class ErrorGoalsState extends ProfileState {
-  const ErrorGoalsState();
+class ErrorDataState extends ProfileState {
+  const ErrorDataState();
 }

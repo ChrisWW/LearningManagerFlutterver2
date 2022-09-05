@@ -1,57 +1,48 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_production_boilerplate/bloc/goals/goals_bloc.dart';
+import 'package:flutter_production_boilerplate/data/models/goal/goal.dart';
 import 'package:flutter_production_boilerplate/repositories/profile_repository.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:equatable/equatable.dart';
 
 part 'profile_event.dart';
+
 part 'profile_state.dart';
 
-class ProfileBloc extends HydratedBloc<ProfileEvent, ProfileState> {
+class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   static const String prefix = 'ProfileBloc';
   static const String profileKey = 'profile';
 
   final ProfileRepository _profileRepository;
+  final GoalsBloc _goalsBloc;
 
   // user uruchomi poraz pierwszy apke to zainicjalizuje pusta tablice
-  ProfileBloc(this._profileRepository) : super(ShowDataState());
+  ProfileBloc(
+    this._profileRepository,
+    this._goalsBloc,
+  ) : super(const InitialDataState());
+
+  factory ProfileBloc.create(BuildContext context) {
+    return ProfileBloc(
+      RepositoryProvider.of<ProfileRepository>(context),
+      BlocProvider.of<GoalsBloc>(context),
+    );
+  }
 
   @override
   Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
-    if (event is AddAllData) {
-    } else {
+    if (event is GetDataEvent) {
+      yield* _mapGetData(event);
     }
   }
 
-  // Stream<ProfileState> _mapAddGoal(AddGoal event) async* {
-  //   try {
-  //     final Goals newGoals = goals;
-  //     final List<Goal> newList = [...goals.goals, event.goal];
-  //     yield ShowGoalsState(newGoals.copyWith(goals: newList));
-  //   } catch (e) {
-  //     yield const ErrorGoalsState();
-  //   }
-  // }
-
-  @override
-  ProfileState? fromJson(Map<String, dynamic> json) {
-    if (json.containsKey(profileKey)) {
-      return ShowDataState(
-        // Goals.fromJson(json[profileKey] as Map<String, dynamic>),
-      );
-    } else {
-      return ShowDataState();
-    }
-  }
-
-  // Kazdy obiekt w goalslist zostanie zrzucony do Jsona
-  @override
-  Map<String, dynamic>? toJson(ProfileState state) {
-    if (state is ShowDataState) {
-      return <String, dynamic>{
-        // profileKey: state.goals.toJson(),
-      };
-    } else {
-      return <String, dynamic>{};
+  Stream<ProfileState> _mapGetData(GetDataEvent event) async* {
+    try {
+      final Goals goals = _goalsBloc.goals;
+      yield ShowDataState(goals);
+    } catch (e) {
+      yield const ErrorDataState();
     }
   }
 }

@@ -355,7 +355,7 @@ class __$$_GoalCopyWithImpl<$Res> extends _$GoalCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Goal with DiagnosticableTreeMixin implements _Goal {
+class _$_Goal extends _Goal with DiagnosticableTreeMixin {
   _$_Goal(
       {this.id = '',
       this.goal = '',
@@ -366,7 +366,8 @@ class _$_Goal with DiagnosticableTreeMixin implements _Goal {
       this.color = -1,
       this.eventGoogleId = '',
       this.wasAcceptedToday = false,
-      this.isFinished = false});
+      this.isFinished = false})
+      : super._();
 
   factory _$_Goal.fromJson(Map<String, dynamic> json) => _$$_GoalFromJson(json);
 
@@ -434,7 +435,7 @@ class _$_Goal with DiagnosticableTreeMixin implements _Goal {
   }
 }
 
-abstract class _Goal implements Goal {
+abstract class _Goal extends Goal {
   factory _Goal(
       {final String id,
       String goal,
@@ -446,6 +447,7 @@ abstract class _Goal implements Goal {
       String eventGoogleId,
       bool wasAcceptedToday,
       bool isFinished}) = _$_Goal;
+  _Goal._() : super._();
 
   factory _Goal.fromJson(Map<String, dynamic> json) = _$_Goal.fromJson;
 

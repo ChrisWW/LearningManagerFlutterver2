@@ -7,10 +7,6 @@ abstract class ProfileEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class AddAllData extends ProfileEvent {
-
-  const AddAllData();
-
-  @override
-  List<Object?> get props => [];
+class GetDataEvent extends ProfileEvent {
+  const GetDataEvent();
 }

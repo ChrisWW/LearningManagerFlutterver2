@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_production_boilerplate/data/models/goal/goal.dart';
-import 'package:flutter_production_boilerplate/helpers/PopUpExample.dart';
 import 'package:flutter_production_boilerplate/helpers/count_service.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -26,13 +25,10 @@ class _GoalsExpansionPanelListState extends State<GoalsExpansionPanelList> {
       },
       children: widget.items.map(
         (Item item) {
-          final daysLeft = CountService().getDaysLeft(
+          final daysLeft = CountService.getDaysLeft(
               item.goal.timeGoal.toString(), item.goal.initialDate);
-          final progressPercentage = CountService()
-              .getProgressPercentages(
-                  item.goal.timeGoal.toString(), item.goal.initialDate)
-              .toString();
-          final countHour = CountService().countHour(item.goal.initialDate,
+          final progressPercentage = item.goal.progressPercentage;
+          final countHour = CountService.countHour(item.goal.initialDate,
               item.goal.intenseGoal.toString(), item.goal.timeGoal.toString());
           return ExpansionPanel(
             backgroundColor: Colors.orange,
@@ -61,7 +57,7 @@ class _GoalsExpansionPanelListState extends State<GoalsExpansionPanelList> {
                       Flexible(
                         flex: 1,
                         child: ProgressBar(
-                          value: double.parse(progressPercentage) / 100,
+                          value: progressPercentage / 100,
                         ),
                       ),
                   ],
@@ -114,7 +110,7 @@ class _GoalsExpansionPanelListState extends State<GoalsExpansionPanelList> {
                     ),
                   ),
                   const SizedBox(height: 8.0),
-                  ProgressBar(value: double.parse(progressPercentage) / 100),
+                  ProgressBar(value: progressPercentage / 100),
                   const SizedBox(height: 16.0),
                   Row(
                     children: [

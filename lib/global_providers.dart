@@ -79,6 +79,7 @@ class GlobalProviders extends StatelessWidget {
           ),
         ),
         BlocProvider<GoalsBloc>(
+          lazy: true,
           create: (BuildContext context) => GoalsBloc(
             RepositoryProvider.of<GoalsRepository>(context),
           ),
@@ -88,15 +89,10 @@ class GlobalProviders extends StatelessWidget {
             RepositoryProvider.of<NotesRepository>(context),
           ),
         ),
-        BlocProvider<ProfileBloc>(
-          create: (BuildContext context) => ProfileBloc(
-            RepositoryProvider.of<ProfileRepository>(context),
-          ),
-        ),
         BlocProvider<MyInspirationsBloc>(
           create: (BuildContext context) => MyInspirationsBloc(
             RepositoryProvider.of<MyInspirationsRepository>(context),
           ),
-        )
+        ),
       ];
 }

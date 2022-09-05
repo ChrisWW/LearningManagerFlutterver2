@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_production_boilerplate/bloc/goals/goals_search_cubit.dart';
 import 'package:flutter_production_boilerplate/data/models/goal/goal.dart';
 import 'package:flutter_production_boilerplate/repositories/goals_repository.dart';
 import 'package:flutter_production_boilerplate/utils/work_manager.dart';
@@ -31,7 +32,9 @@ class GoalsBloc extends HydratedBloc<GoalsEvent, GoalsState> {
       yield* _mapAddGoal(event);
     } else if (event is MarkGoalAsDone) {
       yield* _mapMarkGoalAsDone(event);
-    }
+    } /*else if (event is GoalChange) {
+      yield* _mapGoalChange(event);
+    }*/
   }
 
   Stream<GoalsState> _mapAddGoal(AddGoal event) async* {
@@ -65,6 +68,20 @@ class GoalsBloc extends HydratedBloc<GoalsEvent, GoalsState> {
       yield const ErrorGoalsState();
     }
   }
+
+  /*Stream<GoalsState> _mapGoalChange(ChangeGoal event) async* {
+    try {
+      final amount = event.amount;
+      goals.goals.forEach((element) {
+        if (element.id == event.id) {
+          element.timeGoal += amount;
+        }
+      });
+      yield ShowGoalsState(goals);
+    } catch (e) {
+      yield const ErrorGoalsState();
+    }
+  }*/
 
   @override
   GoalsState? fromJson(Map<String, dynamic> json) {
