@@ -166,7 +166,7 @@ class _GoalsExpansionPanelListState extends State<GoalsExpansionPanelList> {
     /// TODO: GoalsBloc - mark goal as done
     /// item.goal;
     // PopUpExample(key: null,).createElement();
-    showDataAlert(context);
+    showDataAlert(context, item);
   }
 
   void increaseGoal(Item item) {
@@ -229,7 +229,7 @@ class PropertyRow extends StatelessWidget {
   }
 }
 
-void showDataAlert(BuildContext contextValue) {
+void showDataAlert(BuildContext contextValue, Item item) {
   showDialog<void>(
       context: contextValue,
       builder: (context) {
@@ -245,7 +245,7 @@ void showDataAlert(BuildContext contextValue) {
             top: 10.0,
           ),
           title: Text(
-            "Save your task: }",
+            "Save your task: ${item.goal.goal}",
             style: TextStyle(fontSize: 24.0),
           ),
           content: Container(
