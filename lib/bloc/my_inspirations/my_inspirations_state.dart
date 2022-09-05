@@ -14,7 +14,7 @@ class ShowMyInspirationsDataState extends MyInspirationsState {
   const ShowMyInspirationsDataState(this.inspirations);
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [inspirations];
 }
 
 class ErrorMyInspirationsState extends MyInspirationsState {

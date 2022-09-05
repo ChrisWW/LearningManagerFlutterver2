@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_production_boilerplate/helpers/local_notification_service.dart';
 import 'package:flutter_production_boilerplate/ui/screens/drawerlayout/drawer_page.dart';
 import 'package:flutter_production_boilerplate/ui/screens/drawerlayout/menuscreens/myinspirations/add_edit_my_inspiration_screen.dart';
 import 'package:flutter_production_boilerplate/ui/screens/drawerlayout/menuscreens/myinspirations/my_inspirations_screen.dart';
@@ -55,6 +56,7 @@ void main() async {
 
   /// Background Service
   MyWorkManager.initialize();
+  // LocalNotificationService.intialize();
 
   runApp(
     EasyLocalization(
@@ -81,7 +83,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'Flutter Production Boilerplate',
             theme: state.themeData,
-            home: const DrawerPage(),
+            home: const LoginScreen(),
             debugShowCheckedModeBanner: false,
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,

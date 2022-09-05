@@ -85,7 +85,7 @@ class _MyInspirationsScreenState extends State<MyInspirationsScreen> {
                         return MyInspirationsRowView(
                             itemsInspirations: itemsInspirations);
                       } else {
-                        return Text("Empty");
+                        return Center(child: Text("Empty"));
                       }
                     } else {
                       return const Text("Error");
@@ -124,16 +124,17 @@ class MyInspirationsRowView extends StatelessWidget {
     // return ListView();
     return Container(
       child: ListView.builder(
-          padding: const EdgeInsets.all(10.0),
-          shrinkWrap: true,
-          itemCount: itemsInspirations.length,
-          itemBuilder: (BuildContext context, int index) {
-            if (itemsInspirations.isNotEmpty) {
-              return listItem(context, index);
-            } else {
-              return Text("EmptyList");
-            }
-          }),
+        padding: const EdgeInsets.all(10.0),
+        shrinkWrap: true,
+        itemCount: itemsInspirations.length,
+        itemBuilder: (BuildContext context, int index) {
+          if (itemsInspirations.isNotEmpty) {
+            return listItem(context, index);
+          } else {
+            return Center(child: Text("Empty"));
+          }
+        },
+      ),
     );
   }
 
@@ -156,7 +157,8 @@ class MyInspirationsRowView extends StatelessWidget {
       child: Container(
         height: 180,
         padding: EdgeInsets.symmetric(
-          horizontal: 5,
+          horizontal: 10,
+          vertical: 5
         ),
         child: Row(
           children: <Widget>[
@@ -175,6 +177,7 @@ class MyInspirationsRowView extends StatelessWidget {
             ),
             SizedBox(
               width: 20,
+                height: 24.0
             ),
             Expanded(
               child: Column(
@@ -213,70 +216,3 @@ class MyInspirationsRowView extends StatelessWidget {
     );
   }
 }
-
-// return Scaffold(body: ListView.builder(
-//     padding: EdgeInsets.all(10.0),
-// shrinkWrap: false,
-// itemCount: model.length,
-// itemBuilder: (BuildContext context, int index)
-// ) {
-// return listItem(context, index);
-//
-// }),
-// return Center(
-//   child: Container(
-//     height: 180,
-//     padding: EdgeInsets.symmetric(
-//       horizontal: 5,
-//     ),
-//     child: Row(
-//       children: <Widget>[
-//         Expanded(
-//           child: Column(
-//             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//             children: <Widget>[
-//               Align(
-//                 alignment: Alignment.centerLeft,
-//                 child: Text('Image'),
-//               ),
-//             ],
-//           ),
-//         ),
-//         SizedBox(
-//           width: 20,
-//         ),
-//         Expanded(
-//           child: Column(
-//             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//             children: <Widget>[
-//               Align(
-//                 alignment: Alignment.topCenter,
-//                 child: Text(
-//                   itemsIn,
-//                   style: const TextStyle(
-//                     fontSize: 16,
-//                     color: Colors.black,
-//                   ),
-//                   overflow: TextOverflow.ellipsis,
-//                   maxLines: 2,
-//                 ),
-//               ),
-//               Align(
-//                 alignment: Alignment.center,
-//                 child: Text('Quote'),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ],
-//     ),
-//   ),
-// );
-
-// ListView.builder(
-// padding: EdgeInsets.all(10.0),
-// shrinkWrap: false,
-// itemCount: model.length,
-// itemBuilder: (BuildContext context, int index) {
-// return listItem(context, index);
-// },

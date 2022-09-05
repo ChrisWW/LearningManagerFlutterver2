@@ -91,12 +91,10 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
               //title
               TextFormField(
                 controller: goalTitle,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20,
+                style: const TextStyle(fontSize: 16, color: Colors.black
                 ),
                 decoration: const InputDecoration(
-                  hintText: "Enter title",
+                  hintText: "Write your goal!",
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide.none,
                   ),

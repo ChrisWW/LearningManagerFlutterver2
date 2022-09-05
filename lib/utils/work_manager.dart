@@ -1,3 +1,4 @@
+import 'package:flutter_production_boilerplate/helpers/local_notification_service.dart';
 import 'package:workmanager/workmanager.dart';
 
 void _callbackDispatcher() {
@@ -6,6 +7,12 @@ void _callbackDispatcher() {
 
     switch (task) {
       case MyWorkManager.periodicTask:
+        await LocalNotificationService().showScheduledNotification(
+          id: 0,
+          title: 'Make your goals!',
+          body: 'Your goals are waiting for you. Make it done.',
+          seconds: 4,
+        );
         print("*** ${MyWorkManager.periodicTask} was executed");
         break;
       default:

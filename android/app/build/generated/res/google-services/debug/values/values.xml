@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">117540174395-vbu122tbk44utcm1dh3q0k7il78gut9g.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">117540174395</string>
+    <string name="google_api_key" translatable="false">AIzaSyAAiQu3NeEtenNGs-g9OciOce1cr8Iu5aU</string>
+    <string name="google_app_id" translatable="false">1:117540174395:android:31253af338692ff7377a1e</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAAiQu3NeEtenNGs-g9OciOce1cr8Iu5aU</string>
+    <string name="google_storage_bucket" translatable="false">learningmanagerflutter.appspot.com</string>
+    <string name="project_id" translatable="false">learningmanagerflutter</string>
+</resources>

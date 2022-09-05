@@ -85,7 +85,7 @@ class _NotesScreenState extends State<NotesScreen> {
                         final List<Note> itemsNotes = getItems(state);
                         return NotesGridView(itemsNotes: itemsNotes);
                       } else {
-                        return const Text("Empty list");
+                        return const Center(child: Text("Empty"));
                       }
                     } else {
                       return const Text("Error");

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_production_boilerplate/bloc/goals/goals_bloc.dart';
 import 'package:flutter_production_boilerplate/bloc/profile/profile_bloc.dart';
 import 'package:flutter_production_boilerplate/data/models/goal/goal.dart';
+import 'package:flutter_production_boilerplate/ui/widgets/goals/goals_expansion_panel_list.dart';
 
 class ProfileScreen extends StatefulWidget {
   static const String route = '/profile';
@@ -61,9 +62,9 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
             children: [
               TextFormField(
                 controller: goalDescription,
-                style: const TextStyle(fontSize: 16, color: Colors.black),
+                style: const TextStyle(fontSize: 20, color: Colors.black),
                 decoration: const InputDecoration(
-                  hintText: "You've done x / 4 goals so far.",
+                  hintText: "You've done 2 / 4 goals so far.",
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide.none,
                   ),
@@ -74,9 +75,9 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
               ),
               TextFormField(
                 controller: goalDescription,
-                style: const TextStyle(fontSize: 16, color: Colors.black),
+                style: const TextStyle(fontSize: 20, color: Colors.black),
                 decoration: const InputDecoration(
-                  hintText: "Total hours on tasks: x / 40",
+                  hintText: "Total hours on tasks: 25 / 40",
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide.none,
                   ),
@@ -85,15 +86,17 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                   ),
                 ),
               ),
-              LinearProgressIndicator(
-                value: controller.value,
-                semanticsLabel: 'Linear progress indicator',
-              ),
+                Flexible(
+                  flex: 1,
+                  child: ProgressBar(
+                    value: double.parse("60") / 100,
+                  ),
+                ),
               TextFormField(
                 controller: goalDescription,
-                style: const TextStyle(fontSize: 16, color: Colors.black),
+                style: const TextStyle(fontSize: 20, color: Colors.black),
                 decoration: const InputDecoration(
-                  hintText: "You've saved x inspirations.",
+                  hintText: "You've saved 3 inspirations.",
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide.none,
                   ),
@@ -104,9 +107,9 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
               ),
               TextFormField(
                 controller: goalDescription,
-                style: const TextStyle(fontSize: 16, color: Colors.black),
+                style: const TextStyle(fontSize: 20, color: Colors.black),
                 decoration: const InputDecoration(
-                  hintText: "You've saved x notes.",
+                  hintText: "You've saved 4 notes.",
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide.none,
                   ),
@@ -122,7 +125,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                   ), //SizedBox
                   Text(
                     'Enable notifications in SetGoals',
-                    style: TextStyle(fontSize: 16.0),
+                    style: TextStyle(fontSize: 20),
                   ), //Text
                   SizedBox(width: 10), //SizedBox
                   /** Checkbox Widget **/

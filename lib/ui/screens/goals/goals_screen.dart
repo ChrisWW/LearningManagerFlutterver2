@@ -5,8 +5,6 @@ import 'package:flutter_production_boilerplate/bloc/goals/goals_search_cubit.dar
 import 'package:flutter_production_boilerplate/ui/widgets/goals/goals_expansion_panel_list.dart';
 import 'package:flutter_production_boilerplate/ui/widgets/my_prefilled_search.dart';
 
-import '../../../bloc/goals/goals_search_cubit.dart';
-
 class GoalsScreen extends StatefulWidget {
   const GoalsScreen({Key? key}) : super(key: key);
 

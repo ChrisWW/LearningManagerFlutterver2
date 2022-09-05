@@ -80,7 +80,9 @@ class MyInspirationsBloc
   @override
   Map<String, dynamic>? toJson(MyInspirationsState state) {
     if (state is ShowMyInspirationsDataState) {
-      return <String, dynamic>{};
+      return <String, dynamic>{
+        key: state.inspirations.toJson(),
+      };
     } else {
       return <String, dynamic>{};
     }
