@@ -38,6 +38,8 @@ class CountService {
     }
   }
 
+
+
   static double countHour(String initData, String perDay, String timeGoalDays) {
     var oneDayEpoch = 86400000.toDouble();
     var stringInitData = initData.toString();
@@ -46,14 +48,31 @@ class CountService {
     var initialDateDouble = double.parse(stringInitData);
     final now = DateTime.now().millisecondsSinceEpoch;
 
-    var hours = ((now - initialDateDouble) / (oneDayEpoch)) *
+    var hours = ((now - initialDateDouble) / (oneDayEpoch) + double.parse(getDaysLeft(stringTimeGoalDays, stringInitData))) *
         ((double.parse(stringperDay) / 60).toDouble());
     var df = NumberFormat("#.##");
     var value = double.parse(df.format(hours));
-    var borderValue = ((double.parse(stringperDay) / 60).toDouble())*double.parse(stringTimeGoalDays);
-    if(value>=borderValue) {
+    var borderValue = ((double.parse(stringperDay) / 60).toDouble()) *
+        double.parse(stringTimeGoalDays);
+    if (value >= borderValue) {
       return double.parse(df.format(borderValue));
     }
     return value;
+  }
+
+  static double countHourDone(
+    String initData,
+    String perDay,
+  ) {
+    var oneDayEpoch = 86400000.toDouble();
+    var stringperDay = perDay.toString();
+    var stringInitData = initData.toString();
+    var initialDateDouble = double.parse(stringInitData);
+    final now = DateTime.now().millisecondsSinceEpoch;
+
+    var hours = ((now - initialDateDouble) / (oneDayEpoch)) *
+        (double.parse(stringperDay) / 60);
+    var df = NumberFormat("#.##");
+    return double.parse(df.format(hours));
   }
 }

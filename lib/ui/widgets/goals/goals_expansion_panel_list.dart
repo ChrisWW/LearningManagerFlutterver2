@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_production_boilerplate/bloc/goals/goals_bloc.dart';
 import 'package:flutter_production_boilerplate/data/models/goal/goal.dart';
 import 'package:flutter_production_boilerplate/helpers/count_service.dart';
 import 'package:ionicons/ionicons.dart';
@@ -28,8 +30,7 @@ class _GoalsExpansionPanelListState extends State<GoalsExpansionPanelList> {
           final daysLeft = CountService.getDaysLeft(
               item.goal.timeGoal.toString(), item.goal.initialDate);
           final progressPercentage = item.goal.progressPercentage;
-          final countHour = CountService.countHour(item.goal.initialDate,
-              item.goal.intenseGoal.toString(), item.goal.timeGoal.toString());
+          final countHour = item.goal.doneHours;
           return ExpansionPanel(
             backgroundColor: Colors.orange,
             canTapOnHeader: true,
@@ -166,15 +167,11 @@ class _GoalsExpansionPanelListState extends State<GoalsExpansionPanelList> {
   }
 
   void increaseGoal(Item item) {
-    /// TODO: GoalsBloc - increase goal
-    /// item.goal;
-    item.goal.timeGoal += 1;
+    BlocProvider.of<GoalsBloc>(context).add(ChangeGoal(1, item.goal));
   }
 
   void decreaseGoal(Item item) {
-    /// TODO: GoalsBloc - increase goal
-    /// item.goal;
-    item.goal.timeGoal -= 1;
+    BlocProvider.of<GoalsBloc>(context).add(ChangeGoal(-1, item.goal));
   }
 }
 
@@ -287,6 +284,7 @@ void showDataAlert(BuildContext contextValue, Item item) {
                         ElevatedButton(
                           onPressed: () {
                             Navigator.of(context).pop();
+                            BlocProvider.of<GoalsBloc>(context).add(ChangeGoal(1, item.goal));
                           },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.black,

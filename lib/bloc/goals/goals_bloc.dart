@@ -32,9 +32,9 @@ class GoalsBloc extends HydratedBloc<GoalsEvent, GoalsState> {
       yield* _mapAddGoal(event);
     } else if (event is MarkGoalAsDone) {
       yield* _mapMarkGoalAsDone(event);
-    } /*else if (event is GoalChange) {
+    } else if (event is ChangeGoal) {
       yield* _mapGoalChange(event);
-    }*/
+    }
   }
 
   Stream<GoalsState> _mapAddGoal(AddGoal event) async* {
@@ -69,11 +69,11 @@ class GoalsBloc extends HydratedBloc<GoalsEvent, GoalsState> {
     }
   }
 
-  /*Stream<GoalsState> _mapGoalChange(ChangeGoal event) async* {
+  Stream<GoalsState> _mapGoalChange(ChangeGoal event) async* {
     try {
       final amount = event.amount;
       goals.goals.forEach((element) {
-        if (element.id == event.id) {
+        if (element.id == event.goal.id) {
           element.timeGoal += amount;
         }
       });
@@ -81,7 +81,7 @@ class GoalsBloc extends HydratedBloc<GoalsEvent, GoalsState> {
     } catch (e) {
       yield const ErrorGoalsState();
     }
-  }*/
+  }
 
   @override
   GoalsState? fromJson(Map<String, dynamic> json) {

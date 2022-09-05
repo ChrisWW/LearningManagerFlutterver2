@@ -43,4 +43,10 @@ class Goal with _$Goal {
       0;
 
   bool get isProgressFinished => progressPercentage >= 100;
+
+  double get doneHours => CountService.countHourDone(initialDate.toString(), intenseGoal.toString());
+
+  double get totalHours =>
+      CountService.countHour(initialDate,
+          intenseGoal.toString(), timeGoal.toString()) ?? 0;
 }

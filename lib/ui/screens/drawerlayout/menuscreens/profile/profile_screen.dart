@@ -25,11 +25,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   int allGoalsAmount = 0;
   int doneGoalsAmount = 0;
+  int allInspirationsAmount = 0;
+  int notesAmount = 0;
+  double hoursDone = 0.0;
+  double hoursAll = 0.0;
+  double percentageValue = 0.0;
 
   @override
   void initState() {
     super.initState();
-    bloc = ProfileBloc.create(context)..add(const GetDataEvent());
+    bloc = ProfileBloc.create(context)
+      ..add(const GetDataEvent());
   }
 
   @override
@@ -54,10 +60,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   TextFormField(
                     controller: goalDescription,
-                    style: const TextStyle(fontSize: 20, color: Colors.black),
+                    style: TextStyle(fontSize: 20, color: Colors.black),
                     decoration: InputDecoration(
                       hintText:
-                          "You've done $doneGoalsAmount / $allGoalsAmount goals so far.",
+                      "You've done $doneGoalsAmount / $allGoalsAmount goals so far.",
                       enabledBorder: const OutlineInputBorder(
                         borderSide: BorderSide.none,
                       ),
@@ -68,9 +74,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   TextFormField(
                     controller: goalDescription,
-                    style: const TextStyle(fontSize: 20, color: Colors.black),
-                    decoration: const InputDecoration(
-                      hintText: "Total hours on tasks: 25 / 40",
+                    style: TextStyle(fontSize: 20, color: Colors.black),
+                    decoration: InputDecoration(
+                      hintText: "Total hours on tasks: $hoursDone / $hoursAll",
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide.none,
                       ),
@@ -82,14 +88,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Flexible(
                     flex: 1,
                     child: ProgressBar(
-                      value: double.parse("60") / 100,
+                      value: percentageValue,
                     ),
                   ),
                   TextFormField(
                     controller: goalDescription,
-                    style: const TextStyle(fontSize: 20, color: Colors.black),
-                    decoration: const InputDecoration(
-                      hintText: "You've saved 3 inspirations.",
+                    style: TextStyle(fontSize: 20, color: Colors.black),
+                    decoration: InputDecoration(
+                      hintText:
+                      "You've saved $allInspirationsAmount inspirations.",
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide.none,
                       ),
@@ -100,9 +107,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   TextFormField(
                     controller: goalDescription,
-                    style: const TextStyle(fontSize: 20, color: Colors.black),
-                    decoration: const InputDecoration(
-                      hintText: "You've saved 4 notes.",
+                    style: TextStyle(fontSize: 20, color: Colors.black),
+                    decoration: InputDecoration(
+                      hintText: "You've saved $notesAmount notes.",
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide.none,
                       ),
@@ -142,7 +149,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (state is ShowDataState) {
       allGoalsAmount = state.goals.goals.length;
       doneGoalsAmount =
-          state.goals.goals.where((g) => g.isProgressFinished).length;
+          state.goals.goals
+              .where((g) => g.isProgressFinished)
+              .length;
+      notesAmount = state.notes.notes.length;
+      allInspirationsAmount = state.inspirations.inspirations.length;
+      state.goals.goals.forEach((g) => {hoursAll = hoursAll + g.totalHours});
+      state.goals.goals.forEach((g) => {hoursDone = hoursDone + g.doneHours});
+      percentageValue = hoursDone / hoursAll;
     }
   }
 

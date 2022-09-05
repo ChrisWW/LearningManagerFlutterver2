@@ -24,3 +24,13 @@ class MarkGoalAsDone extends GoalsEvent {
   @override
   List<Object?> get props => [goal];
 }
+
+class ChangeGoal extends GoalsEvent {
+  final int amount;
+  final Goal goal;
+
+  const ChangeGoal(this.amount, this.goal);
+
+  @override
+  List<Object?> get props => [goal];
+}

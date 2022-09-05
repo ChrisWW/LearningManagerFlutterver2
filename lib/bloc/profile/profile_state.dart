@@ -15,8 +15,10 @@ class InitialDataState extends ProfileState {
 @immutable
 class ShowDataState extends ProfileState {
   final Goals goals;
+  final Inspirations inspirations;
+  final Notes notes;
 
-  const ShowDataState(this.goals);
+  const ShowDataState(this.goals, this.inspirations, this.notes);
 
   @override
   List<Object?> get props => [];
