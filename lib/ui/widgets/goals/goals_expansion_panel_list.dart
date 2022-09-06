@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_production_boilerplate/bloc/goals/goals_bloc.dart';
@@ -30,6 +31,7 @@ class _GoalsExpansionPanelListState extends State<GoalsExpansionPanelList> {
           final daysLeft = CountService.getDaysLeft(
               item.goal.timeGoal.toString(), item.goal.initialDate);
           final progressPercentage = item.goal.progressPercentage;
+          var df = NumberFormat("#.##");
           final countHour = item.goal.doneHours;
           return ExpansionPanel(
             backgroundColor: Colors.orange,
@@ -58,7 +60,7 @@ class _GoalsExpansionPanelListState extends State<GoalsExpansionPanelList> {
                       Flexible(
                         flex: 1,
                         child: ProgressBar(
-                          value: progressPercentage / 100,
+                          value: progressPercentage,
                         ),
                       ),
                   ],
@@ -103,7 +105,7 @@ class _GoalsExpansionPanelListState extends State<GoalsExpansionPanelList> {
                   ),
                   const SizedBox(height: 8.0),
                   Text(
-                    '$progressPercentage %',
+                    '${double.parse(df.format(progressPercentage * 100))} %',
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -111,7 +113,7 @@ class _GoalsExpansionPanelListState extends State<GoalsExpansionPanelList> {
                     ),
                   ),
                   const SizedBox(height: 8.0),
-                  ProgressBar(value: progressPercentage / 100),
+                  ProgressBar(value: progressPercentage),
                   const SizedBox(height: 16.0),
                   Row(
                     children: [
@@ -312,22 +314,6 @@ void showDataAlert(BuildContext contextValue, Item item) {
                       ],
                     ),
                   ),
-                  // Container(
-                  //   padding: const EdgeInsets.all(8.0),
-                  //   child: Text('Note'),
-                  // ),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(8.0),
-                  //   child: Text(
-                  //     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'
-                  //     ' ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud'
-                  //     ' exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-                  //     ' Duis aute irure dolor in reprehenderit in voluptate velit esse cillum '
-                  //     'dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,'
-                  //     ' sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                  //     style: TextStyle(fontSize: 12),
-                  //   ),
-                  // ),
                 ],
               ),
             ),
