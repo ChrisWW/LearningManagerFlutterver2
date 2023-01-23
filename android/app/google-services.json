@@ -37,6 +37,13 @@
             {
               "client_id": "117540174395-vbu122tbk44utcm1dh3q0k7il78gut9g.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "117540174395-ga7g0tkho9hi1bfm3t2aukivukf5tovj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.learningmanagerflutter"
+              }
             }
           ]
         }

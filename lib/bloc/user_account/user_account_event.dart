@@ -9,16 +9,17 @@ abstract class UserAccountEvent extends Equatable {
 }
 
 class TryToLogIn extends UserAccountEvent {
-  final String login;
-  final String password;
 
-  TryToLogIn(this.login, this.password);
+  TryToLogIn();
 
   @override
-  List<Object?> get props => [login, password];
+  List<Object?> get props => [];
 }
 
-class TryToLogOut extends UserAccountEvent {}
+class TryToLogOut extends UserAccountEvent {
+
+  TryToLogOut();
+}
 
 class InjectLogIn extends UserAccountEvent {
   final UserProfile profile;

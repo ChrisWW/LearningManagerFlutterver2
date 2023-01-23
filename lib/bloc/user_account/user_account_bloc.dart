@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 part 'user_account_event.dart';
+
 part 'user_account_state.dart';
 
 class UserAccountBloc extends HydratedBloc<UserAccountEvent, UserAccountState> {
@@ -18,7 +19,6 @@ class UserAccountBloc extends HydratedBloc<UserAccountEvent, UserAccountState> {
   final UserAccountRepository _userAccountRepository;
 
   UserAccountBloc(this._userAccountRepository) : super(UserLoggedOutState());
-
 
   // First create states TODO
   // UserProfile? get profile =>
@@ -53,20 +53,14 @@ class UserAccountBloc extends HydratedBloc<UserAccountEvent, UserAccountState> {
       /// TODO:
       /// // zmusamy repo, zeby zalogowalo usera
       /// // zapytanie do API
-      final UserProfile profile = await _userAccountRepository.logInUser(
-          event.login,
-          event.password
-      );
+      final UserProfile profile =
+          await _userAccountRepository.logInUserWithGoogle();
 
       // natenczas zmockowana logika
       // if accept
       // yield przechodzimy w inny stan(State)
       // mock hardcoded
-      if (event.login == 'test') {
-        yield UserLoggedInState(profile);
-      } else {
-        throw Exception('random error');
-      }
+      yield UserLoggedInState(profile);
     } catch (e) {
       print('$prefix:_mapTryToLogIn: error ${e.toString()}');
       yield UserLogInErrorState();
@@ -92,7 +86,9 @@ class UserAccountBloc extends HydratedBloc<UserAccountEvent, UserAccountState> {
   @override
   UserAccountState? fromJson(Map<String, dynamic> json) {
     if (json.containsKey(profileKey)) {
-      return UserLoggedInState(UserProfile.fromJson(json[profileKey] as Map<String, dynamic>));
+      return UserLoggedInState(
+        UserProfile.fromJson(json[profileKey] as Map<String, dynamic>),
+      );
     } else {
       return UserLoggedOutState();
     }
@@ -107,7 +103,8 @@ class UserAccountBloc extends HydratedBloc<UserAccountEvent, UserAccountState> {
   Map<String, dynamic>? toJson(UserAccountState state) {
     if (state is UserLoggedInState) {
       return <String, dynamic>{
-        profileKey: state.userProfile.toJson()};
+        profileKey: state.userProfile.toJson(),
+      };
     } else {
       return <String, dynamic>{};
     }

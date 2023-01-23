@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'inspiration_response.dart';
@@ -11,30 +12,11 @@ part of 'inspiration_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 InspirationResponse _$InspirationResponseFromJson(Map<String, dynamic> json) {
   return _InspirationResponse.fromJson(json);
 }
-
-/// @nodoc
-class _$InspirationResponseTearOff {
-  const _$InspirationResponseTearOff();
-
-  _InspirationResponse call({String quoteAuthor = '', String quoteText = ''}) {
-    return _InspirationResponse(
-      quoteAuthor: quoteAuthor,
-      quoteText: quoteText,
-    );
-  }
-
-  InspirationResponse fromJson(Map<String, Object?> json) {
-    return InspirationResponse.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $InspirationResponse = _$InspirationResponseTearOff();
 
 /// @nodoc
 mixin _$InspirationResponse {
@@ -83,32 +65,32 @@ class _$InspirationResponseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$InspirationResponseCopyWith<$Res>
+abstract class _$$_InspirationResponseCopyWith<$Res>
     implements $InspirationResponseCopyWith<$Res> {
-  factory _$InspirationResponseCopyWith(_InspirationResponse value,
-          $Res Function(_InspirationResponse) then) =
-      __$InspirationResponseCopyWithImpl<$Res>;
+  factory _$$_InspirationResponseCopyWith(_$_InspirationResponse value,
+          $Res Function(_$_InspirationResponse) then) =
+      __$$_InspirationResponseCopyWithImpl<$Res>;
   @override
   $Res call({String quoteAuthor, String quoteText});
 }
 
 /// @nodoc
-class __$InspirationResponseCopyWithImpl<$Res>
+class __$$_InspirationResponseCopyWithImpl<$Res>
     extends _$InspirationResponseCopyWithImpl<$Res>
-    implements _$InspirationResponseCopyWith<$Res> {
-  __$InspirationResponseCopyWithImpl(
-      _InspirationResponse _value, $Res Function(_InspirationResponse) _then)
-      : super(_value, (v) => _then(v as _InspirationResponse));
+    implements _$$_InspirationResponseCopyWith<$Res> {
+  __$$_InspirationResponseCopyWithImpl(_$_InspirationResponse _value,
+      $Res Function(_$_InspirationResponse) _then)
+      : super(_value, (v) => _then(v as _$_InspirationResponse));
 
   @override
-  _InspirationResponse get _value => super._value as _InspirationResponse;
+  _$_InspirationResponse get _value => super._value as _$_InspirationResponse;
 
   @override
   $Res call({
     Object? quoteAuthor = freezed,
     Object? quoteText = freezed,
   }) {
-    return _then(_InspirationResponse(
+    return _then(_$_InspirationResponse(
       quoteAuthor: quoteAuthor == freezed
           ? _value.quoteAuthor
           : quoteAuthor // ignore: cast_nullable_to_non_nullable
@@ -131,11 +113,11 @@ class _$_InspirationResponse
   factory _$_InspirationResponse.fromJson(Map<String, dynamic> json) =>
       _$$_InspirationResponseFromJson(json);
 
-  @JsonKey(defaultValue: '')
   @override
+  @JsonKey()
   final String quoteAuthor;
-  @JsonKey(defaultValue: '')
   @override
+  @JsonKey()
   final String quoteText;
 
   @override
@@ -156,20 +138,23 @@ class _$_InspirationResponse
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _InspirationResponse &&
-            (identical(other.quoteAuthor, quoteAuthor) ||
-                other.quoteAuthor == quoteAuthor) &&
-            (identical(other.quoteText, quoteText) ||
-                other.quoteText == quoteText));
+            other is _$_InspirationResponse &&
+            const DeepCollectionEquality()
+                .equals(other.quoteAuthor, quoteAuthor) &&
+            const DeepCollectionEquality().equals(other.quoteText, quoteText));
   }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, quoteAuthor, quoteText);
 
   @JsonKey(ignore: true)
   @override
-  _$InspirationResponseCopyWith<_InspirationResponse> get copyWith =>
-      __$InspirationResponseCopyWithImpl<_InspirationResponse>(
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(quoteAuthor),
+      const DeepCollectionEquality().hash(quoteText));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_InspirationResponseCopyWith<_$_InspirationResponse> get copyWith =>
+      __$$_InspirationResponseCopyWithImpl<_$_InspirationResponse>(
           this, _$identity);
 
   @override
@@ -179,8 +164,9 @@ class _$_InspirationResponse
 }
 
 abstract class _InspirationResponse implements InspirationResponse {
-  factory _InspirationResponse({String quoteAuthor, String quoteText}) =
-      _$_InspirationResponse;
+  factory _InspirationResponse(
+      {final String quoteAuthor,
+      final String quoteText}) = _$_InspirationResponse;
 
   factory _InspirationResponse.fromJson(Map<String, dynamic> json) =
       _$_InspirationResponse.fromJson;
@@ -191,6 +177,6 @@ abstract class _InspirationResponse implements InspirationResponse {
   String get quoteText;
   @override
   @JsonKey(ignore: true)
-  _$InspirationResponseCopyWith<_InspirationResponse> get copyWith =>
+  _$$_InspirationResponseCopyWith<_$_InspirationResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }

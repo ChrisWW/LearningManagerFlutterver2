@@ -1,4 +1,5 @@
-import 'dart:ffi';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../base/base_repository.dart';
 import '../data/models/user_profile.dart';
@@ -21,10 +22,28 @@ class UserAccountRepository extends BaseRepository {
     return Future.value(userProfile);
   }
 
+  Future<UserProfile> logInUserWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    final UserCredential cr = await FirebaseAuth.instance.signInWithCredential(credential);
+    final UserProfile userProfile = UserProfile(login: cr.user?.email.toString(), displayName: cr.user?.displayName.toString(), imageUrl: cr.user?.photoURL);
+    return userProfile;
+
+  }
+
   // TODO
   Future<void> logOutUser() async {
-    // google polaczenie z api
-    // logout
-    return Future.value();
+    return FirebaseAuth.instance.signOut();
   }
 }

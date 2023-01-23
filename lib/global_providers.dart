@@ -2,12 +2,19 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_production_boilerplate/api/api_service.dart';
+import 'package:flutter_production_boilerplate/bloc/goals/goals_bloc.dart';
+import 'package:flutter_production_boilerplate/bloc/my_inspirations/my_inspirations_bloc.dart';
+import 'package:flutter_production_boilerplate/bloc/notes/notes_bloc.dart';
+import 'package:flutter_production_boilerplate/bloc/profile/profile_bloc.dart';
 import 'package:flutter_production_boilerplate/cubit/inspiration_cubit.dart';
 import 'package:flutter_production_boilerplate/cubit/theme_cubit.dart';
 import 'package:flutter_production_boilerplate/main.dart';
+import 'package:flutter_production_boilerplate/repositories/goals_repository.dart';
 import 'package:flutter_production_boilerplate/repositories/inspiration_repository.dart';
+import 'package:flutter_production_boilerplate/repositories/my_inspirations_repository.dart';
+import 'package:flutter_production_boilerplate/repositories/notes_repository.dart';
+import 'package:flutter_production_boilerplate/repositories/profile_repository.dart';
 import 'package:flutter_production_boilerplate/repositories/user_account_repository.dart';
-import 'package:flutter_production_boilerplate/ui/screens/login/login_screen.dart';
 
 import 'bloc/user_account/user_account_bloc.dart';
 
@@ -16,7 +23,7 @@ class GlobalProviders extends StatelessWidget {
   late final ApiService _apiService;
 
   GlobalProviders({Key? key}) : super(key: key) {
-    _dio = Dio();
+    _dio = Dio(BaseOptions(contentType: "application/json"));
     _apiService = ApiService(_dio);
   }
 
@@ -40,7 +47,19 @@ class GlobalProviders extends StatelessWidget {
         ),
         RepositoryProvider<InspirationRepository>(
           create: (BuildContext context) => InspirationRepository(_apiService),
-        )
+        ),
+        RepositoryProvider<GoalsRepository>(
+          create: (BuildContext context) => GoalsRepository(),
+        ),
+        RepositoryProvider<NotesRepository>(
+          create: (BuildContext context) => NotesRepository(),
+        ),
+        RepositoryProvider<ProfileRepository>(
+          create: (BuildContext context) => ProfileRepository(),
+        ),
+        RepositoryProvider<MyInspirationsRepository>(
+          create: (BuildContext context) => MyInspirationsRepository(),
+        ),
       ];
 
   List<BlocProvider<dynamic>> _buildBlocProviders(BuildContext context) =>
@@ -58,8 +77,22 @@ class GlobalProviders extends StatelessWidget {
           create: (BuildContext context) => InspirationCubit(
             RepositoryProvider.of<InspirationRepository>(context),
           ),
-        )
+        ),
+        BlocProvider<GoalsBloc>(
+          lazy: true,
+          create: (BuildContext context) => GoalsBloc(
+            RepositoryProvider.of<GoalsRepository>(context),
+          ),
+        ),
+        BlocProvider<NotesBloc>(
+          create: (BuildContext context) => NotesBloc(
+            RepositoryProvider.of<NotesRepository>(context),
+          ),
+        ),
+        BlocProvider<MyInspirationsBloc>(
+          create: (BuildContext context) => MyInspirationsBloc(
+            RepositoryProvider.of<MyInspirationsRepository>(context),
+          ),
+        ),
       ];
 }
-
-// Here I can add man
